@@ -179,7 +179,7 @@ export default function ManageCategory(){
                         aspect={1.5/2.2}
                     >
                         <Upload
-                            action="/uploads/uploadImageProductDescription"
+                            action="/uploads/uploadImageProduct"
                             listType="picture-card"
                             name="image"
                             fileList={logoTmp}
@@ -259,7 +259,7 @@ export default function ManageCategory(){
                     aspect={1.5/2.2}
                 >
                     <Upload
-                        action="/uploads/uploadImageProductDescription"
+                        action="/uploads/uploadImageProduct"
                         listType="picture-card"
                         name="image"
                         fileList={logoCategory}

@@ -29,6 +29,8 @@ import { getUser} from '../util/getUser';
 import { updateCartCurrent } from '../contain/updateQuanityCart';
 import { updateUser } from '../redux/reducer/user.reducer';
 import ChatBotPage from './ChatBotPage';
+const dotenv = require('dotenv').config();
+
 const { Header,Content} = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -289,7 +291,7 @@ export default function App() {
               <ArrowUpOutlined />
             </div>
           </BackTop>
-          <ChatBotPage />
+          {/* <ChatBotPage /> */}
          
         
            {/* <MessengerCustomerChat

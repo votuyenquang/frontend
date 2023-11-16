@@ -11,6 +11,7 @@ export default function Profile(){
     const [loadingBtn, setloadingBtn] = useState(false);
     const [formInfor] = Form.useForm();
     useEffect(()=>{
+        console.log('currentUser ' , currentUser);
         setshowContent(false)
         if(currentUser.id==undefined){
             setshowContent(true)

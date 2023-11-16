@@ -13,6 +13,7 @@ import './css/Home.css';
 import './css/Product.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+const dotenv = require('dotenv').config();
 const history = createBrowserHistory();
 ReactDOM.render(
   <Provider store={store}>

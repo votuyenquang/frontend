@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import {Card,Form,Input,Button,Col,message} from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import * as FetchAPI from '../../util/fetchApi';
@@ -9,10 +9,11 @@ export default function Admin(){
     const [processLoading, setprocessLoading] = useState(false);
     const [formLogin] = Form.useForm();
     const history = useHistory();
+    const elementFooter = useRef() ;
     useEffect(()=>{
         document.getElementsByClassName("header-nav")[0].style.display = 'none';
         document.getElementsByClassName("footer")[0].style.display = 'none';
-        document.getElementsByClassName("sc-bqiRlB bHmrDE rsc-float-button")[0].style.display = 'none';
+       
     },[])
     const handleLogin = async() =>{
         setprocessLoading(true);
