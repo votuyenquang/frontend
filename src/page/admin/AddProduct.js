@@ -38,7 +38,8 @@ export default function AddProduct(){
         });
         productType.map((item,index)=>{
             arrTmpProductType.push(
-                <Option value={[item.name,item.id,item.idCategory]}>{item.name}</Option>
+                <Option value={`${item.name},${item.id},${item.idCategory}`}>{item.name}</Option>
+             
             )
             if(index===productType.length-1){
                 setoptionFullProductType(arrTmpProductType)
@@ -73,7 +74,7 @@ export default function AddProduct(){
             "promotional":promotional,
             "image":imageUrl,
             "idCategory":idcategory,
-            "idProductType":idproduct_type[1],
+            "idProductType":idproduct_type.split(",")[1],
             "imageDecription1":url1,
             "imageDecription2":url2,
             "imageDecription3":url3,
@@ -115,10 +116,18 @@ export default function AddProduct(){
     const onChangeImageDecription = ({ fileList: newFileList }) => {
         setimageDecription(newFileList);
     };
-    const filterOption = (value,init)=>{
+    const filterOption = async (valueID,init)=>{
         let arrTmp = optionFullProductType;
-        arrTmp = arrTmp.filter(e=>e.props.value[2]===value);
-        setoptionProductType(arrTmp)
+        let newArrTmp =[];
+      
+          newArrTmp = await arrTmp.filter((e) => {
+      
+          return  e.props.value.split(',')[2].toString() === valueID
+        })
+      
+
+            
+        setoptionProductType(newArrTmp)
         if(!init){
             formadd.setFieldsValue({nameProductType:null})
         }  
@@ -171,7 +180,10 @@ export default function AddProduct(){
                     <Select
                         value={idproduct_type}
                         placeholder="Loại sản phẩm"
-                        onChange= {e=>setidproduct_type(e)}
+                        onChange= {e=> {
+                            console.log("eeeeeeee",e);
+                            setidproduct_type(e)
+                        }}
                     >
                         {optionProductType}
                     </Select>

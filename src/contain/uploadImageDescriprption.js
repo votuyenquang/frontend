@@ -12,7 +12,7 @@ export class uploadImageDescriprption {
         return axios({
           data,
           method: "POST",
-          url: "/uploads/uploadImageProductDescription",
+          url: "/uploads/uploadImageProduct",
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -24,7 +24,7 @@ export class uploadImageDescriprption {
             )
           },
         })
-          .then((response) => ({ default: "/Upload/ImageDescription/"+response.data.msg.filename }))
+          .then((response) => ({ default: "/uploads/uploadImageProduct/"+response.data.msg.filename }))
           .catch(err=>console.log(err));
       })
     }

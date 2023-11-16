@@ -19,7 +19,7 @@ export default function AddInventory(){
         const res = await FetchAPI.getAPI("/product/getFullProduct");
         res.map((item,index)=>{
             product.push(
-                <Option value={[item.name,item.id]}>
+                <Option value={`${item.name},${item.id}`}>
                     {item.name}
                     <div style={{ display:'flex',justifyContent:'flex-end',marginTop:-20,paddingRight:20 }}>
                         <Image src={item.image} width={40} preview={false}/>
@@ -42,7 +42,7 @@ export default function AddInventory(){
         setquanity(value)
     }
     const handleAddInventory = async()=>{
-        const data = {"idProduct":productToAdd[1],"quanity":quanity,"option":option};
+        const data = {"idProduct":productToAdd.split(',')[1],"quanity":quanity,"option":option};
         const res = await FetchAPI.postDataAPI("/inventory/addInventory",data);
         if(res.msg){
             if(res.msg==="The product exist"){
