@@ -52,7 +52,7 @@ export default function ManageProduct(){
         });
         productType.map((item,index)=>{
             arrTmpProductType.push(
-                <Option value={[item.name,item.id,item.idCategory]}>{item.name}</Option>
+                <Option value={`${item.name},${item.id},${item.idCategory}`}>{item.name}</Option>
             )
             if(index===productType.length-1){
                 setoptionFullProductType(arrTmpProductType)
@@ -66,7 +66,7 @@ export default function ManageProduct(){
     
     const filterOption = (value,init)=>{
         let arrTmp = optionFullProductType;
-        arrTmp = arrTmp.filter(e=>e.props.value[2]===value);
+        arrTmp = arrTmp.filter(e=>e.props.value.split(',')[2]===value);
         setoptionProductType(arrTmp)
         if(!init){
             formEdit.setFieldsValue({nameProductType:null})
@@ -264,7 +264,10 @@ export default function ManageProduct(){
                 >
                     <Select
                         placeholder="Loại sản phẩm"
-                        onChange= {(e)=>itemProductTmp.idProductType=e[1]} 
+                        onChange= {
+                            (e)=>itemProductTmp.idProductType=e.split(',')[1]
+                           
+                        } 
                     >
                         {optionProductType}
                     </Select>

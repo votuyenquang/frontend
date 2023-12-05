@@ -11,18 +11,21 @@ export default function Profile(){
     const [loadingBtn, setloadingBtn] = useState(false);
     const [formInfor] = Form.useForm();
     useEffect(()=>{
-        console.log('currentUser ' , currentUser);
-        setshowContent(false)
-        if(currentUser.id==undefined){
+
+        if(!currentUser.id){
             setshowContent(true)
         }else{
+            setshowContent(false)
             getInforUser()
+           
         }
     },[currentUser])
   
     const getInforUser = async()=>{
         const data = {"idUser":currentUser.id}
+        console.log({data});
         const res = await FetchAPI.postDataAPI("/user/getInforUser",data)
+        console.log(res[0]);
         setdataUser(res[0])
         formInfor.setFieldsValue(res[0])
         setshowContent(true)

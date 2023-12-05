@@ -61,7 +61,7 @@ export default function BillFollow (){
                 if(record.status===0){
                     return <span style={{ color:'red' }}>Đang xử lý</span>
                 }else if(record.status===1){
-                    return <sapn style={{color:'blue' }}>Đang giao hàng</sapn>
+                    return <span style={{color:'blue' }}>Đang giao hàng</span>
                 }else if(record.status===2) {
                     return <span style={{ color:'green' }}>Hoàn thành</span>
                 }else{
