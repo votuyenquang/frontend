@@ -1,48 +1,38 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import {
-  Layout,
-  Menu,
-  Input,
-  Row,
-  Col,
-  BackTop,
-  Dropdown,
-  message,
-  Badge,
-} from "antd";
-import * as FetchAPI from "../util/fetchApi";
+import React ,{useEffect,useState,useLayoutEffect} from 'react';
+import { Layout, Menu,Input,Row,Col,BackTop, Dropdown,message,Badge } from 'antd';
+import * as FetchAPI from '../util/fetchApi';
 import logo from "../images/logo.png";
-import Home from "./client/Home";
-import MenuProduct from "./client/MenuProduct";
-import ProductDetails from "./client/ProductDetails";
-import CategoryProduct from "./client/CategoryProduct";
-import LoginAdmin from "./admin/LoginAdmin";
-import Admin from "./admin/Admin";
-import Account from "./client/Account";
-import Cart from "./client/Cart";
-import Payment from "./client/Payment";
-import BillFollow from "./client/BillFollow";
-import InfoAccount from "../elements/menuAccount";
-import BillDetails from "./client/BillDetails";
-import DropDownCart from "../elements/dropDownCart";
-import ProductSale from "./client/ProductSale";
-import Profile from "./client/Profile";
-import SearchView from "./client/SearchView";
-import FullProduct from "./client/FullProduct";
-import FooterWeb from "../elements/FooterWeb";
-import { Switch, Route, Link, useHistory, Redirect } from "react-router-dom";
+import Home from './client/Home';
+import MenuProduct from './client/MenuProduct';
+import ProductDetails from './client/ProductDetails';
+import CategoryProduct from './client/CategoryProduct';
+import LoginAdmin from './admin/LoginAdmin';
+import Admin from './admin/Admin';
+import Account  from './client/Account'; 
+import Cart from './client/Cart';
+import Payment from './client/Payment';
+import BillFollow from './client/BillFollow';
+import InfoAccount from '../elements/menuAccount';
+import BillDetails from './client/BillDetails';
+import DropDownCart from '../elements/dropDownCart';
+import ProductSale from './client/ProductSale';
+import Profile from './client/Profile';
+import SearchView from './client/SearchView';
+import FullProduct from './client/FullProduct';
+import FooterWeb from '../elements/FooterWeb';
+import {Switch,Route, Link,useHistory,Redirect} from "react-router-dom";
 import {
   HistoryOutlined,
   ArrowUpOutlined,
   MailOutlined,
   EnvironmentOutlined,
 } from "@ant-design/icons";
-import { FaUser, FaShoppingCart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../util/getUser";
-import { updateCartCurrent } from "../contain/updateQuanityCart";
-import { updateUser } from "../redux/reducer/user.reducer";
-import ChatBotPage from "./ChatBotPage";
+import {FaUser,FaShoppingCart} from 'react-icons/fa';
+import {BiMap} from 'react-icons/bi';
+import { useDispatch,useSelector } from 'react-redux';
+import { getUser} from '../util/getUser';
+import { updateCartCurrent } from '../contain/updateQuanityCart';
+import { updateUser } from '../redux/reducer/user.reducer';
 import Policy from "./client/Policy";
 const dotenv = require("dotenv").config();
 
