@@ -89,6 +89,12 @@
     animation: rainbow 2s ease-in-out infinite;
     
 }
+.text{
+    font-family: 'Arial', sans-serif;
+    display: block;
+    text-align: justify;
+    margin-bottom: 10px;
+}
 .rsc-header-title{
     color:white !important 
 }

@@ -43,6 +43,7 @@ import { getUser } from "../util/getUser";
 import { updateCartCurrent } from "../contain/updateQuanityCart";
 import { updateUser } from "../redux/reducer/user.reducer";
 import ChatBotPage from "./ChatBotPage";
+import Policy from "./client/Policy";
 const dotenv = require("dotenv").config();
 
 const { Header, Content } = Layout;
@@ -311,7 +312,7 @@ export default function App() {
           <Link to="/fullproduct/1">Cửa hàng</Link>
         </Menu.Item>
         <Menu.Item key="6">
-          <Link to={"/home"} />
+          <Link to={"/policy"} />
           Chính sách
         </Menu.Item>
         <Menu.Item key="7">
@@ -371,6 +372,9 @@ export default function App() {
         </Route>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/policy">
+          <Policy />
         </Route>
         <Redirect to="/home" />
         <Route path="/">
