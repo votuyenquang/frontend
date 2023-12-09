@@ -10,7 +10,7 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  padding-left: 20%;
+  padding-left: 7%;
 }
 .back-top{
   height: 40px;
@@ -55,7 +55,7 @@ html {
   animation: rorate-logo 1s;
 }
 .ant-input-group-wrapper.input-search{
-  width: 70%;
+  width: 100%;
   display: inline-block;
 }
 .ant-input-group-wrapper.input-search input{
@@ -64,6 +64,7 @@ html {
 }
 .ant-input-group-wrapper.input-search button{
   height:40px;
+  border-radius: 0 50px 50px 0 !important;
 }
 .ant-layout-footer.footer{
   width: '100%';
@@ -141,16 +142,22 @@ html {
   color:white !important
 }
 .title-logo{
-  background: linear-gradient(to right,#E250E5,#4B50E6,#E250E5);
+  /* background: linear-gradient(to right,#E250E5,#4B50E6,#E250E5);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
   background-size: 200% 200%;
   color: #1F1F2C;
-  transition: color .2s ease-in-out;
-  animation: rainbow 1.5s ease-in-out infinite;
+  letter-spacing: .5px; */
+  color: black;
+  font-weight: bold;
   cursor: pointer;
-  letter-spacing: .5px;
+  animation: rainbow 1.5s ease-in-out infinite;
+  transition: color .2s ease-in-out;
+}
+.title{
+  display: grid;
+  margin-left: 10px;
 }
 .item-of-submenu:hover{
   animation: mov-item-submenu 1s;
