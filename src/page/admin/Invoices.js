@@ -129,7 +129,7 @@ export default function Invoices(){
                             <span style={{ color:'red' }}>Đang xử lý</span>
                         </Option>
                         <Option value={1}>
-                            <sapn style={{color:'blue' }}>Đang giao hàng</sapn>
+                            <span style={{color:'blue' }}>Đang giao hàng</span>
                         </Option>
                         <Option value={2}>
                             <span style={{ color:'green' }}>Hoàn thành</span>

@@ -28,7 +28,6 @@ export default function ProductDetails(){
     const [reviewStar, setreviewStar] = useState(5);
     const [quanityReview, setquanityReview] = useState(0);
     const [arrReview, setarrReview] = useState([]);
-    const [arrUser, setarrUser] = useState([])
 
     const {idProduct} = useParams();
     const dispatch = useDispatch();

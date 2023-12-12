@@ -35,7 +35,6 @@ import { updateCartCurrent } from "../contain/updateQuanityCart";
 import { updateUser } from "../redux/reducer/user.reducer";
 import Policy from "./client/Policy";
 import Introduction from "./client/Introduction";
-const dotenv = require("dotenv").config();
 
 const { Header, Content } = Layout;
 const { SubMenu } = Menu;
