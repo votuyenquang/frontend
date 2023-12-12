@@ -149,11 +149,15 @@ html {
   background-size: 200% 200%;
   color: #1F1F2C;
   letter-spacing: .5px; */
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  animation: rainbow 1.5s ease-in-out infinite;
+  background: linear-gradient(to right,#E250E5,#4B50E6,#E250E5);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 200% 200%;
+  color: #1F1F2C;
   transition: color .2s ease-in-out;
+  animation: rainbow 2s ease-in-out infinite;
+  font-weight: bold;
 }
 .title{
   display: grid;
