@@ -166,6 +166,18 @@ html {
 .item-of-submenu:hover{
   animation: mov-item-submenu 1s;
 }
+
+.icon-contact{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f3a270;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
 @media only screen and (max-width:1200px) {
   .ant-input-group-wrapper.input-search{
     margin-bottom: 10px;

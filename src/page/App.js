@@ -35,6 +35,7 @@ import { updateCartCurrent } from "../contain/updateQuanityCart";
 import { updateUser } from "../redux/reducer/user.reducer";
 import Policy from "./client/Policy";
 import Introduction from "./client/Introduction";
+import Contact from "./client/Contact";
 
 const { Header, Content } = Layout;
 const { SubMenu } = Menu;
@@ -302,7 +303,7 @@ export default function App() {
           Chính sách
         </Menu.Item>
         <Menu.Item key="7">
-          <Link to={"/home"} />
+          <Link to={"/contact"} />
           Liên hệ
         </Menu.Item>
       </Menu>
@@ -364,6 +365,9 @@ export default function App() {
         </Route>
         <Route path="/intro">
           <Introduction />
+        </Route>
+        <Route path="/contact">
+          <Contact />
         </Route>
         <Redirect to="/home" />
         <Route path="/">
