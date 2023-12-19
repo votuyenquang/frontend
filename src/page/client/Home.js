@@ -125,7 +125,7 @@ export default function Home() {
         <div>
           {slide()}
           <div className="contentHome">
-            <span className="title-list">SẢN PHẨM MỚI</span>
+            <span className="title-new">Sản Phẩm Mới</span>
             <Slider className="slider-item-new" {...settings_carsoule_new}>
               {itemProductNew.map((item, i) => (
                 <div key={i} className="hello">
@@ -134,14 +134,7 @@ export default function Home() {
               ))}
             </Slider>
 
-            <span
-              className="title-list"
-              style={{
-                paddingTop: 50,
-              }}
-            >
-              SẢN PHẨM DEAL HOT
-            </span>
+            <span className="title-new" style={{marginTop: 40}}>Sản Phẩm Deal Hot</span>
             <Row
               gutter={[{ xs: 8, sm: 16, md: 24, lg: 24 }, 20]}
               style={{ width: "100%" }}
@@ -169,12 +162,7 @@ export default function Home() {
               </div>
             )}
 
-            <span
-              className="title-list"
-              style={{ fontSize: 20, paddingBottom: 40, fontWeight: "bold" }}
-            >
-              HÃY CHỌN FASHION HQ
-            </span>
+            <span className="title-new" style={{marginTop: 40}}>Hãy Chọn Fashion HQ</span>
             <Row className="reason-choose">
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
