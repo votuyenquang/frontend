@@ -91,12 +91,12 @@ export default function Cart (){
     }
     const handleValidationCodeSale = async()=>{
         if(codeSale===""){
-            message.warning("Bạn chưa nhập mã ưu đãi !")
+            message.warning("You haven't entered the promotion code yet !")
         }else{
             const res = await FetchAPI.postDataAPI("/order/getSaleByCode",{"code":codeSale.toUpperCase()})
             if(res.msg){
                 if(res.msg==="Sale not exist"){
-                    message.warning("Mã này không tồn tại!")
+                    message.warning("This code does not exist !")
                 }
             }else if(res!==undefined){
                 handleCodeSale(res[0])
@@ -108,27 +108,27 @@ export default function Cart (){
         const timeStart = new Date(data.date_start);
         const timeExpired = new Date(data.expired);
         if(currentTime<timeStart){
-            message.warning("Thời gian sự kiện chưa bắt đầu !")
+            message.warning("The event hasn't started yet !")
         }else if(currentTime>timeExpired){
-            message.warning("Sự kiện đã kết thúc !")
+            message.warning("The event has ended !")
         }else if(data.quanity-data.used===0){
-            message.warning("Số lượng mã này đã hết !")
+            message.warning("This number of codes has expired !")
         }
         else{
             setdataSale(data);
             setpromoprice(data.cost_sale);
             setcodeSale("");
             message.success(
-                "Bạn đã áp dụng mã "+data.code_sale+ 
-                " của sự kiện "+data.name_event_sale+
-                " được giảm giá "+getPriceVND(data.cost_sale)+" đ"
+                "You have applied the code "+data.code_sale+ 
+                " of event "+data.name_event_sale+
+                " sale "+getPriceVND(data.cost_sale)+" đ"
             )
         }
       
     }
     const columns  = [
         {
-            title:"Sản phẩm",
+            title:"Product",
             key:'name',
             render: record=>{
                 return (
@@ -144,7 +144,7 @@ export default function Cart (){
             }
         },
         {
-            title:"Giá",
+            title:"Price",
             key:'price',
             dataIndex:"",
             render:record =>{
@@ -156,7 +156,7 @@ export default function Cart (){
             }
         },
         { 
-            title:"Số lượng",
+            title:"Quantity",
             dataIndex:'',
             key:'quanity',
             render: (record,index)=>{
@@ -168,7 +168,7 @@ export default function Cart (){
             }
         },
         { 
-            title:"Tạm tính",
+            title:"Provisional",
             dataIndex:"",
             key:'temp',
             render:(record)=>{
@@ -179,7 +179,7 @@ export default function Cart (){
                 }
             }
         },{
-            title:"Tùy chỉnh",
+            title:"Custom",
             key:"delete",
             render: (record,index) =>{
                 return (
@@ -200,42 +200,42 @@ export default function Cart (){
     // };
     const ViewPayment = ()=>(
         <div style={{ paddingLeft:20 }}>
-           <span style={{ fontWeight:'bold',fontSize:16 }}> Cộng giỏ hàng</span>
+           <span style={{ fontWeight:'bold',fontSize:16 }}> Add shopping cart</span>
            <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
-               <span>Tạm tính</span>
+               <span>Provisional</span>
                <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp) +" đ"}</span>
            </div>
            <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
-               <span>Tổng</span>
+               <span>Total</span>
                <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp-promoprice) +" đ"}</span>
            </div>
            {dataSale!==undefined &&
             <div style={{ paddingTop:10,display:'flex',justifyContent:'space-between' }}>
                 <div>
-                <span>Mã giảm giá : {dataSale.code_sale}</span>
+                <span>Discount code: {dataSale.code_sale}</span>
                 </div>
                 <span style={{ paddingRight:20 }}><b>{"-"+getPriceVND(dataSale.cost_sale) +" đ"}</b></span>
             </div>
            }
            <div style={{ paddingTop:20,justifyContent:'center',display:'flex' }}>
            <Button type="primary" danger style={{ width:'80%',height:40 }} onClick={handlePayment}>
-               TIẾN HÀNH THANH TOÁN
+               PROCEED TO PAY
            </Button>
            </div>
            <div style={{ paddingTop:20,display:'flex',flexDirection:'column' }}>
                 <span style={{ fontWeight:'bold',fontSize:16 }}>
-                    <GiftOutlined /> Phiếu ưu đãi
+                    <GiftOutlined /> Vouchers
                 </span>
                 <div style={{ display:'flex',alignItems:'center',paddingTop:10,flexDirection:'column'}}>
                 <Input 
-                    placeholder="Mã ưu đãi"
+                    placeholder="Promotion code"
                     style={{width:'80%',height:40}}
                     value={codeSale}
                     defaultValue={codeSale}
                     onChange= {(e)=>setcodeSale(e.target.value)}
                 />
                 <Button style={{ width:'80%',height:40,marginTop:10 }} onClick={handleValidationCodeSale}>
-                    ÁP DỤNG
+                   APPLY
                 </Button>
                 </div>
             </div>
@@ -256,7 +256,7 @@ export default function Cart (){
         />
         <Button type="primary" danger style={{ height:40,marginBottom:20 }}>
             <Link to="/">
-                <ArrowLeftOutlined /> Tiếp tục xem sản phẩm
+                <ArrowLeftOutlined /> Continue viewing products
             </Link>
         </Button>
         </div>
@@ -265,11 +265,11 @@ export default function Cart (){
         <div className="wrapperCart" >
             {dataCart.length===undefined ?
             <div style={{ height:400,padding:"20px 10px" }}>
-                <span style={{ fontWeight:'bold',fontSize:16 }}>Chưa có sản phẩm trong giỏ hàng...</span>
+                <span style={{ fontWeight:'bold',fontSize:16 }}>There are no products in the cart...</span>
                 <div style={{ display:'flex',flex:1,justifyContent:'center',paddingTop:"10%" }}>
                     <Button style={{ height:50 }} type="primary" danger>
                         <Link to="/">
-                            Quay trở lại cửa hàng
+                          Return to the store
                         </Link>
                     </Button>
                 </div>

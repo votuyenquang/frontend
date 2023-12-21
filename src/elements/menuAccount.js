@@ -32,7 +32,7 @@ export default function MenuAccount (props){
             </Menu.Item>
             <Menu.Item key="profile" >
                 <Link to="/profile">
-                    {"Account information ("+name+")" }
+                    {"Information ("+name+")" }
                 </Link>
             </Menu.Item>
             <Menu.Item key="logout" onClick={handleLogout}>
