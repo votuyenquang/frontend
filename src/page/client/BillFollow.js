@@ -35,7 +35,7 @@ export default function BillFollow (){
     }
     const columns  = [
         {
-            title:"Đơn hàng",
+            title:"Order",
             key:'id',
             render: record=>{
                 return (
@@ -44,7 +44,7 @@ export default function BillFollow (){
             }
         },
         { 
-            title:"Ngày Đặt",
+            title:"Date of Order",
             dataIndex:"",
             key:'date',
             render:(record)=>{
@@ -54,23 +54,23 @@ export default function BillFollow (){
             }   
         },
         { 
-            title:"Tình trạng",
+            title:"Status",
             dataIndex:"",
             key:'status',
             render:(record)=>{
                 if(record.status===0){
-                    return <span style={{ color:'red' }}>Đang xử lý</span>
+                    return <span style={{ color:'red' }}>Processing</span>
                 }else if(record.status===1){
-                    return <span style={{color:'blue' }}>Đang giao hàng</span>
+                    return <span style={{color:'blue' }}>Delivering</span>
                 }else if(record.status===2) {
-                    return <span style={{ color:'green' }}>Hoàn thành</span>
+                    return <span style={{ color:'green' }}>Complete</span>
                 }else{
-                    return <span style={{ color:'gray' }}>Đã hủy</span>
+                    return <span style={{ color:'gray' }}>Cancelled</span>
                 }
             }
         },
         { 
-            title:"Tổng",
+            title:"Total",
             dataIndex:"",
             key:'total',
             render:(record)=>{
@@ -78,14 +78,14 @@ export default function BillFollow (){
             }
         },
         { 
-            title:"Các thao tác",
+            title:"Actions",
             dataIndex:"",
             key:'behavior',
             render:(record)=>{
                return (
                <Button>
                    <Link to={`/billdetails/${record.code_order}`}>
-                        Chi tiết
+                      Detail
                    </Link>
                 </Button>
                )
@@ -118,7 +118,7 @@ export default function BillFollow (){
                     columns={columns} 
                     dataSource={dataTmp} 
                     size="small"
-                    locale={{ emptyText:"Bạn chưa có đơn hàng nào" }}/>
+                    locale={{ emptyText:"You don't have any orders yet" }}/>
             </div>
         )
     }
@@ -129,23 +129,23 @@ export default function BillFollow (){
                 {statusUser ? 
                 <div style={{ backgroundColor:'white',paddingTop:20,minHeight:450 }}>
                 <Tabs defaultActiveKey="1" type="card" onChange={(e)=>setkeyTab(e)} size="small" tabPosition="top" centered>
-                    <TabPane tab="Tất cả đơn hàng của bạn" key="1">
+                    <TabPane tab="All your orders" key="1">
                             <TabContent />
                     </TabPane>
-                    <TabPane tab="Đang xử lý" key="2">
+                    <TabPane tab="Processing" key="2">
                             <TabContent />
                     </TabPane>
-                    <TabPane tab="Đang giao hàng" key="3">
+                    <TabPane tab="Delivering" key="3">
                             <TabContent />
                     </TabPane>
-                    <TabPane tab="Đã hoàn thành" key="4">
+                    <TabPane tab="Completed" key="4">
                             <TabContent />
                     </TabPane> 
                 </Tabs>
                 </div>
                 :
                 <div style={{ padding:"20px 40px" }}>
-                    <span style={{ fontWeight:'bold' }}>Hãy đăng nhập để theo dõi đơn hàng...</span>
+                    <span style={{ fontWeight:'bold' }}>Please log in to track your order...</span>
                 </div>
                 }
                 </div>
