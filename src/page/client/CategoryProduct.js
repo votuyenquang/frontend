@@ -44,7 +44,7 @@ export default function CategoryProduct(){
     const Direction = ()=>(
         <Breadcrumb style={{ fontSize:18,paddingBottom:20 }}>
             <Breadcrumb.Item>
-                <Link to={"/home"}>Trang chủ</Link>
+                <Link to={"/home"}>Home</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
                {nameCategory}

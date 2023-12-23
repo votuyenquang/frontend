@@ -120,16 +120,16 @@ export default function ProductDetails() {
     setbuttonLoading(true);
     setTimeout(() => {
       if (option == null) {
-        message.warning("Hãy chọn kích cỡ, màu sắc để đặt hàng");
+        message.warning("Please select size and color to order !");
         setbuttonLoading(false);
       } else if (quanity === null) {
-        message.warning("Vui lòng chọn số lượng !");
+        message.warning("Please select quantity !");
         setbuttonLoading(false);
       } else if (option[1] < quanity) {
         message.warning(
-          "Mẫu này số lượng chỉ còn " +
+          "This model is limited in quantity " +
             option[1] +
-            " sản phẩm, quý khách vui lòng thông cảm !"
+            " products, please understand !"
         );
         setbuttonLoading(false);
       } else {
@@ -145,7 +145,7 @@ export default function ProductDetails() {
         notification.close("notifysuccess");
       }}
     >
-      Đi ngay
+      Go now
     </Button>
   );
   const handleOrder = () => {
@@ -170,7 +170,9 @@ export default function ProductDetails() {
         let newQuanity = objDataOut[index].quanity + quanity;
         if (newQuanity > option[1]) {
           message.warning(
-            "Sản phẩm chỉ còn " + option[1] + ", vui lòng chọn kiểm tra lại"
+            "Product is only available " +
+              option[1] +
+              ", please select check again"
           );
           setbuttonLoading(false);
           return;
@@ -192,8 +194,8 @@ export default function ProductDetails() {
       setbuttonLoading(false);
       updateCartCurrent(dispatch);
       notification["success"]({
-        message: "Đặt hàng thành công",
-        description: "Bạn có muốn chuyển đến giỏ hàng ngay bây giờ.",
+        message: "Add to cart successfully !",
+        description: "Would you like to go to cart now ?",
         btn,
         key: "notifysuccess",
       });
@@ -375,7 +377,7 @@ style={{ display:'flex',flexDirection:'column' }}
             <span>ADD CART</span>
           </Button>
           <Button className="buy-now" disabled={outOfStock}>
-            <span>BUY NOW</span>
+            <Link to="/cart"><span>BUY NOW</span></Link>
           </Button>
         </div>
 
@@ -394,6 +396,7 @@ style={{ display:'flex',flexDirection:'column' }}
               + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from
               850,000 VND !
             </p>
+            <p>+ Apply code SHIPTET to save 15,000 VND on shipping !</p>
           </div>
         </div>
 
