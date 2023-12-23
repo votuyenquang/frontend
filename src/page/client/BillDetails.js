@@ -72,13 +72,13 @@ export default function BillDetails(){
             if(res.msg==="Success"){
                 setTimeout(()=>{
                     setshowModalCancel(false)
-                    message.success("Hủy đơn hàng thành công !");
+                    message.success("Order canceled successfully !");
                     history.goBack();
                 },500)
             }else{
                 setTimeout(()=>{
                     setshowModalCancel(false)
-                    message.error("Có lỗi rồi !!");
+                    message.error("There's an error !");
                  
                 },500)
             }
@@ -86,19 +86,19 @@ export default function BillDetails(){
     }
     const ModalCancelBill = ()=>(
         <Modal
-            title={`Bạn chắc chắn muốn hủy đơn #${dataBill.id}`}
+            title={`You definitely want to cancel your order #${dataBill.id}`}
             visible={showModalCancel}
             onOk={handleCancelBill}
             onCancel={()=>setshowModalCancel(false)}
-            cancelText="Thoát"
-            okText="Chắc chắn"
+            cancelText="Exit"
+            okText="Sure"
         >
-            <p>Bạn chắc chắn với quyết định của mình ! Đơn hàng này của bạn sẽ bị hủy.</p>
+            <p>You are sure of your decision ! Your order will be canceled.</p>
         </Modal>
     )
     const columns  = [
         {
-            title:"Sản phẩm",
+            title:"Product",
             key:'product',
             render : record=>{
                 return(
@@ -110,7 +110,7 @@ export default function BillDetails(){
             }
         },
         {
-            title:"Tổng",
+            title:"Total",
             key:'total_price',
             render: record=>{
                 return <span>{getPriceVND(record.price*record.quanity + 30000) +" đ"}</span>
@@ -126,29 +126,29 @@ export default function BillDetails(){
             summary={()=>(
                 <Table.Summary>
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tạm tính</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
                         <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataSale !== undefined &&
                         <Table.Summary.Row>
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Mã khuyến mãi</span></Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{"-"+getPriceVND(promotionprice)+" đ"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     }
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Phí vận chuyển</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
                         <Table.Summary.Cell index={1}>{getPriceVND(30000)+" đ"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tổng</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
                         <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" đ"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataBill.status===2 &&
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Đánh giá sản phẩm</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Product reviews</span></Table.Summary.Cell>
                         <Table.Summary.Cell index={1}>
                             <Button onClick={()=>setshowModalReview(true)}>
-                                Đánh giá ngay
+                              Rate now
                             </Button>
                         </Table.Summary.Cell>
                     </Table.Summary.Row>
@@ -159,13 +159,13 @@ export default function BillDetails(){
     )
     const getTextStatus = (a)=>{
         if(a===0){
-            return <b>Đang xử lý</b>
+            return <b>Processing</b>
         }else if(a===1){
-            return <b>Đang giao hàng</b>
+            return <b>Delivering</b>
         }else if(a===2){
-            return <b>Đã hoàn thành</b>
+            return <b>Delivered</b>
         }else{
-            return <b>Đã hủy</b>
+            return <b>Cancelled</b>
         }
     }
     return(
@@ -178,41 +178,41 @@ export default function BillDetails(){
             <PageHeader
                 className="site-page-header"
                 onBack={() => history.goBack()}
-                title="Chi tiết đơn hàng"
-                subTitle={"Mã đơn hàng: #"+dataBill.id}
+                title="Order details"
+                subTitle={"Code order: #"+dataBill.id}
             />
             <Row>
             <Col lg={14} xs={24} style={{ padding:"20px 40px" }} >
                 {ViewProduct()}
-                <Card title="Địa chỉ thanh toán" style={{ marginTop:30 }}>
+                <Card title="Payment address" style={{ marginTop:30 }}>
                 <div style={{ fontSize:16 }}>
                 <Space direction="vertical" size={20}>
-                    <span><b>Tên: </b>{dataBill.name}</span>
-                    <span><b>Địa chỉ: </b>{dataBill.address}</span>
+                    <span><b>Name: </b>{dataBill.name}</span>
+                    <span><b>Address: </b>{dataBill.address}</span>
                     <span><b>Email: </b>{dataBill.email}</span>
-                    <span><b>Số điện thoại: </b>{dataBill.phone} </span>
+                    <span><b>Phone number: </b>{dataBill.phone} </span>
                 </Space>
                 </div>
                 </Card>
             </Col>
             <Col lg={10} xs={24} style={{ justifyContent:'center',display:'flex' }}>
-                <Card title="Cảm ơn bạn. Đơn hàng đã được nhận." style={{ marginTop:20,width:'80%' }}>
+                <Card title="Thank you. Order has been received." style={{ marginTop:20,width:'80%' }}>
                 <ul>
                     <Space size={10} direction="vertical">
-                        <li>Mã đơn hàng : <b>{"#"+dataBill.id}</b></li>
-                        <li>Ngày đặt: <b>{new Date(dataBill.create_at).toString()}</b></li>
+                        <li>Code order : <b>{"#"+dataBill.id}</b></li>
+                        <li>Order date: <b>{new Date(dataBill.create_at).toString()}</b></li>
                         <li>Email : <b>{dataBill.email}</b></li>
-                        <li>Tổng cộng : <b>{getPriceVND(totalTmp-promotionprice +30000)+" đ"}</b></li>
-                        <li>Thời gian cập nhật hóa đơn: <b>{new Date(dataBill.update_at).toString()}</b></li>
-                        <li>Phương thức thanh toán: 
-                            <b>{dataBill.methodPayment===1 ? "Chuyển khoản ngân hàng":"Trả tiền mặt"}</b>
+                        <li>Total : <b>{getPriceVND(totalTmp-promotionprice +30000)+" đ"}</b></li>
+                        <li>Time to update invoices: <b>{new Date(dataBill.update_at).toString()}</b></li>
+                        <li>Payment method: 
+                            <b>{dataBill.methodPayment===1 ? " Bank transfer":" Pay cash"}</b>
                         </li>
                         <li>
-                            Tình trạng : {getTextStatus(dataBill.status)}
+                          Status : {getTextStatus(dataBill.status)}
                         </li>
                         <div>
                             <Button type="primary" onClick={()=>setshowModalCancel(true)} danger disabled={dataBill.status!==0} >
-                                Hủy đơn
+                              Cancel order
                             </Button>
                         </div>
                     </Space>
@@ -231,7 +231,7 @@ export default function BillDetails(){
             </div>
             :
             <div style={{ padding:"20px 40px" }}>
-                <span style={{ fontWeight:'bold' }}>Bạn không có quyền truy cập hóa đơn này...</span>
+                <span style={{ fontWeight:'bold' }}>You do not have permission to access this invoice...</span>
             </div>
             }
             </div>

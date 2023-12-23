@@ -26,13 +26,13 @@ export default function Account(props) {
         console.log(res);
       
         if(res.msg==="Invalid account"){
-            message.error("Tên tài khoản không tồn tại")
+            message.error("Account name does not exist")
         }else if(res.msg ==="Incorrect password"){
-            message.error("Mật khẩu không đúng")
+            message.error("Incorrect password")
         }else if(res.msg==="Success"){
             localStorage.setItem("token",res.token);
             finish(res.token);
-            message.success("Đăng nhập thành công !");
+            message.success("Logged in successfully !");
             formLogin.setFieldsValue({username:"",password:""})
             setusername("");
             setpassword("");
@@ -51,7 +51,7 @@ export default function Account(props) {
         if(res.success){
             return Promise.resolve();
         }else{
-            return Promise.reject(new Error('Email đã tồn tại trong hệ thống, vui lòng chọn email khác  !'));
+            return Promise.reject(new Error('Email already exists in the system, please choose another email!'));
         }
     }
     const handleRegister = async()=>{
@@ -119,15 +119,15 @@ export default function Account(props) {
             form={formLogin}
             scrollToFirstError
         >
-            <p style={{ fontSize:18,fontWeight:'bold' }}>ĐĂNG NHẬP</p>
-            <p style={{ fontSize:16,fontWeight:'bold' }}>Tên tài khoản hoặc email đăng nhập *</p>
+            <p style={{ fontSize:18,fontWeight:'bold' }}>LOGIN</p>
+            <p style={{ fontSize:16,fontWeight:'bold' }}>Account name or login email *</p>
             <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Vui lòng nhập tên tài khoản!' }]}
+                rules={[{ required: true, message: 'Please enter your account name !' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập tên tài khoản"
+                    placeholder="Enter account name"
                     value={username}
                     defaultValue={username}
                     onChange= {(e)=>setusername(e.target.value)}
@@ -135,17 +135,17 @@ export default function Account(props) {
                     style={{height:40}}
                 />
             </Form.Item>
-            <p style={{ fontSize:16,fontWeight:'bold' }}>Mật khẩu *</p>
+            <p style={{ fontSize:16,fontWeight:'bold' }}>Password *</p>
             <Form.Item
                 name="password"
                 rules={[
-                    { required: true, message: 'Vui lòng nhập mật khẩu!' },
-                    {min:3,message:'Mật khẩu ít nhất 3 ký tự'}
+                    { required: true, message: 'Please enter password !' },
+                    {min:3,message:'Password must be at least 3 characters !'}
                 ]}
                 style={{width:'80%'}}   
             >
                 <Input.Password
-                    placeholder="Nhập mật khẩu"
+                    placeholder="Enter password"
                     value={password}
                     defaultValue={password}
                     onChange= {(e)=>setpassword(e.target.value)}
@@ -156,49 +156,48 @@ export default function Account(props) {
             </Form.Item>
             <Form.Item style={{ padding:"4px 0px" }} >
                 <Button htmlType="submit" type="primary" danger style={{ width:100,height:45,borderRadius:8 }}>
-                    Đăng nhập
+                    Login
                 </Button>
             </Form.Item>
 
-                
-                <Button className='action' type="primary" info style={{height:45,borderRadius:8 }}   onClick={faceSignin}>
-                  
-                    Đăng Nhập bằng FaceID
-                </Button> 
-        
-            
+                {/* 
+                      <Button className='action' type="primary" info style={{height:45,borderRadius:8 }}   onClick={faceSignin}>
+                        Đăng Nhập bằng FaceID
+                      </Button> 
+                */}
+
             <div>
-                <span>Quên mật khẩu ?</span>
+                <span>Forgot password ?</span>
             </div>
         </Form>
     )
     const SignUp = ()=>(
         <Form onFinish={handleRegister}>
-            <p style={{ fontSize:18,fontWeight:'bold' }}>ĐĂNG KÝ</p>
-            <p style={{ fontSize:16,fontWeight:'bold' }}>Địa chỉ email *</p>
+            <p style={{ fontSize:18,fontWeight:'bold' }}>REGISTER</p>
+            <p style={{ fontSize:16,fontWeight:'bold' }}>Email address *</p>
             <Form.Item 
                 style={{ width:'80%' }} 
                 hasFeedback
                 rules={[
-                    { type: 'email',message:"Vui lòng nhập đúng Email"},
-                    {required:true,message:"Vui lòng điền Email !"},
+                    { type: 'email',message:"Please enter correct email !"},
+                    {required:true,message:"Please fill in email !"},
                     { validator: checkEmailExist}
                 ]}
                 name={['user', 'email']}
             >
                 <Input
-                    placeholder="Nhập email"
+                    placeholder="Enter email"
                     value={emailRegister}
                     onChange= {(e)=>setemailRegister(e.target.value)}
                     maxLength={32}
                     style={{height:40}}
                 />
             </Form.Item>
-            <p style={{ fontSize:16,padding:"10px 0px" }}>Dùng email để đăng ký với Fashion CT</p>
-            <p>Thông tin cá nhân của bạn sẽ được sử dụng để tăng trải nghiệm sử dụng website, quản lý truy cập vào tài khoản của bạn, và cho các mục đích cụ thể khác được mô tả trong chính sách riêng tư.</p>
+            <p style={{ fontSize:16,padding:"10px 0px" }}>Use email to register with Fashion HQ</p>
+            <p>Your personal information will be used to enhance your experience using the website, manage access to your account, and for other specific purposes described in the privacy policy.</p>
             <Form.Item style={{ padding:"10px 0px" }}>
                 <Button type="primary" danger style={{ width:100,height:45,borderRadius:8 }} htmlType="submit">
-                    Tiếp tục
+                   Continue
                 </Button>
             </Form.Item>
         </Form>
@@ -208,7 +207,7 @@ export default function Account(props) {
     
     return(
         <Modal 
-            title="Tài khoản" 
+            title="Account" 
             visible={props.visible} 
             onCancel={()=>{props.onCancel();setcontinueRegister(false)}}
             cancelText="Thoát"

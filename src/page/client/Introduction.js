@@ -11,9 +11,9 @@ export default function Introduction() {
     <div style={{ marginTop: 20, marginLeft: 30 }}>
       <Breadcrumb style={{ fontSize: 18, padding: "20px 20px" }}>
         <Breadcrumb.Item>
-          <Link to={"/home"}>Trang chủ</Link>
+          <Link to={"/home"}>Home</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{`Giới thiệu`}</Breadcrumb.Item>
+        <Breadcrumb.Item>{`Introduction`}</Breadcrumb.Item>
       </Breadcrumb>
       <div
         style={{
@@ -24,31 +24,14 @@ export default function Introduction() {
         }}
       >
         <span className="text">
-          Chào mừng bạn đến với Fashion HQ - điểm đến hàng đầu cho những người
-          yêu thời trang và đang tìm kiếm sự phong cách độc đáo. Tại đây, chúng
-          tôi tự hào giới thiệu một bộ sưu tập đa dạng với hàng nghìn sản phẩm
-          chất lượng cao, từ áo thun thoải mái đến quần jeans thời trang, mang
-          đến cho bạn trải nghiệm mua sắm thú vị và độc đáo. Để hiểu rõ hơn về
-          chúng tôi, đừng bỏ lỡ nội dung bài viết sau.
+           Welcome to Fashion HQ - the leading destination for fashion lovers looking for unique style. Here, we proudly present a diverse collection of thousands of high-quality products, from comfortable t-shirts to fashionable jeans, bringing you a fun and unique shopping experience. To better understand us, don't miss the following article.
         </span>
-        <h2 style={{ fontWeight: "bold" }}>TỔNG QUAN VỀ FASHION HQ</h2>
+        <h2 style={{ fontWeight: "bold" }}>OVERVIEW OF FASHION HQ</h2>
         <span className="text">
-          Với sứ mệnh tạo nên không gian mua sắm trực tuyến lý tưởng, chúng tôi
-          cam kết cung cấp những sản phẩm chất lượng hàng đầu từ các thương hiệu
-          uy tín và những kiểu dáng mới nhất, phản ánh xu hướng thời trang hiện
-          đại. Chất liệu cao cấp và sự chăm sóc tỉ mỉ trong từng đường may đều
-          là ưu tiên hàng đầu của chúng tôi. Ngoài ra, trải nghiệm mua sắm tại
-          Fashion HQ không chỉ là việc chọn lựa sản phẩm mà còn là hành trình
-          khám phá phong cách cá nhân của bạn. Chúng tôi luôn cập nhật các xu
-          hướng thời trang mới nhất và cung cấp gợi ý phối hợp trang phục để bạn
-          có thể tạo nên phong cách riêng biệt và độc đáo.
+           With the mission of creating an ideal online shopping space, we are committed to providing top quality products from reputable brands and the latest designs, reflecting modern fashion trends. High quality materials and meticulous care in every seam are our top priorities. In addition, the shopping experience at Fashion HQ is not only about product selection but also a journey to discover your personal style. We always keep up to date with the latest fashion trends and provide outfit coordination suggestions so you can create your own, unique style.
         </span>
         <span className="text">
-          Hãy tham gia cùng chúng tôi trên hành trình thời trang đầy phong cách
-          và tự tin. Dù bạn là người đam mê thời trang hay đang tìm kiếm những
-          bộ trang phục hàng ngày, Fashion HQ là địa chỉ lý tưởng để thỏa mãn
-          đam mê của bạn. Hãy khám phá ngay và biến ước mơ thời trang của bạn
-          thành hiện thực!
+          Join us on a fashion journey filled with style and confidence. Whether you are a fashion enthusiast or looking for everyday outfits, Fashion HQ is the ideal place to satisfy your passion. Discover now and make your fashion dreams come true !
         </span>
         <div
           style={{ display: "flex", alignItems: "center", marginBottom: 10 }}
@@ -65,85 +48,79 @@ export default function Introduction() {
           </span>
         </div>
         <span className="text" style={{ fontWeight: "bold" }}>
-          Nhằm đáp ứng nhu cầu ngày một tăng của khách hàng, Fashion HQ đã và
-          đang bán những sản phẩm sau đây:
+          To meet the growing needs of customers, Fashion HQ has been selling the following products:
         </span>
         <div style={{ marginLeft: 10 }}>
-          <span className="text">- &nbsp;<Link to="/category/1">Áo</Link></span>
-          <span className="text">- &nbsp;<Link to="/category/2">Quần</Link></span>
-          <span className="text">- &nbsp;<Link to="/category/3">Giày</Link></span>
-          <span className="text">- &nbsp;<Link to="/category/4">Phụ kiện</Link></span>
+          <span className="text">- &nbsp;<Link to="/category/1">Shirt</Link></span>
+          <span className="text">- &nbsp;<Link to="/category/2">Trousers</Link></span>
+          <span className="text">- &nbsp;<Link to="/category/3">Shoe</Link></span>
+          <span className="text">- &nbsp;<Link to="/category/4">Accessory</Link></span>
         </div>
-        <h2 style={{ fontWeight: "bold" }}>HÃY CHỌN FASHION HQ</h2>
+        <h2 style={{ fontWeight: "bold" }}>CHOOSE FASHION HQ</h2>
         <div style={{ marginTop: 20, marginBottom: 20 }}>
           <Row gutter={16}>
             <Col span={6}>
               <Card
-                title={ <span><CarTwoTone style={{ fontSize: 20 }} /> Giao hàng toàn quốc</span>}
+                title={ <span><CarTwoTone style={{ fontSize: 20 }} /> Nationwide Delivery</span>}
                 bordered={false}
               >
-                Giao hàng vô cùng nhanh với chỉ 30.000đ.
+               Extremely fast delivery with many attractive shipping support incentive.
               </Card>
             </Col>
             <Col span={6}>
               <Card
-                title={<span><ShoppingTwoTone style={{ fontSize: 20 }} /> Sản phẩm đa dạng</span>}
+                title={<span><ShoppingTwoTone style={{ fontSize: 20 }} /> Diverse products</span>}
                 bordered={false}
               >
-                Áo, quần, phụ kiện các loại luôn chờ đón bạn.
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card
-                title={
-                  <span>
-                    <LikeTwoTone style={{ fontSize: 20 }} /> Tiện ích
-                  </span>
-                }
-                bordered={false}
-              >
-                Bạn có thể theo dõi đơn hàng của mình mọi lúc.
+               Shirts, pants, and accessories of all kinds are always waiting for you.
               </Card>
             </Col>
             <Col span={6}>
               <Card
                 title={
                   <span>
-                    <MobileTwoTone style={{ fontSize: 20 }} /> Hỗ trợ mua hàng trên nhiều nền tảng
+                    <LikeTwoTone style={{ fontSize: 20 }} /> Utilities
                   </span>
                 }
                 bordered={false}
               >
-                Bạn có thể mua hàng trên website và ứng dụng di động.
+               You can place orders and track your orders anytime, anywhere.
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card
+                title={
+                  <span>
+                    <MobileTwoTone style={{ fontSize: 20 }} /> Supports purchases on multiple platforms
+                  </span>
+                }
+                bordered={false}
+              >
+              You can make purchases on the website and mobile application.
               </Card>
             </Col>
           </Row>
         </div>
         <span className="text" style={{ fontWeight: "bold" }}>
-          Fashion HQ xin cam kết với khách hàng:
+        Fashion HQ would like to commit to customers:
         </span>
         <div style={{ marginLeft: 10 }}>
-          <span className="text">- &nbsp;Sản phẩm đạt chuẩn chất lượng.</span>
+          <span className="text">- &nbsp;The product meets quality standards.</span>
           <span className="text">
-            - &nbsp;Đội ngũ chăm sóc khách hàng của chúng tôi sẵn sàng hỗ trợ
-            bạn 24/7.
+            - &nbsp;Our customer care team is ready to support you 24/7.
           </span>
           <span className="text">
-            - &nbsp;Sản phẩm của bạn sẽ được đóng gói cẩn thận và vận chuyển an
-            toàn đến địa chỉ của bạn.
+            - &nbsp;Your product will be carefully packaged and shipped safely to your address.
           </span>
           <span className="text">
-            - &nbsp;Thông tin cá nhân của bạn sẽ được bảo vệ an toàn và không
-            bao giờ được chia sẻ với bên thứ ba.
+            - &nbsp;Your personal information will be kept secure and never shared with third parties.
           </span>
           <span className="text">
-            - &nbsp;Bạn có quyền đổi hoặc trả hàng trong vòng 7 kể từ ngày nhận
-            hàng.
+            - &nbsp;You have the right to exchange or return goods within 7 days from the date of receipt.
           </span>
         </div>
         <span className="text" style={{ marginTop: 20 }}>
-          Chúng tôi mong muốn bạn có một trải nghiệm mua sắm thú vị và hài lòng
-          tại Fashion HQ. Xin cảm ơn bạn đã tin tưởng và ủng hộ chúng tôi !
+          We want you to have an enjoyable and satisfying shopping experience at Fashion HQ. Thank you for trusting and supporting us!
         </span>
       </div>
     </div>

@@ -36,13 +36,13 @@ export default function Profile(){
         if(res.msg){
             if(res.msg==="Success"){
                 setTimeout(()=>{
-                    message.success("Cập nhật thành công")
+                    message.success("Update successful !")
                     setloadingBtn(false)
                 },500)
               
             }else{
                 setTimeout(()=>{
-                    message.error("Có lỗi rồi !!")
+                    message.error("There's an error !")
                     setloadingBtn(false)
                 },500)
                
@@ -60,12 +60,12 @@ export default function Profile(){
           
         >
             <Form.Item
-                label="Họ và tên"
+                label="First and last name"
                 name="name"
-                rules={[{ required: true, message: 'Nhập họ và tên'}]}
+                rules={[{ required: true, message: 'Enter first and last name'}]}
             >
                 <Input 
-                    placeholder="Nhập họ và tên đầy đủ"
+                    placeholder="Enter full name and surname"
                     value={dataUser.name}
                     onChange= {(e)=>setdataUser({...dataUser,name:e.target.value})}
                 />
@@ -75,35 +75,35 @@ export default function Profile(){
                 name="email"
             >
                 <Input 
-                    placeholder="Nhập email"
+                    placeholder="Enter email"
                     disabled
                 />
             </Form.Item>
             <Form.Item
-                label="Địa chỉ"
+                label="Address"
                 name="address"
-                rules={[{ required: true, message: 'Nhập địa chỉ'}]}
+                rules={[{ required: true, message: 'Enter address'}]}
             >
                 <Input 
-                    placeholder="Nhập địa chỉ"
+                    placeholder="Enter address"
                     value={dataUser.address}
                     onChange= {(e)=>setdataUser({...dataUser,address:e.target.value})}
                 />
             </Form.Item>
             <Form.Item
-                label="Số điện thoại"
+                label="Phone number"
                 name = "phone"
-                rules={[{ required: true, message: 'Nhập số điện thoại'}]}
+                rules={[{ required: true, message: 'Enter phone number'}]}
             >
                 <Input
-                    placeholder="Số điện thoại"
+                    placeholder="Phone number"
                     value={dataUser.phone}
                     onChange= {(e)=>setdataUser({...dataUser,phone:e.target.value})}
                 />
             </Form.Item>
             <Form.Item style={{ paddingTop:20 }}  wrapperCol={{ span: 12, offset: 10 }}>
                 <Button type="primary" htmlType="submit" danger loading={loadingBtn}>
-                    Cập nhật
+                    Update
                 </Button>
             </Form.Item>
         </Form>
@@ -114,11 +114,11 @@ export default function Profile(){
                 <div>
                     {currentUser.id==undefined ?
                     <span style={{ margin:"20px 10px" }}>
-                        Vui lòng đăng nhập để xem thông tin...
+                        Please log in to view information...
                     </span>
                     :
                     <div style={{ padding:"20px 20px" }}>
-                        Lưu thông tin cá nhân của bạn để thuận tiện cho việc thanh toán
+                        Save your personal information for payment convenience
                         {InforUser()}
                     </div>
                 

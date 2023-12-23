@@ -125,7 +125,7 @@ export default function Home() {
         <div>
           {slide()}
           <div className="contentHome">
-            <span className="title-new">Sản Phẩm Mới</span>
+            <span className="title-new">NEW PRODUCTS</span>
             <Slider className="slider-item-new" {...settings_carsoule_new}>
               {itemProductNew.map((item, i) => (
                 <div key={i} className="hello">
@@ -134,7 +134,7 @@ export default function Home() {
               ))}
             </Slider>
 
-            <span className="title-new" style={{marginTop: 40}}>Sản Phẩm Deal Hot</span>
+            <span className="title-new" style={{marginTop: 40}}>HOT DEAL PRODUCTS</span>
             <Row
               gutter={[{ xs: 8, sm: 16, md: 24, lg: 24 }, 20]}
               style={{ width: "100%" }}
@@ -157,12 +157,12 @@ export default function Home() {
                   danger
                   ghost
                 >
-                  Xem thêm...
+                  View more...
                 </Button>
               </div>
             )}
 
-            <span className="title-new" style={{marginTop: 40}}>Hãy Chọn Fashion HQ</span>
+            <span className="title-new" style={{marginTop: 40}}>CHOOSE FASHION HQ</span>
             <Row className="reason-choose">
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -170,8 +170,8 @@ export default function Home() {
                     <CompassFilled />
                   </div>
                 </div>
-                <h2>Giao hàng toàn quốc</h2>
-                <span>Giao hàng vô cùng nhanh với chỉ 30.000đ.</span>
+                <h2>Nationwide Delivery</h2>
+                <span>Extremely fast delivery with lots of support.</span>
               </Col>
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -179,8 +179,8 @@ export default function Home() {
                     <FormatPainterFilled />
                   </div>
                 </div>
-                <h2>Sản phẩm đa dạng</h2>
-                <span>Áo, quần, phụ kiện các loại luôn chờ đón bạn.</span>
+                <h2>Diverse Products</h2>
+                <span>Shirts, pants, and accessories of all kinds are always waiting for you.</span>
               </Col>
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -188,8 +188,8 @@ export default function Home() {
                     <BulbFilled />
                   </div>
                 </div>
-                <h2>Tiện ích</h2>
-                <span>Bạn có thể theo dõi đơn hàng của mình mọi lúc.</span>
+                <h2>Utilities</h2>
+                <span>You can track your order at all times.</span>
               </Col>
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -197,10 +197,9 @@ export default function Home() {
                     <ToolFilled />
                   </div>
                 </div>
-                <h2>Hỗ trợ mua hàng trên nhiều nền tảng</h2>
+                <h2>Platform diversity</h2>
                 <span>
-                  Chúng tôi có website, ứng dụng di động để bạn có thể dễ dàng
-                  kết nối.
+                   We have a website and mobile application so you can easily connect.
                 </span>
               </Col>
             </Row>

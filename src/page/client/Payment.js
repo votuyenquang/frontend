@@ -23,7 +23,7 @@ export default function Payment (props){
     const [methodPayment, setmethodPayment] = useState(1);
     const [form] = Form.useForm();
     const [paymentSucess, setpaymentSucess] = useState(false);
-    const textMethodBank = "Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển."
+    const textMethodBank = "Make payments right into our bank account. Please use your Order ID in the Checkout text section. The order will be delivered after the money has been transferred."
     const location = useLocation();
     useEffect(()=>{
         setpaymentSucess(false)
@@ -73,7 +73,7 @@ export default function Payment (props){
         if(methodPayment===2){
             handleOrder();
         }else{
-            console.log("Thanh toán sau")
+            console.log("Pay later")
         }
     }
     const handleOrder = async()=>{
@@ -108,7 +108,7 @@ export default function Payment (props){
     }
     const columns  = [
         {
-            title:"Sản phẩm",
+            title:"Product",
             key:'name',
             render: record=>{
                 return (
@@ -120,7 +120,7 @@ export default function Payment (props){
             }
         },
         { 
-            title:"Tạm tính",
+            title:"Provisional",
             dataIndex:"",
             key:'temp',
             render:(record)=>{
@@ -134,22 +134,22 @@ export default function Payment (props){
     ]
     const InformationPayment = ()=>(
        <div style={{ padding:20 }}>
-           <div style={{ display:'flex',flexDirection:'column' }}>
+           <div style={{ display:'flex',flexDirection:'column', marginBottom: 10 }}>
             {dataSale===undefined &&
-                <span >Bạn có mã khuyển mãi? <Link to="/cart">Quay lại</Link> giỏ hàng để nhận được khuyển mãi ! </span>
+                <span >Do you have a promotional code ?<Link to="/cart"> Come back</Link> shopping cart to receive promotion !</span>
             }
            </div>
-           <h2>THÔNG TIN THANH TOÁN</h2>
+           <h2 style={{fontWeight: "bold"}}>BILLING INFORMATION</h2>
             <Form.Item
                 name="name"
-                label="Họ Tên"
+                label="Full name"
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 14 }}
-                rules={[{ required: true, message: 'Vui lòng nhập họ tên!' }]}
+                rules={[{ required: true, message: 'Please enter your full name !' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập họ tên"
+                    placeholder="Enter your full name"
                     value={name}
                     defaultValue={name}
                     onChange= {(e)=>setname(e.target.value)}
@@ -159,14 +159,14 @@ export default function Payment (props){
             </Form.Item>
             <Form.Item
                 name="address"
-                label="Địa chỉ"
+                label="Address"
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 14 }}
-                rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
+                rules={[{ required: true, message: 'Please enter your address !' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập địa chỉ"
+                    placeholder="Enter address"
                     value={address}
                     defaultValue={address}
                     onChange= {(e)=>setaddress(e.target.value)}
@@ -176,14 +176,14 @@ export default function Payment (props){
             </Form.Item>
             <Form.Item
                 name="phone"
-                label="Số điện thoại"
+                label="Phone number"
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 14 }}
-                rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
+                rules={[{ required: true, message: 'Please enter the phone number !' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập số điện thoại"
+                    placeholder="Enter your phone number"
                     value={phone}
                     defaultValue={phone}
                     onChange= {(e)=>setphone(e.target.value)}
@@ -193,17 +193,17 @@ export default function Payment (props){
             </Form.Item>
             <Form.Item
                 name="email"
-                label="Địa chỉ Email"
+                label="Email"
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 14 }}
                 rules={[
-                    { type: 'email',message:"Vui lòng nhập đúng Email"},
-                    {required:true,message:"Vui lòng điền Email !"},
+                    { type: 'email',message:"Please enter correct Email"},
+                    {required:true,message:"Please fill in Email!"},
                 ]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập địa chỉ Email"
+                    placeholder="Enter your email address"
                     value={email}
                     defaultValue={email}
                     onChange= {(e)=>setemail(e.target.value)}
@@ -214,13 +214,13 @@ export default function Payment (props){
             </Form.Item>
             <Form.Item
                 name= 'introduction'
-                label="Ghi chú đơn hàng"
+                label="Order notes"
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 14 }}
                 style={{width:'80%'}}
             >
                 <Input.TextArea
-                    placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."
+                    placeholder="Notes about the order, for example, time or more detailed delivery location instructions."
                     value={message}
                     defaultValue={message}
                     onChange= {(e)=>setmessage(e.target.value)}
@@ -232,7 +232,7 @@ export default function Payment (props){
     )
     const Payment = ()=>(
         <div style={{ border:"2px solid black",padding:20 }}>
-            <h2>ĐƠN HÀNG CỦA BẠN</h2>
+            <h2 style={{fontWeight: "bold"}}>YOUR ORDER</h2>
             <Table 
                 dataSource={dataCart} 
                 columns={columns} 
@@ -240,21 +240,21 @@ export default function Payment (props){
                 summary={()=>(
                     <Table.Summary>
                         <Table.Summary.Row>
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tạm tính</span></Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         {dataSale !== undefined &&
                         <Table.Summary.Row>
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Mã khuyến mãi</span></Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{"-"+getPriceVND(promoprice)+" đ"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         }
                         <Table.Summary.Row>
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Phí vận chuyển</span></Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{getPriceVND(30000)+" đ"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         <Table.Summary.Row>
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tổng</span></Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promoprice+30000)+" đ"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     </Table.Summary>
@@ -267,24 +267,22 @@ export default function Payment (props){
                 horizontal
             >
             <Space direction="vertical">
-                <Radio value={1}><b>Chuyển khoản ngân hàng</b> <br/>
+                <Radio value={1}><b>Bank transfer</b> <br/>
                     {methodPayment===1 ? <span>{textMethodBank}</span>:null}
                 </Radio>
-                <Radio value={2}><b>Trả tiền mặt khi nhận hàng</b><br/>
-                    {methodPayment===2 ? <span>Trả tiền mặt khi nhận hàng</span>:null}
+                <Radio value={2}><b>Pay cash upon delivery</b><br/>
+                    {methodPayment===2 ? <span>Pay cash upon delivery</span>:null}
                  </Radio>
             </Space> 
             </Radio.Group>
             
             <Form.Item style={{ paddingTop:20 }}>
                 <Button type="primary" htmlType="submit" danger style={{ height:60,width:120,fontWeight:'bold' }} onClick={()=>console.log(email)}>
-                    Đặt hàng
+                  Order
                 </Button>
             </Form.Item>
             <div >
-            <span >Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, 
-                tăng trải nghiệm sử dụng website, 
-                và cho các mục đích cụ thể khác đã được mô tả trong chính sách riêng tư.</span>
+            <span >Your personal information will be used to process orders, enhance your website experience, and for other specific purposes described in the privacy policy.</span>
             </div>
         </div>
     )
@@ -316,11 +314,11 @@ export default function Payment (props){
             </div>
             :
             <div style={{ height:450,padding:"20px 40px" }}>
-            <span style={{ fontWeight:'bold' }}> Hãy thêm sản phẩm vào giỏ hàng để thực hiện chức năng này... </span>
+            <span style={{ fontWeight:'bold' }}> Please add product to cart to perform this function...</span>
             <div style={{ display:'flex',flex:1,justifyContent:'center',paddingTop:"10%" }}>
                         <Button style={{ height:50 }} type="primary" danger>
                             <Link to="/">
-                                Quay trở lại cửa hàng
+                              Return to the store
                             </Link>
                         </Button>
                     </div>
@@ -334,17 +332,17 @@ export default function Payment (props){
             <Result
                 style={{ height:450,paddingTop:50 }}
                 status="success"
-                title="Đặt hàng thành công!"
-                subTitle="Theo dõi đơn hàng của bạn ?"
+                title="Order Success !"
+                subTitle="Track your order?"
                 extra={[
                 <Button type="primary">
                     <Link to="/">
-                    Tiếp tục đặt sản phẩm
+                      Continue ordering products
                     </Link>
                 </Button>,
                 <Button >
                     <Link to="/billfollow">
-                    Theo dõi đơn hàng
+                      Order tracking
                     </Link>
                 </Button>,
             ]}

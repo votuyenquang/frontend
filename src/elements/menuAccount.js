@@ -14,11 +14,11 @@ export default function MenuAccount (props){
     const {name, email, id} = props.data;
     
     const handleLogout = ()=>{
-        message.loading({ content: 'Đang đăng xuất...', key });
+        message.loading({ content: 'Signing out...', key });
         setTimeout(()=>{
             localStorage.removeItem("token");
             props.refreshAccount();
-            message.success({ content: 'Đăng xuất thành công!', key, duration: 2 });
+            message.success({ content: 'Sign out successfully !', key, duration: 2 });
         },1000)
     }
 
@@ -27,16 +27,16 @@ export default function MenuAccount (props){
         <Menu theme="dark">
             <Menu.Item key="bill" >
                 <Link to="/billfollow">
-                Đơn hàng
+                Order
                 </Link>
             </Menu.Item>
             <Menu.Item key="profile" >
                 <Link to="/profile">
-                    {"Thông tin tài khoản ("+name+")" }
+                    {"Information ("+name+")" }
                 </Link>
             </Menu.Item>
             <Menu.Item key="logout" onClick={handleLogout}>
-                Đăng xuất
+               Log out
             </Menu.Item>
         </Menu>
     )

@@ -48,10 +48,10 @@ export default function FullProduct(){
                 <div style={{ display:'flex',justifyContent:'space-between',alignItems:'center',paddingBottom:20 }}>
                 <Breadcrumb style={{ fontSize:18,padding:"20px 20px"}}>
                     <Breadcrumb.Item>
-                        <Link to={"/home"}>Trang chủ</Link>
+                        <Link to={"/home"}>Home</Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        {`Cửa hàng`}
+                        {`Shop`}
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ paddingRight:20 }}>
