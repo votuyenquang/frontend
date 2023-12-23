@@ -82,7 +82,7 @@ export default function Introduction() {
                 title={ <span><CarTwoTone style={{ fontSize: 20 }} /> Giao hàng toàn quốc</span>}
                 bordered={false}
               >
-                Giao hàng vô cùng nhanh với chỉ 30.000đ.
+                Giao hàng vô cùng nhanh với  nhiều ưu đãi phí vận chuyển.
               </Card>
             </Col>
             <Col span={6}>
@@ -90,7 +90,7 @@ export default function Introduction() {
                 title={<span><ShoppingTwoTone style={{ fontSize: 20 }} /> Sản phẩm đa dạng</span>}
                 bordered={false}
               >
-                Áo, quần, phụ kiện các loại luôn chờ đón bạn.
+                Áo, quần, phụ kiện các luôn sẵn sằng để các bạn thỏa thích lựa chọn.
               </Card>
             </Col>
             <Col span={6}>
