@@ -13,7 +13,7 @@ import {
   List,
   notification,
 } from "antd";
-import { GiftOutlined } from "@ant-design/icons";
+import { GiftOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import * as FetchAPI from "../../util/fetchApi";
 import { getPriceVND } from "../../contain/getPriceVND";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
@@ -278,14 +278,14 @@ style={{ display:'flex',flexDirection:'column' }}
         <span>Code: {dataProduct.id}</span>
         <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span className="rate">
-          Rate:{" "}
+          Rate:
           <Rate
             allowHalf
             style={{ size: "10px" }}
             tooltips="12345"
             defaultValue={reviewStar}
             disabled
-          />{" "}
+          />
           ({quanityReview} review)
         </span>
       </div>
@@ -380,54 +380,77 @@ style={{ display:'flex',flexDirection:'column' }}
         </div>
 
         <div className="block-promotion">
-          <div className="heading-promo"><GiftOutlined style={{marginRight: 5}}/>Special promotion</div>
+          <div className="heading-promo">
+            <GiftOutlined style={{ marginRight: 5 }} />
+            Special promotion
+          </div>
           <div className="promo-content">
-            <p>Special discount program to celebrate Lunar New Year. Applicable from January 12 - February 29</p>
-            <p> + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from 850,000 VND !</p>
+            <p></p>
+            <p>
+              Special discount program to celebrate Lunar New Year. Applicable
+              from January 12 - February 29
+            </p>
+            <p>
+              + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from
+              850,000 VND !
+            </p>
           </div>
         </div>
 
-        <div style={{ paddingTop: 50 }}>
-          {dataProduct.description !== null && (
-            <span style={{ fontSize: 16 }}>
-              <h4>PRODUCT INFORMATION</h4>{" "}
+        <div className="block-promotion">
+          <div className="heading-product-infor">
+            <InfoCircleOutlined style={{ marginRight: 5 }} />
+            Product Information
+          </div>
+          <div className="promo-content">
+            <p></p>
+            <span style={{ fontSize: 14 }}>
+              {ReactHtmlParser(dataProduct.description)}
             </span>
+          </div>
+        </div>
+        {/* 
+<div style={{ paddingTop: 50 }}>
+          {dataProduct.description !== null && (
+            <span className="option-children">PRODUCT INFORMATION</span>
           )}
-          <span style={{ fontSize: 16 }}>
+          <span style={{ fontSize: 14 }}>
             {ReactHtmlParser(dataProduct.description)}
           </span>
         </div>
+*/}
+      </div>
 
-        <div style={{ paddingTop: 50 }}>
-          <span style={{ fontSize: 16 }}>
-            {" "}
-            <h4>Customer reviews</h4>{" "}
-          </span>
-          {arrReview.map((review, ind) => {
-            return (
-              <div className="review">
-                <div className="review-block" key={ind}>
-                  <span className="review-avt">
-                    <FaRegUserCircle />
-                  </span>
-                  <span className="review-name">{review.name} : </span>
-                  <span className="review-star">
-                    <Rate
-                      allowHalf
-                      style={{ color: "orange", fontSize: 16 }}
-                      tooltips="12345"
-                      defaultValue={review.reviewStar}
-                      disabled
-                    />
-                  </span>
-                </div>
-                <div className="review-comment">
-                  <span>{review.comment}</span>
-                </div>
+      <div className="reviews">
+        <p className="review-title">CUSTOMER REVIEWS</p>
+        {arrReview.map((review, ind) => {
+          return (
+            <div className="review">
+              <div className="review-block" key={ind}>
+                <span className="review-avt">
+                  <FaRegUserCircle />
+                </span>
+                <span className="review-name">{review.name}</span>
               </div>
-            );
-          })}
-        </div>
+              <div className="date-start">
+                <span>2024-01-01 20:20</span>
+                <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <span className="review-star">
+                  <Rate
+                    allowHalf
+                    style={{ color: "orange", fontSize: 16 }}
+                    tooltips="12345"
+                    defaultValue={review.reviewStar}
+                    disabled
+                  />
+                </span>
+              </div>
+              <div className="review-comment">
+                <span>{review.comment}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
