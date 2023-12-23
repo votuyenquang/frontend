@@ -129,6 +129,116 @@
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
+.name-product{
+  font-weight: 700;
+  font-family: 'Roboto Condensed',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.inventory-quantity{
+  font-size: 16px;
+  border-bottom: 1px solid #DDE1EF;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.product-price{
+  padding: 5px 10px;
+  background: #ffffff;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.sale-off{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 100%;
+  background: red;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.option{
+  display: flex;
+}
+
+.option-children{
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.button-buy{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2px;
+}
+
+.add-cart{
+  height: 42px;
+  transition-duration: 0.3s;
+  font-weight: 700;
+  width: 40%;
+  background: rgb(0, 10, 90);
+  color: #fff;
+  -webkit-clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border: none;
+}
+
+.buy-now{
+  height: 42px;
+  border: none;
+  transition-duration: 0.3s;
+  font-weight: 700;
+  width: 40%;
+  background: #a2ff00;
+  color: #000000;
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.add-cart:hover,.buy-now:hover{
+  background: #DDE1EF;
+  color: #000000;
+  border: none;
+}
+
+.block-promotion{
+  margin-top: 40px;
+  margin-left: 8px;
+  border: 2px solid #47a432;
+  position: relative;
+}
+
+.heading-promo{
+  padding: 5px 10px 5px 10px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  background: #df4949;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  -webkit-clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.promo-content{
+  padding: 10px;
+  margin-top: 26px;
+}
+
 
 @keyframes ripple {
   to {
