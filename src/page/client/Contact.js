@@ -18,9 +18,9 @@ export default function Contact() {
     <div style={{ marginTop: 20, marginLeft: 30 }}>
       <Breadcrumb style={{ fontSize: 18, padding: "20px 20px" }}>
         <Breadcrumb.Item>
-          <Link to={"/home"}>Trang chủ</Link>
+          <Link to={"/home"}>Home</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{`Liên hệ`}</Breadcrumb.Item>
+        <Breadcrumb.Item>{`Contact`}</Breadcrumb.Item>
       </Breadcrumb>
       <div
         style={{
@@ -30,14 +30,20 @@ export default function Contact() {
           marginBottom: 40,
         }}
       >
-        <div style={{display: "flex", width: "100%", alignItems: "center", justifyContent: "center"}}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <div>
             <h2 style={{ fontWeight: "bold" }}>
-              NƠI GIẢI ĐÁP MỌI THẮC MẮC CỦA BẠN
+              THE PLACE TO ANSWER ALL YOUR QUESTIONS
             </h2>
             <span className="text">
-              Với sứ mệnh "Khách hàng là ưu tiên số 1" chúng tôi luôn mạng lại
-              giá trị tốt nhất
+              With the mission "Customers are the number 1 priority" we always bring the best value
             </span>
             <div style={{ display: "inline-grid", marginBottom: 20 }}>
               <div style={{ display: "-webkit-inline-box", marginTop: 20 }}>
@@ -49,9 +55,9 @@ export default function Contact() {
                   </div>
                   <div style={{ display: "inline-grid" }}>
                     <span style={{ fontWeight: "bold", fontSize: 14 }}>
-                      Địa chỉ
+                    Address
                     </span>
-                    <span>115 Đỗ Thúc Tịnh, Khuê Trung, Cẩm Lệm, Đã Nẵng</span>
+                    <span>115 Do Thuc Tinh, Khue Trung, Cam Lam, Da Nang</span>
                   </div>
                 </div>
                 <div style={{ display: "flex" }}>
@@ -60,9 +66,9 @@ export default function Contact() {
                   </div>
                   <div style={{ display: "inline-grid" }}>
                     <span style={{ fontWeight: "bold", fontSize: 14 }}>
-                      Thời gian làm việc
+                      Working time
                     </span>
-                    <span>8h - 17h hằng ngày</span>
+                    <span>8am - 5pm daily</span>
                   </div>
                 </div>
               </div>
@@ -94,13 +100,12 @@ export default function Contact() {
               </div>
             </div>
             <div style={{ width: "90%" }}>
-              <h2 style={{ fontWeight: "bold" }}> LIÊN HỆ VỚI CHÚNG TÔI </h2>
+              <h2 style={{ fontWeight: "bold" }}> CONTACT US </h2>
               <span className="text">
-                Nếu bạn có thắc mắc gì, có thể gửi yêu cầu cho chúng tôi, và
-                chúng tôi sẽ liên lạc lại với bạn sớm nhất có thể .
+               If you have any questions, you can send us a request, and we will contact you as soon as possible.
               </span>
               <TextArea
-                placeholder="Họ tên"
+                placeholder="Full name"
                 autoSize
                 style={{ marginBottom: 10 }}
               />
@@ -112,12 +117,12 @@ export default function Contact() {
               <TextArea
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="Nội dung"
+                placeholder="Content"
                 autoSize={{ minRows: 3, maxRows: 5 }}
                 style={{ marginBottom: 10 }}
               />
               <Button type="primary" htmlType="submit" style={{ width: 100 }}>
-                Gửi
+                Send
               </Button>
             </div>
           </div>

@@ -184,7 +184,7 @@ export default function App() {
       >
         <Search
           className="input-search"
-          placeholder="Nhập tên sản phẩm"
+          placeholder="Enter product name ..."
           enterButton
           onSearch={onSearch}
         />
@@ -198,7 +198,7 @@ export default function App() {
           >
             <FaUser />
             <span className="title" style={{ paddingLeft: 5 }}>
-              Đăng nhập
+              Login
             </span>
           </div>
         ) : (
@@ -218,7 +218,7 @@ export default function App() {
             >
               <FaUser />
               <span className="title" style={{ paddingLeft: 5 }}>
-                Tài khoản{" "}
+                Account
               </span>
             </div>
           </Dropdown>
@@ -254,7 +254,7 @@ export default function App() {
                   cursor: "pointer",
                 }}
               >
-                Giỏ hàng
+                Cart
               </span>
             </Badge>
           </Dropdown>
@@ -284,27 +284,27 @@ export default function App() {
         defaultSelectedKeys={["1"]}
       >
         <Menu.Item key="1">
-          Trang chủ <Link to={"/home"} />
+          Home <Link to={"/home"} />
         </Menu.Item>
-        <SubMenu key="2" title="Sản phẩm">
+        <SubMenu key="2" title="Product">
           {menu}
         </SubMenu>
         <Menu.Item key="3">
-          <Link to="/intro">Giới thiệu</Link>
+          <Link to="/intro">Introduction</Link>
         </Menu.Item>
         <Menu.Item key="4">
-          <Link to="/productsale/1">Sản phẩm khuyến mãi</Link>
+          <Link to="/productsale/1">Promotional products</Link>
         </Menu.Item>
         <Menu.Item key="5">
-          <Link to="/fullproduct/1">Cửa hàng</Link>
+          <Link to="/fullproduct/1">Shop</Link>
         </Menu.Item>
         <Menu.Item key="6">
           <Link to={"/policy"} />
-          Chính sách
+          Policy
         </Menu.Item>
         <Menu.Item key="7">
           <Link to={"/contact"} />
-          Liên hệ
+          Contact
         </Menu.Item>
       </Menu>
     </Header>

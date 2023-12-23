@@ -19,7 +19,7 @@ export default function Register(props){
         if(res.success){
             return Promise.resolve();
         }else{
-            return Promise.reject(new Error('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác  !'));
+            return Promise.reject(new Error('Username already exists, please choose another name !'));
         }
     }
     const handleRegister = async()=>{
@@ -56,7 +56,7 @@ export default function Register(props){
         <div>
         <PageHeader
             onBack={() => props.back()}
-            title={"Tiếp tục đăng ký với "}
+            title={"Continue to register with "}
             subTitle={email}
             style={{padding:0}}
         />
@@ -67,13 +67,13 @@ export default function Register(props){
             onFinish={handleRegister}
             scrollToFirstError>
             <Form.Item
-                label="Họ tên"
+                label="Full name"
                 name="name"
-                rules={[{ required: true, message: 'Vui lòng nhập tên tài khoản!' }]}
+                rules={[{ required: true, message: 'Please enter your account name !' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập đầy đủ họ tên"
+                    placeholder="Enter full name"
                     value={name}
                     defaultValue={name}
                     onChange= {(e)=>setname(e.target.value)}
@@ -82,17 +82,17 @@ export default function Register(props){
                 />
             </Form.Item>
             <Form.Item
-                label="Tên đăng nhập"
+                label="User name"
                 name="username"
                 hasFeedback
                 rules={[
-                    { required: true, message: 'Vui lòng nhập họ tên !' },
+                    { required: true, message: 'Please enter your full name !' },
                     { validator: checkUserExist}
                 ]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập tên tài khoản"
+                    placeholder="Enter account name"
                     value={username}
                     defaultValue={username}
                     onChange= {(e)=>setusername(e.target.value)}
@@ -101,16 +101,16 @@ export default function Register(props){
                 />
             </Form.Item>
             <Form.Item
-                label="Mật khẩu"
+                label="Password"
                 name="password"
                 rules={[
-                    { required: true, message: 'Vui lòng nhập mật khẩu!' },
-                    {min:3,message:'Mật khẩu ít nhất 3 ký tự'}
+                    { required: true, message: 'Please enter a password !' },
+                    {min:3,message:'Password must be at least 3 characters'}
                 ]}
                 style={{width:'80%'}}
             >
                 <Input.Password
-                    placeholder="Nhập mật khẩu"
+                    placeholder="Enter password"
                     value={password}
                     defaultValue={password}
                     onChange= {(e)=>setpassword(e.target.value)}
@@ -121,26 +121,26 @@ export default function Register(props){
             </Form.Item>
             <Form.Item
                 name="confirm"
-                label="Nhập lại mật khẩu"
+                label="Enter the password"
                 style={{width:'80%'}}
                 hasFeedback
                 rules={[
                 {
                     required: true,
-                    message: 'Vui lòng nhập lại mật khẩu!',
+                    message: 'Please re-enter your password !',
                 },
                 ({ getFieldValue }) => ({
                     validator(_, value) {
                     if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                     }
-                    return Promise.reject(new Error('Mật khẩu nhập lại phải đúng như trên!'));
+                    return Promise.reject(new Error('Re-entered password must be correct as above!'));
                     },
                 }),
                 ]}
             >
                 <Input.Password
-                    placeholder="Nhập mật khẩu"
+                    placeholder="Enter password"
                     value={confirmpass}
                     defaultValue={confirmpass}
                     onChange= {(e)=>setconfirmpass(e.target.value)}
@@ -151,7 +151,7 @@ export default function Register(props){
             </Form.Item>
             <Form.Item style={{ padding:"10px 0px" }} >
                 <Button htmlType="submit" type="primary" danger style={{ width:100,height:45,borderRadius:8 }}>
-                   Đăng ký
+                  Register
                 </Button>
             </Form.Item>
             
@@ -161,13 +161,13 @@ export default function Register(props){
     const ResultSccuess = ()=>(
         <Result
             status="success"
-            title="Đăng ký thanh công !"
-            subTitle="Bạn có muốn đăng nhập ngày bây giờ"
+            title="Successful registration !"
+            subTitle="Would you like to log in now ?"
             extra={[
             <Button onClick={handleLogin} type="primary" key="console">
-                Đăng nhập ngay !
+               Log in now !
             </Button>,
-            <Button onClick={props.cancel} key="buy">Để sau</Button>,
+            <Button onClick={props.cancel} key="buy">Later</Button>,
             ]}
         />
     )

@@ -29,48 +29,46 @@ export default function FooterWeb() {
           </div>
           <div style={{marginTop: 27}}>
             <span>
-              “Thời trang cho mọi người” nhắm đến đối tượng khách hàng vô cùng
-              đa dạng, từ phụ nữ, trẻ em cho đến các đấng mày râu. Thậm chí,
-              ngay trong tên thương hiệu CTFASHION đã ngầm chứa định hướng này
+               “Fashion for everyone” targets an extremely diverse customer base, from women, children to men. Even the brand name CTFASHION implicitly contains this orientation.
             </span>
           </div>
         </Col>
         <Col xl={6} className="widget-footer style2">
-          <h2 className="widget-title-footer">Tài khoản</h2>
+          <h2 className="widget-title-footer">Account</h2>
           <ul>
             <li>
-              <Link to={{ pathname: "/" }}>Đăng nhập</Link>
+              <Link to={{ pathname: "/" }}>Login</Link>
             </li>
             <li>
-              <Link to={{ pathname: "/" }}>Đăng ký</Link>
+              <Link to={{ pathname: "/" }}>Register</Link>
             </li>
             <li>
-              <Link to={{ pathname: "/billfollow" }}>Đơn hàng</Link>
+              <Link to={{ pathname: "/billfollow" }}>Order</Link>
             </li>
             <li>
-              <Link to={{ pathname: "/cart" }}>Giỏ hàng</Link>
+              <Link to={{ pathname: "/cart" }}>Cart</Link>
             </li>
           </ul>
         </Col>
         <Col xl={6} className="widget-footer style3">
-          <h2 className="widget-title-footer">Cửa hàng</h2>
+          <h2 className="widget-title-footer">Shop</h2>
           <ul>
             <li>
-              <Link to={{ pathname: "/" }}>Khám phá</Link>
+              <Link to={{ pathname: "/" }}>Explore</Link>
             </li>
             <li>
-              <Link to={{ pathname: "/" }}>Liên hệ</Link>
+              <Link to={{ pathname: "/" }}>Contact</Link>
             </li>
             <li>
-              <Link to={{ pathname: "/" }}>Giới thiệu</Link>
+              <Link to={{ pathname: "/" }}>Introduce</Link>
             </li>
           </ul>
         </Col>
         <Col xl={6} className="widget-footer style4">
-          <h2 className="widget-title-footer">Phản hồi với chúng tôi</h2>
+          <h2 className="widget-title-footer">Feedback To Us</h2>
           <ul>
             <li>
-              <a href="https://www.facebook.com/tq.0101" target="_blank">
+              <a href="" target="_blank">
                 <FacebookFilled />
               </a>
             </li>
@@ -80,7 +78,7 @@ export default function FooterWeb() {
               </a>
             </li>
             <li>
-              <a href="https://github.com/votuyenquang" target="_blank">
+              <a href="" target="_blank">
                 <GithubFilled />
               </a>
             </li>

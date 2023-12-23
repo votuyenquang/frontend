@@ -213,9 +213,9 @@ export default function ProductDetails(){
             <span style={{ fontSize:18,fontWeight:'bold' }}>{dataProduct.name}</span>  
             <div> 
                 <Rate allowHalf style={{ color:"orange"}} tooltips="12345" defaultValue={reviewStar} disabled/>
-                <span style={{ marginLeft:10 }}>{`(${quanityReview} đánh giá)`}</span>
+                <span style={{ marginLeft:10 }}>{`(${quanityReview} evaluate)`}</span>
             </div>
-            <span><span style={{ fontWeight:'bold' }}>Mã SP : </span>{dataProduct.id}</span>
+            <span><span style={{ fontWeight:'bold' }}>Product code : </span>{dataProduct.id}</span>
            
         </div>
     )
@@ -224,23 +224,23 @@ export default function ProductDetails(){
             {ProductInformation()}
             {line()}
             {dataProduct.promotional===null ?
-                <span style={{ fontSize:20 }}>Giá: {getPriceVND(dataProduct.price)+" đ"}</span>
+                <span style={{ fontSize:20 }}>Price: {getPriceVND(dataProduct.price)+" đ"}</span>
                 :
                 <div style={{ display:'flex',flexDirection:'column' }}>
                     <span style={{ fontSize:18,textDecorationLine:'line-through' }}>
-                        Giá gốc: {getPriceVND(dataProduct.price)+" đ"}
+                        Original price: {getPriceVND(dataProduct.price)+" đ"}
                     </span>
                     <span style={{ fontSize:20,color:'red',fontWeight:'bold' }}>
-                        Giá: {getPriceVND(dataProduct.promotional)+" đ"}
+                        Price: {getPriceVND(dataProduct.promotional)+" đ"}
                     </span>
                 </div>
             }
             {line()}
 
             <div style={{ display:'flex',flexDirection:'row',alignItems:'center',paddingTop:20,paddingBottom:20 }}>
-                <span style={{ fontSize:18 }}>Tùy chọn : </span>
+                <span style={{ fontSize:18 }}>Option :</span>
                 <div style={{ padding:"0px 10px"}}> 
-                  <Select style={{ width: 120 }} placeholder="Chọn Size, Màu" onChange=
+                  <Select style={{ width: 120 }} placeholder="Choose size, Color" onChange=
                   {
                     (e)=> {
                         console.log(e);
@@ -254,7 +254,7 @@ export default function ProductDetails(){
             </div>
 
             <div style={{ display:'flex',flexDirection:'row',alignItems:'center',paddingTop:20,paddingBottom:20 }}>
-                <span style={{ fontSize:18 }}>Số lượng : </span>
+                <span style={{ fontSize:18 }}>Quantity :</span>
                 <div style={{ padding:"0px 10px"}}> 
                     <InputNumber  
                         style={{ textAlign:'center' }} 
@@ -277,21 +277,21 @@ export default function ProductDetails(){
                     loading={buttonLoading}
                 >
                     {outOfStock ? 
-                        <span style={{ fontWeight:'bold' }}>HẾT HÀNG</span>
+                        <span style={{ fontWeight:'bold' }}>OUT OF STOCK</span>
                     :
-                        <span style={{ fontWeight:'bold' }}>MUA HÀNG</span>
+                        <span style={{ fontWeight:'bold' }}>BUY</span>
                     }
                 </Button>
                 <div style={{ paddingTop:50 }}> 
                     {dataProduct.description!==null &&
-                    <span style={{ fontSize:16}}> <h4>THÔNG TIN SẢN PHẨM</h4> </span>
+                    <span style={{ fontSize:16}}> <h4>PRODUCT INFORMATION</h4> </span>
                     }
                     <span style={{ fontSize:16}}>{ReactHtmlParser(dataProduct.description)}</span>
                 </div>
 
                 <div style={{ paddingTop:50 }}> 
                   
-                    <span style={{ fontSize:16}}> <h4>Đánh giá của khách hàng</h4> </span>
+                    <span style={{ fontSize:16}}> <h4>Customer reviews</h4> </span>
                    {
                     arrReview.map( (review,ind) => {
                         return(
@@ -324,7 +324,7 @@ export default function ProductDetails(){
     const Direction = ()=>(
         <Breadcrumb style={{ fontSize:18 }}>
             <Breadcrumb.Item>
-                <Link to={"/home"}>Trang chủ</Link>
+                <Link to={"/home"}>Home</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
                 <Link to={`/category/${dataProduct.idCategory}`}>{nameCategory}</Link>
@@ -341,7 +341,7 @@ export default function ProductDetails(){
         </div>
     )
     return(
-        <div style={{ padding:"20px 10%" }}>
+        <div style={{ padding:"20px 5%" }}>
             {showContent ?
             <div style={{ minHeight:800 }}>
             <div style={{ paddingBottom:30}}>
@@ -370,7 +370,7 @@ export default function ProductDetails(){
                     {contentProduct()}
                </Col>
                <Col className="productRelate" xl={4} style={{ justifyContent:'center' }}>
-                   <span style={{ fontSize:16,fontWeight:'bold' }}>SẢN PHẨM LIÊN QUAN</span>
+                   <span style={{ fontSize:16,fontWeight:'bold' }}>RELATED PRODUCTS</span>
                    <Row>
                         {ItemProductRelate}
                    </Row>
