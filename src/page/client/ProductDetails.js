@@ -309,7 +309,9 @@ style={{ display:'flex',flexDirection:'column' }}
           <span style={{ fontSize: 15, textDecorationLine: "line-through" }}>
             {getPriceVND(dataProduct.price) + "đ"}
           </span>
-          <span className="sale-off">10%</span>
+          <span className="sale-off">
+            {Math.round(( dataProduct.price - dataProduct.promotional) / dataProduct.price * 100) + "%"}
+          </span>
         </div>
       )}
       <div className="option">

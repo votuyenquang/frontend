@@ -31,6 +31,7 @@ export default function Account(props) {
             message.error("Incorrect password")
         }else if(res.msg==="Success"){
             localStorage.setItem("token",res.token);
+            localStorage.setItem("idUser",res.idUser);
             finish(res.token);
             message.success("Logged in successfully !");
             formLogin.setFieldsValue({username:"",password:""})

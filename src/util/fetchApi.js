@@ -45,7 +45,6 @@ export const postDataAPIImg = async(url,data)=>{
     })
     .then((response)=>response.json())
     .then((responseJson)=>{
-        console.log(`${base_url}${url}`);
 
         return responseJson;
     }
