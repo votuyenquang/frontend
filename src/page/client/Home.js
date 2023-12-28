@@ -7,6 +7,7 @@ import Product from "../../elements/product";
 import * as FetchAPI from "../../util/fetchApi";
 import Spinner from "../../elements/spinner";
 import { useLocation } from "react-router-dom";
+import jwt from 'jsonwebtoken';
 import {
   BulbFilled,
   FormatPainterFilled,
@@ -20,8 +21,11 @@ export default function Home() {
   const [itemProductDeal, setitemProductDeal] = useState([]);
   const [showContent, setshowContent] = useState(false);
   const [pageDeal, setpageDeal] = useState(1);
+  const [token, setToken] = useState();
   const [moreDeal, setmoreDeal] = useState(true);
   const location = useLocation();
+  const [productRecommendation, setProductRecommendation] = useState([]);
+ 
   var settings_carsoule_new = {
     dots: true,
     infinite: true,
@@ -61,6 +65,23 @@ export default function Home() {
     setshowContent(false);
     getProductNew();
   }, []);
+  useEffect(  () => {
+    setshowContent(false);
+    const fetchData = async () => {
+      try {
+        const new_token = localStorage.getItem('token') || 1;
+        const resp = await FetchAPI.postDataAPI('/product/getRecommendationProduct', { id: new_token });
+        setProductRecommendation(resp.data);
+        setToken(new_token)
+      } catch (error) {
+        console.error('Error fetching recommendation data:', error);
+      }
+    };
+    fetchData(); 
+
+    setshowContent(true);
+
+  },[localStorage.getItem('token')])
 
   useEffect(() => {
     setshowContent(false);
@@ -70,6 +91,7 @@ export default function Home() {
   useEffect(() => {
     window.scroll(0, 0);
   }, [location]);
+  
 
   const getProductNew = async () => {
     const res = await FetchAPI.getAPI(`/product/getProductNew/1`);
@@ -84,7 +106,6 @@ export default function Home() {
       setmoreDeal(false);
     }
     setitemProductDeal(item);
-    setshowContent(true);
   };
   const slide = () => (
     <Carousel
@@ -125,6 +146,15 @@ export default function Home() {
         <div>
           {slide()}
           <div className="contentHome">
+          <span className="title-new">RECOMMENDATION FOR YOU</span>
+            <Slider className="slider-item-new" {...settings_carsoule_new}
+               style= {{ marginBottom: "48px" }}>
+              {productRecommendation.map((item, i) => (
+                <div key={i} className="hello">
+                  <Product item={item} />
+                </div>
+              ))}
+            </Slider>
             <span className="title-new">NEW PRODUCTS</span>
             <Slider className="slider-item-new" {...settings_carsoule_new}>
               {itemProductNew.map((item, i) => (
