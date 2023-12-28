@@ -401,8 +401,7 @@ export default function App() {
             <div className="topbar">
               <span style={{ color: "white", alignItems: "center" }}>
                 {" "}
-                <EnvironmentOutlined style={{ marginRight: 5 }} /> 115 Đỗ Thúc
-                Tịnh, Khuê Trung, Cẩm Lệ |{" "}
+                <EnvironmentOutlined style={{ marginRight: 5 }} /> 115 Do Thuc Tinh, Khue Trung, Cam Le |{" "}
                 <MailOutlined style={{ marginLeft: 10, marginRight: 5 }} />{" "}
                 Email: fashion@gmail.com.vn |{" "}
                 <HistoryOutlined style={{ marginLeft: 10, marginRight: 5 }} />{" "}

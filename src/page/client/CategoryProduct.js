@@ -69,7 +69,7 @@ export default function CategoryProduct(){
                         </div>
                     </div>
                 {empty ?
-                    <Empty className="empty" description="Không có sản phẩm"  />
+                    <Empty className="empty" description="No products available"  />
                     :
                     <div>
                         <Row  gutter={ [{ xs: 160, sm: 16, md: 24, lg: 50 },12]} >

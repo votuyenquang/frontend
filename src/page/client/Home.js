@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, Col, Row, Button } from "antd";
-import slider1 from "../../images/slider1.jpg";
-import slider2 from "../../images/slider2.jpg";
-import slider3 from "../../images/slider3.jpg";
+import { Carousel, Col, Row, Button, Card } from "antd";
 import Product from "../../elements/product";
 import * as FetchAPI from "../../util/fetchApi";
 import Spinner from "../../elements/spinner";
 import { useLocation } from "react-router-dom";
+import freeship from "../../images/freeship.png";
+import off from "../../images/giam.png"
 import {
   BulbFilled,
   FormatPainterFilled,
   CompassFilled,
   ToolFilled,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import Slider from "react-slick";
 
@@ -86,14 +86,132 @@ export default function Home() {
     setitemProductDeal(item);
     setshowContent(true);
   };
+
+  const sale = () => (
+    <Row className="sale">
+      <Col span={5}>
+        <Card
+          className="sale-item"
+          title={
+            <div className="sale-title">
+              <img src={freeship} style={{ width: 45 }} />
+              <div style={{ display: "grid", marginLeft: 10 }}>
+                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
+                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
+              </div>
+            </div>
+          }
+        >
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <div className="sale-content">
+              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
+              <span>Expiry: 29/02/2023</span>
+            </div>
+            <Button className="sale-button">Copy</Button>
+          </div>
+        </Card>
+      </Col>
+      <Col span={5}>
+        <Card
+          className="sale-item"
+          title={
+            <div className="sale-title">
+              <img src={off} style={{ width: 45 }} />
+              <div style={{ display: "grid", marginLeft: 10 }}>
+                <span style={{fontWeight: 600}}>REDUCED 50,000 VND</span>
+                <span style={{fontSize: 13}}>Applicable to orders from 400k</span>
+              </div>
+            </div>
+          }
+        >
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <div className="sale-content">
+              <span>Code: <span style={{fontWeight: 600}}>GIAM50VND</span></span>
+              <span>Expiry: 29/02/2023</span>
+            </div>
+            <Button className="sale-button">Copy</Button>
+          </div>
+        </Card>
+      </Col>
+      <Col span={5}>
+        <Card
+          className="sale-item"
+          title={
+            <div className="sale-title">
+              <img src={freeship} style={{ width: 45 }} />
+              <div style={{ display: "grid", marginLeft: 10 }}>
+                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
+                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
+              </div>
+            </div>
+          }
+        >
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <div className="sale-content">
+              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
+              <span>Expiry: 29/02/2023</span>
+            </div>
+            <Button className="sale-button">Copy</Button>
+          </div>
+        </Card>
+      </Col>
+      <Col span={5}>
+        <Card
+          className="sale-item"
+          title={
+            <div className="sale-title">
+              <img src={freeship} style={{ width: 45 }} />
+              <div style={{ display: "grid", marginLeft: 10 }}>
+                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
+                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
+              </div>
+            </div>
+          }
+        >
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <div className="sale-content">
+              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
+              <span>Expiry: 29/02/2023</span>
+            </div>
+            <Button className="sale-button">Copy</Button>
+          </div>
+        </Card>
+      </Col>
+    </Row>
+  );
+
   const slide = () => (
     <Carousel
       style={{ overflow: "hidden" }}
-      autoplaySpeed={3000}
+      autoplaySpeed={4000}
+      effect="fade"
       autoplay
       dots={false}
     >
-      <div>
+      <div className="background1">
+        <div className="slider1">
+          <div className="title-1">FLASH SALE</div>
+          <div className="title-2">BUY PAIR TO DISCOUNT SET</div>
+          <div className="title-3">Apply to many products</div>
+          <Button className="shop-now">
+            <ShoppingCartOutlined />
+            <span>SHOP NOW</span>
+          </Button>
+        </div>
+      </div>
+      <div className="background2">
+        <div className="slider1">
+          <div className="title-1">Special offer</div>
+          <div className="title-2">LUNAR NEW YEAR</div>
+          <div className="title-3">Time: 01/01 - 29/02</div>
+          <Button className="shop-now">
+            <ShoppingCartOutlined />
+            <span>SHOP NOW</span>
+          </Button>
+        </div>
+      </div>
+
+      {/*<div>
         <img className="imgCarousel" src={slider1} alt="slider1" />
       </div>
       <div>
@@ -101,7 +219,7 @@ export default function Home() {
       </div>
       <div>
         <img className="imgCarousel" src={slider3} alt="slider3" />
-      </div>
+      </div> */}
     </Carousel>
   );
   const ItemProductDeal = itemProductDeal.map((item, i) => {
@@ -124,8 +242,9 @@ export default function Home() {
       {showContent ? (
         <div>
           {slide()}
+          {sale()}
           <div className="contentHome">
-            <span className="title-new">NEW PRODUCTS</span>
+            <h2 className="title-news">New products</h2>
             <Slider className="slider-item-new" {...settings_carsoule_new}>
               {itemProductNew.map((item, i) => (
                 <div key={i} className="hello">
@@ -134,7 +253,9 @@ export default function Home() {
               ))}
             </Slider>
 
-            <span className="title-new" style={{marginTop: 40}}>HOT DEAL PRODUCTS</span>
+            <h2 className="title-news" style={{ marginTop: 40 }}>
+              HOT DEAL PRODUCT
+            </h2>
             <Row
               gutter={[{ xs: 8, sm: 16, md: 24, lg: 24 }, 20]}
               style={{ width: "100%" }}
@@ -162,7 +283,9 @@ export default function Home() {
               </div>
             )}
 
-            <span className="title-new" style={{marginTop: 40}}>CHOOSE FASHION HQ</span>
+            <span className="title-new" style={{ marginTop: 40 }}>
+              CHOOSE FASHION HQ
+            </span>
             <Row className="reason-choose">
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -180,7 +303,10 @@ export default function Home() {
                   </div>
                 </div>
                 <h2>Diverse Products</h2>
-                <span>Shirts, pants, and accessories of all kinds are always waiting for you.</span>
+                <span>
+                  Shirts, pants, and accessories of all kinds are always waiting
+                  for you.
+                </span>
               </Col>
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">
@@ -199,7 +325,8 @@ export default function Home() {
                 </div>
                 <h2>Platform diversity</h2>
                 <span>
-                   We have a website and mobile application so you can easily connect.
+                  We have a website and mobile application so you can easily
+                  connect.
                 </span>
               </Col>
             </Row>
