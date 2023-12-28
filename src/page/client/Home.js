@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, Col, Row, Button, Card } from "antd";
+import { Carousel, Col, Row, Button, Card, message } from "antd";
 import Product from "../../elements/product";
 import * as FetchAPI from "../../util/fetchApi";
 import Spinner from "../../elements/spinner";
 import { useLocation } from "react-router-dom";
 import freeship from "../../images/freeship.png";
-import off from "../../images/giam.png"
+import off from "../../images/giam.png";
+import ClipboardJS from "clipboard"
+
 import {
   BulbFilled,
   FormatPainterFilled,
@@ -71,6 +73,21 @@ export default function Home() {
     window.scroll(0, 0);
   }, [location]);
 
+  useEffect(() => {
+    const clipboard = new ClipboardJS('.sale-button');
+    clipboard.on('success', (e) => {
+      message.success("Copied")
+    });
+
+    clipboard.on('error', (e) => {
+      message.warning("Copied error")
+    });
+
+    return () => {
+      clipboard.destroy();
+    };
+  }, []);
+
   const getProductNew = async () => {
     const res = await FetchAPI.getAPI(`/product/getProductNew/1`);
     setitemProductNew(res.item);
@@ -104,10 +121,10 @@ export default function Home() {
         >
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <div className="sale-content">
-              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
+              <span>Code: <span style={{fontWeight: 600}}>SHIPTET</span></span>
               <span>Expiry: 29/02/2023</span>
             </div>
-            <Button className="sale-button">Copy</Button>
+            <Button className="sale-button" data-clipboard-text="SHIPTET">Copy</Button>
           </div>
         </Card>
       </Col>
