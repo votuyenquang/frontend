@@ -99,10 +99,10 @@ export default function ManageProduct(){
         const res = await FetchAPI.postDataAPI("/product/editProduct",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Cập nhật sản phẩm thành công !")
+                message.success("Product update successful !")
                 setloadingBtn(false)
             }else{
-                message.error("Có lỗi rồi !!")
+                message.error("There's an error !!")
                 setloadingBtn(false)
             }
         }
@@ -113,12 +113,12 @@ export default function ManageProduct(){
         const res = await FetchAPI.postDataAPI("/product/deleteProduct",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Xóa sản phẩm thành công");
+                message.success("Successfully deleted product");
                 getFullProduct();
                 setloadingTable(false);
                 setshowModalDeleteProduct(false);
             }else{
-                message.error("Có lỗi rồi !!");
+                message.error("There's an error !!");
                 setloadingTable(false);
             }
         }
@@ -137,23 +137,23 @@ export default function ManageProduct(){
     };
     const columns  = [
         {
-            title:"Mã sản phẩm",
+            title:"Product ID",
             key:'id',
             render: record=><span>{record.id}</span>
         },
         {
-            title:"Tên sản phẩm",
+            title:"Product name",
             key:'name',
             ...getColumnSearchProps('name',searchInput)
             // render: record=><span>{record.name}</span>
         },
         {
-            title:"Hình ảnh",
+            title:"Image",
             key:'image',
             render: record=><Image src={record.image} width={80} preview={{ mask:(<PreviewImmage small={true}/>)}}/>
         },
         {
-            title:"Danh mục sản phẩm",
+            title:"Category",
             key:'category',
             filters:filterCategory,
             onFilter: (value, record) =>record.idCategory===value,
@@ -163,14 +163,14 @@ export default function ManageProduct(){
             </div>
         },
         {
-            title:"Loại sản phẩm",
+            title:"Product type",
             key:'product_type',
             filters:filterProductType,
             onFilter: (value, record) =>record.idProductType===value,
             render:record=><span>{record.nameProductType}</span>
         },
         {
-            title:"Trạng thái",
+            title:"Status",
             key:'status',
             render: record=>{
                 if(record.status===0){
@@ -181,7 +181,7 @@ export default function ManageProduct(){
             }
         },
         {
-            title:"Chỉnh sửa",
+            title:"Customized",
             key:'edit',
             render: record=>{
                 return(
@@ -217,7 +217,7 @@ export default function ManageProduct(){
    
     const DrawerEditProduct = ()=>(
         <Drawer
-            title="Chỉnh sửa sản phẩm" 
+            title="Edit products" 
             placement="right" 
             width={overflowX ?"100%":520}
             getContainer={false}
@@ -232,9 +232,9 @@ export default function ManageProduct(){
                 onFinish={handleEditProduct}
             >
                 <Form.Item
-                    label="Tên sản phẩm"
+                    label="Product Name"
                     name="name"
-                    rules={[{ required: true, message: 'Tên sản phẩm không để trống!' }]}
+                    rules={[{ required: true, message: 'Please enter product name!' }]}
                 >
                     <Input 
                         placeholder="Tên sản phẩm"
@@ -243,9 +243,9 @@ export default function ManageProduct(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Danh mục sản phẩm"
+                    label="Category"
                     name="idCategory"
-                    rules={[{ required: true, message: 'Danh mục sản phẩm không để trống!' }]}
+                    rules={[{ required: true, message: 'Please select category' }]}
                 >
                     <Select
                         onChange= {(e)=>{
@@ -258,12 +258,12 @@ export default function ManageProduct(){
                     </Select>
                 </Form.Item>
                 <Form.Item  
-                    label="Loại sản phẩm"
+                    label="Product type"
                     name="nameProductType"
-                    rules={[{ required: true, message: 'Loại sản phẩm không để trống!' }]}
+                    rules={[{ required: true, message: 'Please enter product type!' }]}
                 >
                     <Select
-                        placeholder="Loại sản phẩm"
+                        placeholder="Product type"
                         onChange= {
                             (e)=>itemProductTmp.idProductType=e.split(',')[1]
                            
@@ -273,12 +273,12 @@ export default function ManageProduct(){
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Giá sản phẩm"
+                    label="Price"
                     name="price"
-                    rules={[{ required: true, message: 'Giá sản phẩm không để trống!' }]}
+                    rules={[{ required: true, message: 'Please enter product price!' }]}
                 >
                     <InputNumber
-                        placeholder="Giá sản phẩm"
+                        placeholder="Price"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -287,11 +287,11 @@ export default function ManageProduct(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Giá khuyến mãi"
+                    label="Promotion price"
                     name="promotional"
                 >
                     <InputNumber
-                        placeholder="Giá khuyến mãi"
+                        placeholder="Promotion price"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -300,9 +300,9 @@ export default function ManageProduct(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Ảnh sản phẩm"
+                    label="Product image"
                     name="image"
-                    rules={[{ required: true, message: 'Phải có ảnh gán cho sản phẩm!' }]}
+                    rules={[{ required: true, message: 'Please select image!' }]}
                 >
                     {/* <Image src={itemProductTmp.image} width={100} preview={false}/> */}
                     <ImgCrop 
@@ -320,14 +320,14 @@ export default function ManageProduct(){
                             {imageListUp.length<1 &&
                                 <div>
                                     <UploadOutlined />
-                                    <span>   Tải ảnh lên</span> 
+                                    <span>Upload</span> 
                                 </div>
                             }                            
                         </Upload>  
                     </ImgCrop>
                 </Form.Item>
                 <Form.Item
-                    label="Mô tả sản phẩm"
+                    label="Description"
                     name="description"
                 >
                     <CKEditor
@@ -355,14 +355,14 @@ export default function ManageProduct(){
         <div>
         {showModalDeleteProduct &&
         <Modal
-            title={`Xóa sản phẩm ${itemProductTmp.name}`}
+            title={`Delete product ${itemProductTmp.name}`}
             visible={showModalDeleteProduct}
             onCancel={()=>{setshowModalDeleteProduct(false)}}
             onOk={handleDeleteProduct}
-            cancelText="Thoát"
-            okText="Chắc chắn"
+            cancelText="Exit"
+            okText="Sure"
         >
-            <p>Nếu bạn xóa sản phẩm. Tất cả thông tin về sản phẩm và kho hàng sẽ bị xóa đi.</p>
+            <p>If you delete a product. All product and inventory information will be deleted.</p>
         </Modal>
         }
         </div>
@@ -372,7 +372,7 @@ export default function ManageProduct(){
         {showContent ? 
             <div>
                 <Table 
-                    showSorterTooltip={{ title: 'Nhấn để sắp xếp' }}
+                    showSorterTooltip={{ title: 'Click to sort' }}
                     dataSource={dataProduct} 
                     columns={columns}
                     pagination={{ defaultPageSize:5 }}

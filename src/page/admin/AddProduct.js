@@ -85,12 +85,12 @@ export default function AddProduct(){
         const res = await FetchAPI.postDataAPI("/product/addProduct",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Thêm sản phẩm thành công");
+                message.success("Add product successfully");
                 formadd.setFieldsValue(null);
                 history.replace('/admin/notify_add_product')
                 setloadingBtn(false);
             }else{
-                message.error("Có lỗi rồi !!");
+                message.error("There's an error !!");
                 setloadingBtn(false);
             }
         }
@@ -136,7 +136,7 @@ export default function AddProduct(){
     return(
         <div style={{ overflow:"hidden" }}>
             <PageHeader
-                title="Thêm sản phẩm Fashion CT" 
+                title="Add product FashionHQ" 
                 className="site-page-header"
             />
             <Form 
@@ -146,23 +146,23 @@ export default function AddProduct(){
                 onFinish={handleAddProdcuct}
             >
                 <Form.Item
-                    label="Tên sản phẩm"
+                    label="Product name"
                     name="name"
-                    rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please enter product name'}]}
                 >
                     <Input 
-                        placeholder="Nhập tên sản phẩm"
+                        placeholder="Enter product name"
                         value={name}
                         onChange= {e=>setname(e.target.value)}
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Danh mục sản phẩm"
+                    label="Product category"
                     name="category"
-                    rules={[{required:true, message:'Vui lòng chọn danh mục sản phẩm'}]}
+                    rules={[{required:true, message:'Please select a product category'}]}
                 >
                     <Select
-                        placeholder="Danh mục sản phẩm"
+                        placeholder="Product category"
                         value={idcategory}
                         onChange={e=>{
                             setidcategory(e);
@@ -173,15 +173,14 @@ export default function AddProduct(){
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Loại sản phẩm"
+                    label="Product type"
                     name="productType"
-                    rules={[{ required: true, message: 'Vui lòng chọn loại sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please select product type'}]}
                 >
                     <Select
                         value={idproduct_type}
-                        placeholder="Loại sản phẩm"
+                        placeholder="Product type"
                         onChange= {e=> {
-                            console.log("eeeeeeee",e);
                             setidproduct_type(e)
                         }}
                     >
@@ -189,12 +188,12 @@ export default function AddProduct(){
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Giá sản phẩm"
+                    label="Product price"
                     name="price"
-                    rules={[{ required: true, message: 'Vui lòng nhập giá sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please enter product price'}]}
                 >
                     <InputNumber 
-                        placeholder="Giá sản phẩm"
+                        placeholder="Product price"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -204,11 +203,11 @@ export default function AddProduct(){
                     />
                 </Form.Item>
                 <Form.Item 
-                    label="Giá khuyến mãi"
+                    label="Promotion price"
                     name="promotional"
                 >
                     <InputNumber
-                        placeholder="Giá khuyến mãi"
+                        placeholder="Promotion price"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -218,10 +217,10 @@ export default function AddProduct(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Ảnh sản phẩm"
+                    label="Product image"
                     name="image"
                     valuePropName="fileList"
-                    rules={[{ required: true, message: 'Vui lòng chọn ảnh sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please select product photo'}]}
                 >
                 <ImgCrop 
                     rotate
@@ -239,14 +238,14 @@ export default function AddProduct(){
                         {image.length===0 && 
                         <div>
                             <UploadOutlined />
-                            <span>   Tải ảnh lên</span> 
+                            <span>Upload</span> 
                         </div>
                         }
                     </Upload>  
                 </ImgCrop>
                 </Form.Item>
                 <Form.Item
-                    label="Ảnh mô tả chi tiết"
+                    label="Description images" 
                     name="imageDecription"
                 >
                 <ImgCrop 
@@ -265,14 +264,14 @@ export default function AddProduct(){
                         {imageDecription.length<4 && 
                         <div>
                             <UploadOutlined />
-                            <span>   Tải ảnh lên</span> 
+                            <span>Upload</span> 
                         </div>
                         }
                     </Upload>  
                     </ImgCrop>
                 </Form.Item>
                 <Form.Item
-                    label="Mô tả sản phẩm"
+                    label="Product Description"
                     name="decription"
                 >
                      <CKEditor
@@ -295,7 +294,7 @@ export default function AddProduct(){
                         danger 
                         loading={loadingBtn}
                     >
-                        Thêm sản phẩm
+                        Add product
                     </Button>
                 </Form.Item>
             </Form>

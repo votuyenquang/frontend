@@ -32,12 +32,12 @@ export default function dropDownCart(props){
                         {item[0].promotional===null ?
                             <span>
                                 <span style={{ color:'gray',paddingRight:10 }}>{item.quanity+ "x"}</span>
-                                <span style={{ color:'black' }}>{getPriceVND(item[0].price)+" đ"}</span> 
+                                <span style={{ color:'black' }}>{getPriceVND(item[0].price)+" $"}</span> 
                             </span>
                             :
                             <span>
                                 <span style={{ color:'gray',paddingRight:10 }}>{item.quanity+ "x"}</span>
-                                <span style={{ color:'black' }}>{getPriceVND(item[0].promotional)+" đ"}</span>
+                                <span style={{ color:'black' }}>{getPriceVND(item[0].promotional)+" $"}</span>
                             </span>
                         }
                         <span>{item.option}</span>
@@ -90,7 +90,7 @@ export default function dropDownCart(props){
                     style={{ fontWeight:'bold',justifyContent:'center',width:'100%',display:'flex',padding:"10px 0px"}}
                 >
                     <span style={{ color:'gray' }}>Provisional: </span>
-                    <span style={{ padding:"0 5px" }}>{getPriceVND(total)+" đ"}</span>
+                    <span style={{ padding:"0 5px" }}>{getPriceVND(total)+" $"}</span>
                 </div>
                 <div>
                     <Button type="primary" style={{ width:'100%',height:40 }}>

@@ -22,10 +22,10 @@ export default function Admin(){
         console.log(res);
       
         if(res.msg==="Invalid account"){
-            message.error("Tên tài khoản không tồn tại");
+            message.error("Account name does not exist");
             setprocessLoading(false);
         }else if(res.msg ==="Incorrect password"){
-            message.error("Mật khẩu không đúng");
+            message.error("Incorrect password");
             setprocessLoading(false);
         }else if(res.msg==="Success"){
             finish(res.token);
@@ -36,7 +36,7 @@ export default function Admin(){
         const data = {"token":token};
         const res = await FetchAPI.postDataAPI("/user/getUser",data);
         if(res[0].ruler===1){
-            message.success("Đăng nhập quản lý thành công !");
+            message.success("Login to manage successfully !");
             formLogin.setFieldsValue({username:"",password:""})
             setusername("");
             setpassword("");
@@ -44,21 +44,21 @@ export default function Admin(){
             history.push('/admin');
             setprocessLoading(false);
         }else{
-            message.error("Vui lòng đăng nhập với tài khoản quản lý !!!");
+            message.error("Please log in with the administrator account !!!");
             setprocessLoading(false);
         }
        
     }
     const Login = ()=>(
         <Form form={formLogin} onFinish={handleLogin} >
-        <p style={{ fontSize:16,fontWeight:'bold' }}>Tên đăng nhập *</p>
+        <p style={{ fontSize:16,fontWeight:'bold' }}>Username *</p>
         <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Vui lòng nhập tên tài khoản!' }]}
+                rules={[{ required: true, message: 'Please enter your account name!' }]}
                 style={{width:'80%'}}
             >
                 <Input
-                    placeholder="Nhập tên tài khoản"
+                    placeholder="Enter your account name"
                     value={username}
                     defaultValue={username}
                     onChange= {(e)=>setusername(e.target.value)}
@@ -66,17 +66,17 @@ export default function Admin(){
                     style={{height:40}}
                 />
             </Form.Item>
-            <p style={{ fontSize:16,fontWeight:'bold' }}>Mật khẩu *</p>
+            <p style={{ fontSize:16,fontWeight:'bold' }}>Password *</p>
             <Form.Item
                 name="password"
                 rules={[
-                    { required: true, message: 'Vui lòng nhập mật khẩu!' },
-                    {min:3,message:'Mật khẩu ít nhất 3 ký tự'}
+                    { required: true, message: 'Please enter a password!' },
+                    {min:3,message:'Password must be at least 3 characters'}
                 ]}
                 style={{width:'80%'}}
             >
                 <Input.Password
-                    placeholder="Nhập mật khẩu"
+                    placeholder="Enter a password"
                     value={password}
                     defaultValue={password}
                     onChange= {(e)=>setpassword(e.target.value)}
@@ -87,7 +87,7 @@ export default function Admin(){
             </Form.Item>
             <Form.Item style={{ padding:"10px 0px" }} >
                 <Button htmlType="submit" type="primary" danger style={{ height:45,borderRadius:8 }} loading={processLoading}>
-                    Đăng nhập
+                    Login
                 </Button>
             </Form.Item>
             </Form>
@@ -97,7 +97,7 @@ export default function Admin(){
             style={{ minHeight:window.innerHeight,justifyContent:'center',alignItems:'center',display:'flex' }}
         >
         <Col xl={12} xs={24} style={{ justifyContent:'center',display:'flex' }}>
-        <Card style={{ width:'80%',borderRadius:10 }} title="Đăng nhập quản lý" bordered>
+        <Card style={{ width:'80%',borderRadius:10 }} title="Login Administrator" bordered>
             {Login()}
         </Card>
         </Col>    

@@ -39,12 +39,12 @@ export default function Inventory(){
         if(res.msg){
             if(res.msg==="Success"){
                 setTimeout(()=>{
-                    message.success("Cập nhật sản phẩm "+name+" thành công !");
+                    message.success("Updated product "+name+" successfully !");
                     getFullInventory()
                 },500)
             }else{
                 setTimeout(()=>{
-                    message.error("Có lỗi rồi !!");
+                    message.error("There's an error !!");
                     setloadingTable(false);
                 },500)
             }
@@ -55,19 +55,19 @@ export default function Inventory(){
         const res = await FetchAPI.postDataAPI("/inventory/deleteItemInventory",{"id":dataItemTmp.id})
         if(res.msg){
             if(res.msg==="Success"){
-                message.success(`Xóa sản phẩm ${dataItemTmp.nameProduct} loại ${dataItemTmp.size} thành công !`);
+                message.success(`Delete prodcut ${dataItemTmp.nameProduct} type ${dataItemTmp.size} successfully !`);
                 getFullInventory();
                 setshowModalDeleteInventory(false);
                 setloadingTable(false);
             }else{
                 setloadingTable(false);
-                message.error("Có lỗi rồi !!!")
+                message.error("There's an error !!!")
             }
         }
     }
     const columns  = [
         {
-            title:"Sản phẩm",
+            title:"Product",
             key:'product',
             ...getColumnSearchProps('name',searchInput),
             render: record =>(
@@ -78,12 +78,12 @@ export default function Inventory(){
             )
         },
         {
-            title:"Loại, kích cỡ",
+            title:"Type, Size",
             key:'option',
             render: record=><span>{record.size}</span>
         },
         {
-            title:"Số lượng",
+            title:"Quantity",
             key:'quanity',
             sorter: (a, b) =>a.quanity-b.quanity,
             render: record=>(
@@ -94,23 +94,23 @@ export default function Inventory(){
                 />)
         },
         {
-            title:"Đã bán",
+            title:"Sold",
             key:'sold',
             render: record=><span style={{fontWeight:'bold',color:'gray'}}>{record.sold}</span>
         },
         {
-            title:"Còn lại",
+            title:"Rest",
             key:'rest',
             render: record=><span>{record.quanity-record.sold}</span>
         },
         {
-            title:"Cập nhật lần cuối",
+            title:"Last updated",
             key:'lastUpdate',
             sorter: (a, b) => new Date(a.update_at) - new Date(b.update_at),
             render: record=><span>{moment(record.update_at).format('YYYY-MM-DD HH:mm:ss')}</span>
         },
         {
-            title:"Tùy chỉnh",
+            title:"Customize",
             key:'option',
             render:record=>
             <DeleteOutlined 
@@ -125,7 +125,7 @@ export default function Inventory(){
         <div>
         <Button type="primary" style={{ marginBottom:20 }} danger >
             <Link to="/admin/addInventory" >
-                Nhập kho <PlusCircleOutlined />
+                Enter inventory <PlusCircleOutlined />
             </Link>    
         </Button>
         <Table 
@@ -138,14 +138,14 @@ export default function Inventory(){
         />
         {showModalDeleteInventory &&
             <Modal
-                title={`Bạn chắc chắn muốn xóa ${dataItemTmp.name} loại ${dataItemTmp.size}`}
+                title={`You definitely want to delete ${dataItemTmp.name} type ${dataItemTmp.size}`}
                 visible={showModalDeleteInventory}
                 onOk={handleDeleteItem}
                 onCancel={()=>setshowModalDeleteInventory(false)}
-                cancelText="Thoát"
-                okText="Chắc chắn"
+                cancelText="Exit"
+                okText="Sure"
             >
-                <p>Bạn chắc chắn với quyết định của mình ! Tất cả dữ liệu về món hàng này sẽ bị xóa vĩnh viễn.</p>
+                <p>You are sure of your decision! All data about this item will be permanently deleted.</p>
             </Modal>
         }
         </div>

@@ -7,17 +7,17 @@ export default function NotifyAddProductSucess(){
             <Result
                 style={{ height:450,paddingTop:50 }}
                 status="success"
-                title="Thêm mới sản phẩm thành công!"
-                subTitle="Sản phẩm của bạn đã được thêm"
+                title="Added new product successfully!"
+                subTitle="Your product has been added"
                 extra={[
                 <Button type="primary">
                     <Link to="/admin">
-                    Quay lại trang chủ
+                        Return to homepage
                     </Link>
                 </Button>,
                 <Button >
                     <Link to="/admin/manageProduct">
-                    Quản lý sản phẩm
+                        Product Management
                     </Link>
                 </Button>,
             ]}

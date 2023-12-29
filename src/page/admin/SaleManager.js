@@ -38,12 +38,12 @@ export default function SaleManager(){
             if(res.msg){
                 if(res.msg==="Success"){
                     setTimeout(()=>{
-                        message.success("Cập nhật mã khuyến mãi #"+id+" thành công !");
+                        message.success("Update promotional code #"+id+" successfully !");
                         setloadingTable(false);
                     },500)
                 }else{
                     setTimeout(()=>{
-                        message.error("Có lỗi rồi !!");
+                        message.error("There's an error !!");
                         setloadingTable(false);
                     },500)
                 }
@@ -57,13 +57,13 @@ export default function SaleManager(){
         if(res.msg){
             if(res.msg==="Success"){
                 setTimeout(()=>{
-                    message.success("Cập nhật mã khuyến mãi #"+id+" thành công !")
+                    message.success("Update promotional code #"+id+" successfully !")
                     getFullPromotion();
                     setloadingTable(false);
                 },500)
             }else{
                 setTimeout(()=>{
-                    message.error("Có lỗi rồi !!");
+                    message.error("There's an error !!");
                     setloadingTable(false);
                 })
             }
@@ -76,7 +76,7 @@ export default function SaleManager(){
         if(res.msg){
             if(res.msg==="Success"){
                 setTimeout(()=>{
-                    message.success("Thêm mã khuyến mãi thành công !")
+                    message.success("Added promotion code successfully !")
                     getFullPromotion();
                     setdataAddSale({});
                     formAddSale.setFieldsValue({name_event_sale:"",cost_sale:"",code_sale:"",quanity:"",time:""});
@@ -85,7 +85,7 @@ export default function SaleManager(){
                 },500)
             }else{
                 setTimeout(()=>{
-                    message.error("Có lỗi rồi !!");
+                    message.error("There's an error !!");
                     setloadingBtn(false);
                 })
             }
@@ -96,33 +96,33 @@ export default function SaleManager(){
         const res = await FetchAPI.postDataAPI("/promotion/deleteSale",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Xóa mã thành công")
+                message.success("Deleted code successfully")
                 setshowModalDelete(false)
                 getFullPromotion()
             }else{
-                message.error("Có lỗi rồi !!")
+                message.error("There's an error !!")
                 setshowModalDelete(false)
             }
         }
     }
     const columns  = [
         {
-            title:"Tên sự kiện",
+            title:"Event",
             key:'name_event_sale',
             render: record=><span>{record.name_event_sale}</span>
         },
         {
-            title:"Mã khuyến mãi",
+            title:"Code",
             key:'code_sale',
             render: record=><span>{record.code_sale}</span>
         },
         {
-            title:"Số tiền giảm",
+            title:"Amount decreased",
             key:'cost_sale',
             render: record=><span>{getPriceVND(record.cost_sale)+" đ"}</span>
         },
         {
-            title:"Số lượng",
+            title:"Quantity",
             key:'quanity',
             render: record=>(
                 <InputNumber 
@@ -133,17 +133,17 @@ export default function SaleManager(){
             )
         },
         {
-            title:"Đã sử dụng",
+            title:"Used",
             key:'used',
             render:record=><span>{record.used}</span>
         },
         {
-            title:"Còn lại",
+            title:"Rest",
             key:'rest',
             render: record=><span style={{fontWeight:'bold'}}>{record.quanity-record.used}</span>
         },
         {
-            title:<div style={{textAlign: 'center'}}><span>Thời gian giảm giá</span></div>,
+            title:<div style={{textAlign: 'center'}}><span>Discount period</span></div>,
             key:'date_start',
             sorter: (a, b) =>new Date(a.date_start)- new Date(b.date_start),
             render: record=>(
@@ -156,21 +156,21 @@ export default function SaleManager(){
             )
         },
         {
-            title:"Tùy chỉnh",
+            title:"Customize",
             key:'edit',
             render: record=>(
                 <Button onClick={()=>{
                     setshowModalDelete(true);
                     setitemTmp(record)
                 }}>
-                    Xóa
+                    Delete
                 </Button>
             )
         }
     ]
     const DrawerAddSale = ()=>(
         <Drawer
-            title="Thêm mã khuyến mãi" 
+            title="Add promotional code" 
             placement="right" 
             width={overflowX ?"100%":520}
             getContainer={false}
@@ -185,34 +185,34 @@ export default function SaleManager(){
                 onFinish={handleAddSale}
             >
                 <Form.Item
-                    label="Tên sự kiện"
+                    label="Event"
                     name="name_event_sale"
-                    rules={[{required: true, message:'Vui lòng nhập tên sự kiện'}]}
+                    rules={[{required: true, message:'Please enter an event name'}]}
                 >
                     <Input 
-                        placeholder="Nhập tên sự kiện"
+                        placeholder="Enter an event name"
                         value={dataAddSale.name_event_sale}
                         onChange= {(e)=>setdataAddSale({...dataAddSale,name_event_sale:e.target.value})}
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Mã khuyến mãi"
+                    label="Code"
                     name="code_sale"
-                    rules={[{required: true, message:'Mã khuyến mãi không để trống!'}]}
+                    rules={[{required: true, message:'Please enter code!'}]}
                 >
                     <Input 
-                        placeholder="Nhập mã khuyến mãi"
+                        placeholder="Enter code"
                         value={dataAddSale.code_sale}
                         onChange= {(e)=>setdataAddSale({...dataAddSale,code_sale:e.target.value})}
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Giá giảm"
+                    label="Cost sale"
                     name="cost_sale"
-                    rules={[{ required: true, message: 'Giá giảm không để trống!' }]}
+                    rules={[{ required: true, message: 'Please enter cost sale!' }]}
                 >
                     <InputNumber
-                        placeholder="Giá giảm"
+                        placeholder="Prices decrease"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -221,12 +221,12 @@ export default function SaleManager(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Số lượng mã"
+                    label="Quantity"
                     name="quanity"
-                    rules={[{ required: true, message: 'Số lượng không để trống!' }]}
+                    rules={[{ required: true, message: 'Please enter quantity!' }]}
                 >
                     <InputNumber
-                        placeholder="Số lượng mã"
+                        placeholder="Quantity"
                         formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={value => value.replace(/\$\s?|(,*)/g, '')}
                         min={0}
@@ -235,9 +235,9 @@ export default function SaleManager(){
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Thời gian"
+                    label="Time"
                     name="time"
-                    rules={[{ required: true, message: 'Bạn phải chọn thời gian sự kiện diễn ra!' }]}
+                    rules={[{ required: true, message: 'You must choose the time the event takes place!' }]}
                 >
                     <RangePicker 
                         renderExtraFooter={() => 'extra footer'}
@@ -264,14 +264,14 @@ export default function SaleManager(){
         <div>
         {showModalDelete &&
         <Modal
-            title={`Xóa sản phẩm ${itemTmp.code_sale}`}
+            title={`Delete code  ${itemTmp.code_sale}`}
             visible={showModalDelete}
             onCancel={()=>{setshowModalDelete(false)}}
             onOk={handleDeleteSale}
-            cancelText="Thoát"
-            okText="Chắc chắn"
+            cancelText="Exit"
+            okText="Sure"
         >
-            <p>Bạn có chắc chắn muốn xóa mã khuyến mãi này.</p>
+            <p>Are you sure you want to delete this promo code.</p>
         </Modal>
         }
         </div>
@@ -281,10 +281,10 @@ export default function SaleManager(){
         {showContent ?
         <div>
             <Button type="primary" style={{ marginBottom:20 }} danger onClick={()=>setshowDrawer(true)}>
-                Thêm mã khuyến mãi <PlusCircleOutlined />
+                Add promotion code <PlusCircleOutlined />
             </Button>
             <Table 
-                showSorterTooltip={{ title: 'Nhấn để sắp xếp' }}
+                showSorterTooltip={{ title: 'Click to sort' }}
                 columns={columns}
                 dataSource={dataFullPromotion}
                 loading={loadingTable}

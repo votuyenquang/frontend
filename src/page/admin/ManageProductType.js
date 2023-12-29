@@ -47,11 +47,11 @@ export default function ManageProductType(){
         const res = await FetchAPI.postDataAPI("/product/editProductType",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Cập nhật thành công");
+                message.success("Upate successfully");
                 getProductType();
                 setloadingBtn(false)
             }else{
-                message.error("Có lỗi rồi !!")
+                message.error("There's an error !!")
                 setloadingBtn(false)
             }
         }
@@ -62,32 +62,32 @@ export default function ManageProductType(){
         const res = await FetchAPI.postDataAPI("/product/addProducType",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success("Thêm mới thành công");
+                message.success("Add successfully");
                 getProductType();
                 setshowModalAdd(false);
                 setdataAdd({});
                 formAdd.setFieldsValue({name:"",idCategory:null,status:null})
                 setloadingBtn(false);
             }else{
-                message.error("Có lỗi rồi !!")
+                message.error("There's an error !!")
                 setloadingBtn(false)
             }
         }
     }
     const columns = [
         {
-            title:"Mã loại sản phẩm",
+            title:"Product type id",
             name:"id",
             render: record=><span>{"#"+record.id}</span>
         },
         {
-            title:"Tên loại sản phẩm",
+            title:"Product type name",
             name:"name",
             ...getColumnSearchProps('name',searchInput),
             // render: record=><span>{record.name}</span>
         },
         {
-            title:"Số sản phẩm danh mục",
+        title:"Product quantity",
             name:"product",
             render:record=>{
                 let i = 0;
@@ -96,29 +96,29 @@ export default function ManageProductType(){
                         i++
                     }
                 })
-                return (<span>{i+" sản phẩm"}</span>)
+                return (<span>{i+" product"}</span>)
             }
         },
         {
-            title:"Danh mục sản phẩm",
+            title:"Category",
             name:"nameCategory",
             render: record=>(
                 <span>{record.nameCategory}</span>
             )
         },
         {
-            title:"Trạng thái",
+            title:"Status",
             name:"status",
             render: record=>{
                 if(record.status===0){
-                    return <span>Hiển thị</span>
+                    return <span>Show</span>
                 }else{
-                    return <span>Ẩn</span>
+                    return <span>Hide</span>
                 }
             }
         },
         {
-            title:"Tùy chỉnh",
+            title:"Customized",
             name:"option",
             render: record=>{
                 return(
@@ -142,7 +142,7 @@ export default function ManageProductType(){
     ]
     const DrawerEdit = ()=>(
         <Drawer
-            title="Chỉnh sửa loại sản phẩm"
+            title="Edit product type"
             visible={drawerEdit}
             width={overflowX ?"100%":520}
             onClose={()=>setdrawerEdit(false)}
@@ -154,17 +154,17 @@ export default function ManageProductType(){
               onFinish={handleEditProductType}
             >
                 <Form.Item
-                    label="Tên loại sản phẩm"
+                    label="Product type name"
                     name="name"
                 >
                     <Input
-                        placeholder="Nhập tên loại sản phẩm"
+                        placeholder="Enter Product type name"
                         value={itemTmp.name}
                         onChange= {(e)=>itemTmp.name=e.target.value}
                     /> 
                 </Form.Item>
                 <Form.Item
-                    label="Danh mục sản phẩm"
+                    label="Category"
                     name="idCategory"
                 >
                     <Select
@@ -175,7 +175,7 @@ export default function ManageProductType(){
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Trạng thái"
+                    label="Status"
                     name="status"
                 >
                     <Select
@@ -183,20 +183,20 @@ export default function ManageProductType(){
                         onChange= {(e)=>itemTmp.status=e}
                     >
                         <Option value={0}>
-                            Hiển thị
+                            Show
                         </Option>
                         <Option value={1}>
-                            Ẩn
+                            Hide
                         </Option>
 
                     </Select>
                 </Form.Item>
                 <Form.Item style={{ paddingTop:20 }}  wrapperCol={{ span: 12, offset: 10 }}>
-                    <Button type="primary" htmlType="submit" danger loading={loadingBtn}>
-                        Cập nhật
+                    <Button  style={{ borderRadius:10}} type="primary" htmlType="submit" danger loading={loadingBtn}>
+                        Update
                     </Button>
                     <Button type="primary" danger style={{ borderRadius:10,marginLeft:20 }}>
-                            <DeleteOutlined />
+                        Delete <DeleteOutlined />
                     </Button>
                 </Form.Item>
             </Form>
@@ -204,7 +204,7 @@ export default function ManageProductType(){
     )
     const ModalAddNew = ()=>(
         <Modal
-            title="Thêm mới loại sản phẩm"
+            title="Add new product type"
             visible={showModalAdd}
             onCancel={()=>setshowModalAdd(false)}
             footer={false}
@@ -216,20 +216,20 @@ export default function ManageProductType(){
                 onFinish={handleAddProductType}
             >
                 <Form.Item
-                    label="Tên loại sản phẩm"
+                    label="Product type name"
                     name="name"
-                    rules={[{ required: true, message: 'Nhập tên loại sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please enter product type name'}]}
                 >
                     <Input
-                        placeholder="Nhập tên loại sản phẩm"
+                        placeholder="Enter product type name"
                         value={dataAdd.name}
                         onChange= {(e)=>setdataAdd({...dataAdd,name:e.target.value})}
                     /> 
                 </Form.Item>
                 <Form.Item
-                    label="Danh mục sản phẩm"
+                    label="Category"
                     name="idCategory"
-                    rules={[{ required: true, message: 'Chọn danh mục sản phẩm'}]}
+                    rules={[{ required: true, message: 'Please select category'}]}
                 >
                     <Select
                         value={dataAdd.idCategory}
@@ -239,26 +239,26 @@ export default function ManageProductType(){
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Trạng thái"
+                    label="Status"
                     name="status"
-                    rules={[{ required: true, message: 'Chọn trạng thái'}]}
+                    rules={[{ required: true, message: 'Please select status'}]}
                 >
                     <Select
                         value={dataAdd.status}
                         onChange= {(e)=>setdataAdd({...dataAdd,status:e})}
                     >
                         <Option value={0}>
-                            Hiển thị
+                            Show
                         </Option>
                         <Option value={1}>
-                            Ẩn
+                            Hide
                         </Option>
 
                     </Select>
                 </Form.Item>
                 <Form.Item style={{ paddingTop:20 }}  wrapperCol={{ span: 12, offset: 10 }}>
                     <Button type="primary" htmlType="submit" danger loading={loadingBtn}>
-                       Thêm mới
+                       Add
                     </Button>
                 </Form.Item>
             </Form>
@@ -269,7 +269,7 @@ export default function ManageProductType(){
             {showContent ?
             <div>
             <Button type="primary" style={{ marginBottom:20 }} danger onClick={()=>setshowModalAdd(true)}>
-                Thêm mới <PlusCircleOutlined />
+                Add product type <PlusCircleOutlined />
             </Button>
             <div>
                 <Table 

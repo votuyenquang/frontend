@@ -39,7 +39,7 @@ export default function ProductDetails() {
   const [outOfStock, setoutOfStock] = useState(false);
   const [dataRelate, setdataRelate] = useState([]);
   const [imageDecription, setimageDecription] = useState();
-  const [reviewStar, setreviewStar] = useState(5);
+  const [reviewStar, setreviewStar] = useState(0);
   const [quanityReview, setquanityReview] = useState(0);
   const [arrReview, setarrReview] = useState([]);
 
@@ -120,16 +120,16 @@ export default function ProductDetails() {
     setbuttonLoading(true);
     setTimeout(() => {
       if (option == null) {
-        message.warning("Hãy chọn kích cỡ, màu sắc để đặt hàng");
+        message.warning("Please select size and color to order");
         setbuttonLoading(false);
       } else if (quanity === null) {
-        message.warning("Vui lòng chọn số lượng !");
+        message.warning("Please select quantity !");
         setbuttonLoading(false);
       } else if (option[1] < quanity) {
         message.warning(
-          "Mẫu này số lượng chỉ còn " +
+          "This model only has  " +
             option[1] +
-            " sản phẩm, quý khách vui lòng thông cảm !"
+            " product, Please sympathize!"
         );
         setbuttonLoading(false);
       } else {
@@ -145,7 +145,7 @@ export default function ProductDetails() {
         notification.close("notifysuccess");
       }}
     >
-      Đi ngay
+      Go now
     </Button>
   );
   const handleOrder = () => {
@@ -170,7 +170,7 @@ export default function ProductDetails() {
         let newQuanity = objDataOut[index].quanity + quanity;
         if (newQuanity > option[1]) {
           message.warning(
-            "Sản phẩm chỉ còn " + option[1] + ", vui lòng chọn kiểm tra lại"
+            "This product only has  " + option[1] + ", Please select check again"
           );
           setbuttonLoading(false);
           return;
@@ -192,8 +192,8 @@ export default function ProductDetails() {
       setbuttonLoading(false);
       updateCartCurrent(dispatch);
       notification["success"]({
-        message: "Đặt hàng thành công",
-        description: "Bạn có muốn chuyển đến giỏ hàng ngay bây giờ.",
+        message: "Order successful",
+        description: "Would you like to go to cart now?",
         btn,
         key: "notifysuccess",
       });
@@ -278,15 +278,23 @@ style={{ display:'flex',flexDirection:'column' }}
         <span>Code: {dataProduct.id}</span>
         <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span className="rate">
-          Rate:{" "}
-          <Rate
-            allowHalf
-            style={{ size: "10px" }}
-            tooltips="12345"
-            defaultValue={reviewStar}
-            disabled
-          />{" "}
-          ({quanityReview} review)
+          
+          { reviewStar > 0 ?
+              <>
+              Rate:{" "}
+                <Rate
+                  allowHalf
+                  style={{ size: "10px" }}
+                  tooltips="12345"
+                  defaultValue={reviewStar}
+                  disabled
+                />{" "}
+                ({quanityReview} review)
+              </> 
+              : <>
+                There are no reviews yet
+              </>
+          }
         </span>
       </div>
     </div>
@@ -298,16 +306,16 @@ style={{ display:'flex',flexDirection:'column' }}
       {dataProduct.promotional === null ? (
         <div className="product-price">
           <span style={{ fontSize: 25, color: "red", fontWeight: "bold" }}>
-            {getPriceVND(dataProduct.price) + "đ "}
+            {getPriceVND(dataProduct.price) + "$"}
           </span>
         </div>
       ) : (
         <div className="product-price">
           <span style={{ fontSize: 25, color: "red", fontWeight: "bold" }}>
-            {getPriceVND(dataProduct.promotional) + "đ "}
+            {getPriceVND(dataProduct.promotional) + "$"}
           </span>
           <span style={{ fontSize: 15, textDecorationLine: "line-through" }}>
-            {getPriceVND(dataProduct.price) + "đ"}
+            {getPriceVND(dataProduct.price) + "$"}
           </span>
           <span className="sale-off">
             {Math.round(( dataProduct.price - dataProduct.promotional) / dataProduct.price * 100) + "%"}
