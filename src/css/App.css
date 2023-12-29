@@ -124,21 +124,46 @@ html {
   color: #ebebeb;
 }
 .btn-header{
-  border-radius: 20px;
+  /* border-radius: 20px;
   border: .1px solid #8a8a8a;
   padding: 5px 18px;
   margin-left: 10px;
   cursor: pointer;
-  color:#8a8a8a
+  color:#8a8a8a */
+  border-radius: 10px 0px 0px 10px;
+  height: 37px;
+  margin-right: 5px;
+  width: 110px;
+  cursor: pointer;
+  justify-content: center;
+  transition-duration: 0.3s;
+  font-weight: 700;
+  background: #095cf7;
+  color: #fff;
+  border: none;
 }
-.btn-header:hover{
+
+.btn-cart{
+  border-radius: 0px 10px 10px 0px;
+  width: 110px;
+  cursor: pointer;
+  justify-content: center;
+  transition-duration: 0.3s;
+  font-weight: 700;
+  background: #df4949;
+  color: #fff;
+  border: none;
+}
+
+.btn-header:hover,.btn-cart:hover{
   background-color: #aaaaaa;
+  transform: scale(105%);
   color:white !important;
 }
-.btn-header:hover a{
+.btn-header:hover a,.btn-cart:hover a{
   color:white !important
 }
-.btn-header:hover span{
+.btn-header:hover span,.btn-cart:hover span{
   color:white !important
 }
 .title-logo{
@@ -161,7 +186,7 @@ html {
 }
 .title{
   display: grid;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .item-of-submenu:hover{
   animation: mov-item-submenu 1s;
@@ -192,11 +217,11 @@ html {
   .btn-header{
     padding:10px 20px;
   }
-  .btn-header svg{
+  .btn-header svg,.btn-cart svg{
     transition: all 1s ease;
     animation: move-btn-header 1s;
   }
-  .btn-header span.title{
+  .btn-header span.title,.btn-cart span.title{
     display:none
   }
 }

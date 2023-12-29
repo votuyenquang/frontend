@@ -13,13 +13,13 @@ export default function product(props){
     const hanldeShowPrice = ()=>{
         if(promotional===null){
             return(
-                <span style={{ fontSize:16 }}>{getPriceVND(price)+" đ"}</span>
+                <span style={{ fontSize:16 }}>{getPriceVND(price)+"$"}</span>
             )
         }else{
             return(
                 <div style={{ display:'flex',flexDirection:'column' }}>
-                    <span style={{ fontSize:16,textDecorationLine:'line-through' }}>{getPriceVND(price)+" đ"}</span>
-                    <span style={{ fontSize:16,color:'red',fontWeight:'bold' }}>{getPriceVND(promotional)+" đ"}</span>
+                    <span style={{ fontSize:16,textDecorationLine:'line-through' }}>{getPriceVND(price)+"$"}</span>
+                    <span style={{ fontSize:16,color:'red',fontWeight:'bold' }}>{getPriceVND(promotional)+"$"}</span>
                 </div>
             )
         }   

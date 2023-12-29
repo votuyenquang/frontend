@@ -12,7 +12,7 @@ export const getColumnSearchProps = (dataIndex,searchInput) => ({
       <div style={{ padding: 8 }}>
         <Input
           ref={searchInput}
-          placeholder={`Tìm kiếm`}
+          placeholder={`Search`}
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -26,10 +26,10 @@ export const getColumnSearchProps = (dataIndex,searchInput) => ({
             size="small"
             style={{ width: 100 }}
           >
-            Tìm kiếm
+            Search
           </Button>
           <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Làm mới
+            Refresh
           </Button>
           <Button
             type="link"
@@ -40,7 +40,7 @@ export const getColumnSearchProps = (dataIndex,searchInput) => ({
               state.searchedColumn=dataIndex;
             }}
           >
-            Lọc
+            Filter
           </Button>
         </Space>
       </div>

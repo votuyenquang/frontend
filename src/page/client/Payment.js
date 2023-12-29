@@ -125,9 +125,9 @@ export default function Payment (props){
             key:'temp',
             render:(record)=>{
                 if(record[0].promotional===null){
-                    return <span>{getPriceVND(record[0].price*record.quanity)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].price*record.quanity)+" $"}</span>
                 }else{
-                    return <span>{getPriceVND(record[0].promotional*record.quanity)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].promotional*record.quanity)+" $"}</span>
                 }
             }
         }
@@ -241,21 +241,21 @@ export default function Payment (props){
                     <Table.Summary>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         {dataSale !== undefined &&
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{"-"+getPriceVND(promoprice)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{"-"+getPriceVND(promoprice)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         }
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(30000)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{getPriceVND(30000)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promoprice+30000)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promoprice+30000)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     </Table.Summary>
             )}/>

@@ -121,7 +121,7 @@ export default function Cart (){
             message.success(
                 "You have applied the code "+data.code_sale+ 
                 " of event "+data.name_event_sale+
-                " sale "+getPriceVND(data.cost_sale)+" đ"
+                " sale "+getPriceVND(data.cost_sale)+" $"
             )
         }
       
@@ -149,9 +149,9 @@ export default function Cart (){
             dataIndex:"",
             render:record =>{
                 if(record[0].promotional===null){
-                    return <span>{getPriceVND(record[0].price)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].price)+" $"}</span>
                 }else{
-                    return <span>{getPriceVND(record[0].promotional)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].promotional)+" $"}</span>
                 }
             }
         },
@@ -173,9 +173,9 @@ export default function Cart (){
             key:'temp',
             render:(record)=>{
                 if(record[0].promotional===null){
-                    return <span>{getPriceVND(record[0].price*record.quanity)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].price*record.quanity)+" $"}</span>
                 }else{
-                    return <span>{getPriceVND(record[0].promotional*record.quanity)+" đ"}</span>
+                    return <span>{getPriceVND(record[0].promotional*record.quanity)+" $"}</span>
                 }
             }
         },{
@@ -203,18 +203,18 @@ export default function Cart (){
            <span style={{ fontWeight:'bold',fontSize:16 }}> Add shopping cart</span>
            <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
                <span>Provisional</span>
-               <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp) +" đ"}</span>
+               <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp) +" $"}</span>
            </div>
            <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
                <span>Total</span>
-               <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp-promoprice) +" đ"}</span>
+               <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp-promoprice) +" $"}</span>
            </div>
            {dataSale!==undefined &&
             <div style={{ paddingTop:10,display:'flex',justifyContent:'space-between' }}>
                 <div>
                 <span>Discount code: {dataSale.code_sale}</span>
                 </div>
-                <span style={{ paddingRight:20 }}><b>{"-"+getPriceVND(dataSale.cost_sale) +" đ"}</b></span>
+                <span style={{ paddingRight:20 }}><b>{"-"+getPriceVND(dataSale.cost_sale) +" $"}</b></span>
             </div>
            }
            <div style={{ paddingTop:20,justifyContent:'center',display:'flex' }}>

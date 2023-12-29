@@ -31,13 +31,13 @@ export default function SearchView (){
     const Direction = ()=>(
         <Breadcrumb style={{ fontSize:16,padding:"10px 10px"}}>
             <Breadcrumb.Item>
-                <Link to={"/home"}>Trang chủ</Link>
+                <Link to={"/home"}>Home</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
-                <Link to={"/fullproduct/1"}>Cửa hàng</Link>
+                <Link to={"/fullproduct/1"}>Shop</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
-                {`Kết quả tìm kiếm của "${datasearch}"`}
+                {`Search results of "${datasearch}"`}
             </Breadcrumb.Item>
         </Breadcrumb>
     )
@@ -46,7 +46,7 @@ export default function SearchView (){
             {showContent ? 
             <div style={{ padding:"20px 10px" }}>
                 <div style={{ width:'100%',flexDirection:'row',justifyContent:'space-between',display:'flex' }}>
-                    <span style={{ fontWeight:'bold',fontSize:18 }}>{`Kết quả tìm kiếm của "${datasearch}"`}</span>
+                    <span style={{ marginLeft: 10,fontWeight:'bold',fontSize:18 }}>{`Search results of "${datasearch}"`}</span>
                     <FilterProduct 
                         currentKey={currentKeyFilter}
                         setCurrentKey={(e)=>setcurrentKeyFilter(e)}

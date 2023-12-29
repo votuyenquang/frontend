@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,200;0,700;0,800;1,200&display=swap');
+
 .imgCarousel {
   width: 100%;
   height: 400px;
@@ -89,6 +91,32 @@
   animation: rainbow 2s ease-in-out infinite;
 }
 
+.title-news{
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-left: 3%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.title-news::before{
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #47a432;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+
 .title-new {
   background: linear-gradient(to right, #e250e5, #4b50e6, #e250e5);
   padding: 6px 20px 6px 16px;
@@ -129,10 +157,6 @@
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
-.name-product{
-  font-weight: 700;
-  font-family: 'Roboto Condensed',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
 
 .inventory-quantity{
   font-size: 16px;
@@ -154,7 +178,7 @@
   align-items: center;
   width: 56px;
   height: 100%;
-  background: red;
+  background: #df4949;
   color: #fff;
   text-align: center;
   position: absolute;
@@ -187,7 +211,7 @@
   transition-duration: 0.3s;
   font-weight: 700;
   width: 40%;
-  background: rgb(0, 10, 90);
+  background: #095cf7;
   color: #fff;
   -webkit-clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
@@ -200,13 +224,25 @@
   transition-duration: 0.3s;
   font-weight: 700;
   width: 40%;
-  background: #a2ff00;
-  color: #000000;
+  background: #df4949;
+  color: #ffffff;
   -webkit-clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-.add-cart:hover,.buy-now:hover{
+.shop-now{
+  transition-duration: 0.3s;
+  font-weight: 700;
+  width: 120px;
+  background: #095cf7;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border: none;
+  margin-top: 10px;
+}
+
+.add-cart:hover,.buy-now:hover,.shop-now:hover{
   background: #DDE1EF;
   color: #000000;
   border: none;
@@ -215,7 +251,7 @@
 .block-promotion{
   margin-top: 40px;
   margin-left: 8px;
-  border: 2px solid #47a432;
+  border: 1px solid #47a432;
   position: relative;
 }
 
@@ -225,6 +261,7 @@
   top: -10px;
   left: -10px;
   display: flex;
+  width: 180px;
   align-items: center;
   background: #df4949;
   color: #fff;
@@ -236,7 +273,110 @@
 
 .promo-content{
   padding: 10px;
-  margin-top: 26px;
+  /* margin-top: 26px; */
+  background: #ffffff;
+}
+
+.heading-product-infor{
+  padding: 5px 10px 5px 10px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  width: 180px;
+  align-items: center;
+  background: #095cf7;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  -webkit-clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.reviews{
+  padding-top: 40px;
+}
+
+.review-title{
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.background1{
+  display: flex !important;
+  align-items: center;
+  height: 430px;
+  background-image: url(../images/sslider2.png);
+  background-size: cover;
+}
+
+.background2{
+  display: flex !important;
+  align-items: center;
+  height: 430px;
+  background-image: url(../images/sslider1.png);
+  background-size: cover;
+}
+
+
+.slider1{
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  /* top: 200px;
+  left: 0;
+  width: 50%; 
+  transform: translate(0, -50%); */
+  padding: 40px 7.5vw;
+  color: #000;
+  z-index: 1;
+}
+
+.title-1{
+  font-size: 22px;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  visibility: visible;
+  animation-delay: .3s;
+}
+
+.title-2{
+  font-size: 3.6vw;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  line-height: normal;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+
+.title-3{
+  font-size: 1.8vw;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.sale{
+  margin: 40px 10px 0px 10px;
+  justify-content: space-around;
+}
+
+.sale-item{
+  border-radius: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.sale-title{
+  display: flex;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.sale-content{
+  display: grid;
+}
+
+.sale-button{
+ font-weight: 600;
 }
 
 

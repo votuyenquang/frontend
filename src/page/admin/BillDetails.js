@@ -62,12 +62,12 @@ export default function BillDetails(){
         if(res.msg){
             if(res.msg==="Success"){
                 setTimeout(()=>{
-                    message.success("Cập nhật hóa đơn #"+id+" thành công !");
+                    message.success("Update bill #"+id+" successfully !");
                     // setloadingTable(false);
                 },500)
             }else{
                 setTimeout(()=>{
-                    message.error("Có lỗi rồi !!");
+                    message.error("There's an error !!");
                     // setloadingTable(false);
                 },500)
             }
@@ -80,19 +80,19 @@ export default function BillDetails(){
         let shipping = document.getElementsByClassName('Shipping');
         let totalBill = document.getElementsByClassName('TotalBill');
         let saleBill = document.getElementsByClassName('SaleBill');
-        let tableProduct = "<table style=\"width:100%;text-align:center\"><tr><td style=\"width:33%;border:2px solid black;height:40px\"><b>Sản phẩm</b></td><td style=\"width:33%;border:2px solid black\"><b>Tạm tính</b></td></tr>";
+        let tableProduct = "<table style=\"width:100%;text-align:center\"><tr><td style=\"width:33%;border:2px solid black;height:40px\"><b>Product</b></td><td style=\"width:33%;border:2px solid black\"><b>Provisional</b></td></tr>";
         for(var i=0;i<product.length;i++){
             tableProduct += "<tr > <td style=\"width:33%;border:1px solid black;height:70px\">"+product[i].innerHTML+"</td><td style=\"width:33%;border:1px solid black\">"+price[i].innerHTML+"</td> </tr>"
         }
         let pri = document.getElementById('ifmcontentstoprint').contentWindow;
         pri.document.open();
         pri.document.write(inforbill.outerHTML);
-        pri.document.write("<b>Phí vận chuyển :</b>   "+shipping[0].innerHTML);
+        pri.document.write("<b>Transport fee:</b>   "+shipping[0].innerHTML);
         pri.document.write(tableProduct+"</table>");
         if(saleBill.length!==0){
-            pri.document.write("<div style=\" padding-top:18px;font-size:24px\"><b> Mã khuyến mãi :  </b>"+saleBill[0].innerHTML+"</div>");
+            pri.document.write("<div style=\" padding-top:18px;font-size:24px\"><b> Promotion code :  </b>"+saleBill[0].innerHTML+"</div>");
         }
-        pri.document.write("<div style=\" padding-top:18px;font-size:24px\"><b> Tổng :  </b>"+totalBill[0].innerHTML+"</div>");
+        pri.document.write("<div style=\" padding-top:18px;font-size:24px\"><b> Total :  </b>"+totalBill[0].innerHTML+"</div>");
         pri.document.close();
         pri.focus();
         pri.print();
@@ -104,17 +104,17 @@ export default function BillDetails(){
         const res = await FetchAPI.postDataAPI("/order/deleteBill",data);
         if(res.msg){
             if(res.msg==="Success"){
-                message.success(`Bạn đã xóa hóa đơn #${dataBill.id} thành công !`);
+                message.success(`You have successfully deleted invoice  #${dataBill.id} !`);
                 history.push('/admin/invoices')
             }else{
-                message.error("Có lỗi rồi !!");
+                message.error("There's an error !!");
                 setshowContent(true)
             }
         }
     }
     const columns  = [
         {
-            title:"Sản phẩm",
+            title:"Product",
             key:'product',
             render : record=>{
                 return(
@@ -126,10 +126,10 @@ export default function BillDetails(){
             }
         },
         {
-            title:"Tổng",
+            title:"Total",
             key:'total_price',
             render: record=>{
-                return <span className="BillPrice">{getPriceVND(record.price*record.quanity) +" đ"}</span>
+                return <span className="BillPrice">{getPriceVND(record.price*record.quanity) +" $"}</span>
             }
         }
     ]
@@ -143,22 +143,22 @@ export default function BillDetails(){
             summary={()=>(
                 <Table.Summary>
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tạm tính</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
                         <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataSale !== undefined &&
                         <Table.Summary.Row >
-                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Mã khuyến mãi</span></Table.Summary.Cell>
-                            <Table.Summary.Cell className="SaleBill" index={1}>{"-"+getPriceVND(promotionprice)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotion code</span></Table.Summary.Cell>
+                            <Table.Summary.Cell className="SaleBill" index={1}>{"-"+getPriceVND(promotionprice)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     }
                     <Table.Summary.Row>
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Phí vận chuyển</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}  className="Shipping" >{getPriceVND(30000)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}  className="Shipping" >{getPriceVND(30000)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     <Table.Summary.Row >
-                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Tổng</span></Table.Summary.Cell>
-                        <Table.Summary.Cell className="TotalBill" index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
+                        <Table.Summary.Cell className="TotalBill" index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                 </Table.Summary>
         )}
@@ -173,16 +173,16 @@ export default function BillDetails(){
             disabled={status===3}
         >
             <Option value={0}>
-                <span style={{ color:'red' }}>Đang xử lý</span>
+                <span style={{ color:'red' }}>Processing</span>
             </Option>
             <Option value={1}>
-                <span style={{color:'blue' }}>Đang giao hàng</span>
+                <span style={{color:'blue' }}>Delivering</span>
             </Option>
             <Option value={2}>
-                <span style={{ color:'green' }}>Hoàn thành</span>
+                <span style={{ color:'green' }}>Completed</span>
             </Option>
             <Option value={3} disabled>
-                <span style={{ color:'gray' }}>Đã hủy</span>
+                <span style={{ color:'gray' }}>Cancelled</span>
             </Option>
         </Select>
        )
@@ -194,49 +194,49 @@ export default function BillDetails(){
             <PageHeader
                 className="site-page-header"
                 onBack={() => history.goBack()}
-                title="Chi tiết đơn hàng"
-                subTitle={"Mã đơn hàng: #"+dataBill.id}
+                title="Order details"
+                subTitle={"Order code: #"+dataBill.id}
             />
             <Row>
                 <Col lg={14} xs={24} style={{ padding:"20px 40px" }} >
                     {ViewProduct()}
-                    <Card title="Địa chỉ thanh toán" style={{ marginTop:30,boxShadow:'2px 0px 30px #00000026' }}>
+                    <Card title="Payment address" style={{ marginTop:30,boxShadow:'2px 0px 30px #00000026' }}>
                     <div style={{ fontSize:16 }}>
                     <Space direction="vertical" size={20}>
-                        <span><b>Tên: </b>{dataBill.name}</span>
-                        <span><b>Địa chỉ: </b>{dataBill.address}</span>
+                        <span><b>Name: </b>{dataBill.name}</span>
+                        <span><b>Address: </b>{dataBill.address}</span>
                         <span><b>Email: </b>{dataBill.email}</span>
-                        <span><b>Số điện thoại: </b>{dataBill.phone} </span>
+                        <span><b>Phone: </b>{dataBill.phone} </span>
                     </Space>
                     </div>
                     </Card>
                 </Col>
                 <Col lg={10} xs={24} style={{ justifyContent:'center',display:'flex' }}>
-                    <Card title="Thông tin đơn hàng." style={{ marginTop:20,width:'80%',boxShadow:'2px 0px 30px #00000026' }}>
+                    <Card title="Order information." style={{ marginTop:20,width:'80%',boxShadow:'2px 0px 30px #00000026' }}>
                     <ul>
                         <Space size={10} direction="vertical">
                             <div id="Inforbill">
                             <Space size={10} direction="vertical">
-                                <li>Mã đơn hàng : <b>{"#"+dataBill.id}</b></li>
-                                <li>Ngày đặt: <b>{new Date(dataBill.create_at).toString()}</b></li>
-                                <li>Tên khách hàng : <b>{dataBill.name}</b></li>
+                                <li>Order code : <b>{"#"+dataBill.id}</b></li>
+                                <li>Date order: <b>{new Date(dataBill.create_at).toString().split('GMT')[0]}</b></li>
+                                <li>Customer name : <b>{dataBill.name}</b></li>
                                 <li>Email : <b>{dataBill.email}</b></li>
-                                <li>Tổng cộng : <b>{getPriceVND(totalTmp-promotionprice)+" đ"}</b></li>
-                                <li>Thời gian cập nhật hóa đơn: <b>{new Date(dataBill.update_at).toString()}</b></li>
-                                <li>Phương thức thanh toán: 
-                                    <b>{dataBill.methodPayment===1 ? "Chuyển khoản ngân hàng":"Trả tiền mặt"}</b>
+                                <li>Total : <b>{getPriceVND(totalTmp-promotionprice)+" đ"}</b></li>
+                                <li>Updated order time: <b>{new Date(dataBill.update_at).toString().split('GMT')[0]}</b></li>
+                                <li>Payment method: 
+                                    <b>{dataBill.methodPayment===1 ? "Bank transfer":"Pay cash"}</b>
                                 </li>
                             </Space>
                             </div>
                             <li>
                                 Tình trạng : {getStatus(dataBill.status)}
                             </li>
-                            <div>
-                                <Button type="primary" danger onClick={()=>setshowModalDeleteBill(true)}>
-                                    Xóa đơn
+                            <div style={{ marginTop: 20}}>
+                                <Button style={{ borderRadius : 10}} type="primary" danger onClick={()=>setshowModalDeleteBill(true)}>
+                                    Delete invoice
                                 </Button>
-                                <Button type="primary" danger style={{ marginLeft:30 }} onClick={handlePrintInvoices}>
-                                    In hóa đơn <PrinterOutlined />
+                                <Button  type="primary" success style={{ marginLeft:30, borderRadius : 10 }} onClick={handlePrintInvoices}>
+                                    Print invoice <PrinterOutlined />
                                 </Button>
                             </div>
                         </Space>
@@ -246,15 +246,15 @@ export default function BillDetails(){
             </Row> 
             {showModalDeleteBill &&
                 <Modal
-                    title={`Bạn chắc chắn muốn xóa hóa đơn #${dataBill.id}`}
+                    title={`You definitely want to delete the invoice #${dataBill.id}`}
                     visible={showModalDeleteBill}
                     onOk={handleDeleteItem}
                     onCancel={()=>setshowModalDeleteBill(false)}
-                    cancelText="Thoát"
-                    okText="Chắc chắn"
+                    cancelText="Exit"
+                    okText="Sure"
                 >
-                    <p>Bạn chắc chắn với quyết định của mình ! Tất cả dữ liệu về hóa đơn này sẽ bị xóa.</p>
-                    <p>Và các sản phẩm trong hóa đơn này sẽ được đưa lại vào kho hàng !</p>
+                    <p>You are sure of your decision! All data about this invoice will be deleted.</p>
+                    <p>And the products in this invoice will be returned to the inventory !</p>
                 </Modal>
             }
             <iframe 

@@ -15,6 +15,7 @@
     "antd-img-crop": "^3.16.0",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
+    "clipboard": "^2.0.11",
     "concurrently": "^6.3.0",
     "dotenv": "^16.0.3",
     "jsonwebtoken": "^9.0.2",
