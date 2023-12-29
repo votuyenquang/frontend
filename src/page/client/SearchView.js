@@ -62,7 +62,7 @@ export default function SearchView (){
                 </Row>
                 :
                 <div style={{ display:'flex',alignItems:'center',justifyContent:'center',height:400 }}>
-                    Không sản phẩm nào được tìm thấy...
+                    No products were found...
                 </div>
                 }
             </div>

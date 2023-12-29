@@ -14,13 +14,13 @@ export default function MenuAccount (props){
     const {name, email, id} = props.data;
     
     const handleLogout = ()=>{
-        message.loading({ content: 'Signing out...', key });
+        message.loading({ content: 'Logging out...', key });
         setTimeout(()=>{
             localStorage.removeItem("token"); 
             localStorage.removeItem("idUser"); 
 
             props.refreshAccount();
-            message.success({ content: 'Sign out successfully !', key, duration: 2 });
+            message.success({ content: 'Logout successfully !', key, duration: 2 });
         },1000)
     }
 

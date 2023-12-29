@@ -119,7 +119,7 @@ export default function SaleManager(){
         {
             title:"Amount decreased",
             key:'cost_sale',
-            render: record=><span>{getPriceVND(record.cost_sale)+" đ"}</span>
+            render: record=><span>{getPriceVND(record.cost_sale)+" $"}</span>
         },
         {
             title:"Quantity",

@@ -144,7 +144,7 @@ export default function BillDetails(){
                 <Table.Summary>
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataSale !== undefined &&
                         <Table.Summary.Row >
@@ -221,7 +221,7 @@ export default function BillDetails(){
                                 <li>Date order: <b>{new Date(dataBill.create_at).toString().split('GMT')[0]}</b></li>
                                 <li>Customer name : <b>{dataBill.name}</b></li>
                                 <li>Email : <b>{dataBill.email}</b></li>
-                                <li>Total : <b>{getPriceVND(totalTmp-promotionprice)+" đ"}</b></li>
+                                <li>Total : <b>{getPriceVND(totalTmp-promotionprice)+" $"}</b></li>
                                 <li>Updated order time: <b>{new Date(dataBill.update_at).toString().split('GMT')[0]}</b></li>
                                 <li>Payment method: 
                                     <b>{dataBill.methodPayment===1 ? "Bank transfer":"Pay cash"}</b>

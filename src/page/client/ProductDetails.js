@@ -311,7 +311,7 @@ style={{ display:'flex',flexDirection:'column' }}
         </div>
       ) : (
         <div className="product-price">
-          <span style={{ fontSize: 25, color: "red", fontWeight: "bold" }}>
+          <span style={{ fontSize: 25, color: "red", fontWeight: "bold", marginRight:10 }}>
             {getPriceVND(dataProduct.promotional) + "$"}
           </span>
           <span style={{ fontSize: 15, textDecorationLine: "line-through" }}>
