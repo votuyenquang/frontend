@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image,Card,Badge  } from 'antd';
+import { Image,Card,Badge, Button  } from 'antd';
 import {getPriceVND} from '../contain/getPriceVND';
 import {Link} from 'react-router-dom';
 import PreviewImmage from './PreviewImmage';
@@ -27,6 +27,58 @@ export default function product(props){
     const title2 = (
         <Link className="title-card-product" to={path}>{name}</Link>
     )
+    const handleOrder = () => {
+        const dataOut = localStorage.getItem("cart");
+        alert(dataOut)
+        // let objDataOut = JSON.parse(dataOut);
+        // if (objDataOut === null || dataOut === undefined) {
+        //   const data = [
+        //     { id: dataProduct.id, quanity: quanity, option: option[0] },
+        //   ];
+        //   objDataOut = data;
+        // } else {
+        //   //Check product and option in cart
+        //   let police = objDataOut.some(
+        //     (x) => x.id === dataProduct.id && x.option === option[0]
+        //   );
+        //   if (police) {
+        //     //find postition
+        //     let index = objDataOut.findIndex(
+        //       (x) => x.id === dataProduct.id && x.option === option[0]
+        //     );
+        //     //setNewQuanity
+        //     let newQuanity = objDataOut[index].quanity + quanity;
+        //     if (newQuanity > option[1]) {
+        //       message.warning(
+        //         "This product only has  " + option[1] + ", Please select check again"
+        //       );
+        //       setbuttonLoading(false);
+        //       return;
+        //     } else {
+        //       //setNewQuanity
+        //       objDataOut[index].quanity = newQuanity;
+        //     }
+        //   } else {
+        //     const data = {
+        //       id: dataProduct.id,
+        //       quanity: quanity,
+        //       option: option[0],
+        //     };
+        //     objDataOut.push(data);
+        //   }
+        // }
+        // localStorage.setItem("cart", JSON.stringify(objDataOut));
+        // setTimeout(() => {
+        //   setbuttonLoading(false);
+        //   updateCartCurrent(dispatch);
+        //   notification["success"]({
+        //     message: "Add to cart successfully !",
+        //     description: "Would you like to go to cart now ?",
+        //     btn,
+        //     key: "notifysuccess",
+        //   });
+        // }, 1000);
+      };
     return(
             <Card
                 className="itemProduct"
@@ -49,6 +101,7 @@ export default function product(props){
                 }
             >
                 <Meta title={title2} description={hanldeShowPrice()} />
+                <Button onClick={handleOrder} className='button_add_cart'> add to cart </Button>
             </Card>
        
     )
