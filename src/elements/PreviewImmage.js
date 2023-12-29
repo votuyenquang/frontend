@@ -6,7 +6,7 @@ export default function PreviewImmage (props){
         <div style={{ display:'flex',flexDirection:'row',alignItems:'center'}}>
             <EyeOutlined />
             {props.small==undefined &&
-                <span style={{ marginLeft:5 }}>Xem chi tiết</span>
+                <span style={{ marginLeft:5 }}>View detail</span>
             }
         </div>
     )

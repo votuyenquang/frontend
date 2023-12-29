@@ -26,13 +26,12 @@
     }
 }
 .review{
-    border-bottom: solid 1px black;
+    border-bottom: 1px solid #DDE1EF;
     margin-bottom: 16px;
 }
 .review-block{
     font-size: 16px;
     padding: 4px;
-    margin: 0 8px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -47,8 +46,8 @@
     color: tan;
 }
 .review-name{
-    font-weight: bold;
-    margin: 0 8px 0 4px;
+    font-weight: 600;
+    margin: 0 8px 0 2px;
 }
 .review-star{
     display: inline-flex;
@@ -59,6 +58,12 @@
 }
 .review-comment{
     font-size: 16px;
-    margin-left: 58px;
+    margin-left: 50px;
     margin-bottom: 12px;
+}
+
+.date-start{
+    font-size: 13px;
+    margin-left: 50px;
+    margin-bottom: 4px;
 }

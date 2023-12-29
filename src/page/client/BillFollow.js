@@ -74,7 +74,7 @@ export default function BillFollow (){
             dataIndex:"",
             key:'total',
             render:(record)=>{
-               return <span>{getPriceVND(record.total_price) +" đ"}</span>
+               return <span>{getPriceVND(record.total_price) +" $"}</span>
             }
         },
         { 

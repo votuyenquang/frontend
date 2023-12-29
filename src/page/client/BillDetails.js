@@ -113,7 +113,7 @@ export default function BillDetails(){
             title:"Total",
             key:'total_price',
             render: record=>{
-                return <span>{getPriceVND(record.price*record.quanity + 30000) +" đ"}</span>
+                return <span>{getPriceVND(record.price*record.quanity + 30000) +" $"}</span>
             }
         }
     ]
@@ -127,21 +127,21 @@ export default function BillDetails(){
                 <Table.Summary>
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataSale !== undefined &&
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{"-"+getPriceVND(promotionprice)+" đ"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{"-"+getPriceVND(promotionprice)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     }
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(30000)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(30000)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" đ"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataBill.status===2 &&
                     <Table.Summary.Row>
@@ -202,7 +202,7 @@ export default function BillDetails(){
                         <li>Code order : <b>{"#"+dataBill.id}</b></li>
                         <li>Order date: <b>{new Date(dataBill.create_at).toString()}</b></li>
                         <li>Email : <b>{dataBill.email}</b></li>
-                        <li>Total : <b>{getPriceVND(totalTmp-promotionprice +30000)+" đ"}</b></li>
+                        <li>Total : <b>{getPriceVND(totalTmp-promotionprice +30000)+" $"}</b></li>
                         <li>Time to update invoices: <b>{new Date(dataBill.update_at).toString()}</b></li>
                         <li>Payment method: 
                             <b>{dataBill.methodPayment===1 ? " Bank transfer":" Pay cash"}</b>
