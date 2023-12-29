@@ -7,7 +7,6 @@ import Product from "../../elements/product";
 import * as FetchAPI from "../../util/fetchApi";
 import Spinner from "../../elements/spinner";
 import { useLocation } from "react-router-dom";
-import jwt from 'jsonwebtoken';
 import {
   BulbFilled,
   FormatPainterFilled,
