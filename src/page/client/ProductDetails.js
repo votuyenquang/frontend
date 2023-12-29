@@ -120,26 +120,16 @@ export default function ProductDetails() {
     setbuttonLoading(true);
     setTimeout(() => {
       if (option == null) {
-<<<<<<< HEAD
-        message.warning("Please select size and color to order");
-=======
         message.warning("Please select size and color to order !");
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         setbuttonLoading(false);
       } else if (quanity === null) {
         message.warning("Please select quantity !");
         setbuttonLoading(false);
       } else if (option[1] < quanity) {
         message.warning(
-<<<<<<< HEAD
           "This model only has  " +
             option[1] +
             " product, Please sympathize!"
-=======
-          "This model is limited in quantity " +
-            option[1] +
-            " products, please understand !"
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         );
         setbuttonLoading(false);
       } else {
@@ -180,13 +170,7 @@ export default function ProductDetails() {
         let newQuanity = objDataOut[index].quanity + quanity;
         if (newQuanity > option[1]) {
           message.warning(
-<<<<<<< HEAD
             "This product only has  " + option[1] + ", Please select check again"
-=======
-            "Product is only available " +
-              option[1] +
-              ", please select check again"
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
           );
           setbuttonLoading(false);
           return;
@@ -208,13 +192,8 @@ export default function ProductDetails() {
       setbuttonLoading(false);
       updateCartCurrent(dispatch);
       notification["success"]({
-<<<<<<< HEAD
-        message: "Order successful",
-        description: "Would you like to go to cart now?",
-=======
         message: "Add to cart successfully !",
         description: "Would you like to go to cart now ?",
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         btn,
         key: "notifysuccess",
       });
@@ -299,7 +278,6 @@ style={{ display:'flex',flexDirection:'column' }}
         <span>Code: {dataProduct.id}</span>
         <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span className="rate">
-<<<<<<< HEAD
           
           { reviewStar > 0 ?
               <>
@@ -317,17 +295,6 @@ style={{ display:'flex',flexDirection:'column' }}
                 There are no reviews yet
               </>
           }
-=======
-          Rate:
-          <Rate
-            allowHalf
-            style={{ size: "10px" }}
-            tooltips="12345"
-            defaultValue={reviewStar}
-            disabled
-          />
-          ({quanityReview} review)
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         </span>
       </div>
     </div>

@@ -281,8 +281,8 @@ export default function Home() {
           {slide()}
           {sale()}
           <div className="contentHome">
-<<<<<<< HEAD
-          <span className="title-new">RECOMMENDATION FOR YOU</span>
+
+          <h2 className="title-news">Recommendation for you</h2>
             <Slider className="slider-item-new" {...settings_carsoule_new}
                style= {{ marginBottom: "48px" }}>
               {productRecommendation.map((item, i) => (
@@ -291,10 +291,8 @@ export default function Home() {
                 </div>
               ))}
             </Slider>
-            <span className="title-new">NEW PRODUCTS</span>
-=======
+
             <h2 className="title-news">New products</h2>
->>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
             <Slider className="slider-item-new" {...settings_carsoule_new}>
               {itemProductNew.map((item, i) => (
                 <div key={i} className="hello">
@@ -304,7 +302,7 @@ export default function Home() {
             </Slider>
 
             <h2 className="title-news" style={{ marginTop: 40 }}>
-              HOT DEAL PRODUCT
+              HOT DEAL PRODUCTS
             </h2>
             <Row
               gutter={[{ xs: 8, sm: 16, md: 24, lg: 24 }, 20]}
