@@ -13,7 +13,7 @@ import {
   List,
   notification,
 } from "antd";
-import { GiftOutlined } from "@ant-design/icons";
+import { GiftOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import * as FetchAPI from "../../util/fetchApi";
 import { getPriceVND } from "../../contain/getPriceVND";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
@@ -120,16 +120,26 @@ export default function ProductDetails() {
     setbuttonLoading(true);
     setTimeout(() => {
       if (option == null) {
+<<<<<<< HEAD
         message.warning("Please select size and color to order");
+=======
+        message.warning("Please select size and color to order !");
+>>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         setbuttonLoading(false);
       } else if (quanity === null) {
         message.warning("Please select quantity !");
         setbuttonLoading(false);
       } else if (option[1] < quanity) {
         message.warning(
+<<<<<<< HEAD
           "This model only has  " +
             option[1] +
             " product, Please sympathize!"
+=======
+          "This model is limited in quantity " +
+            option[1] +
+            " products, please understand !"
+>>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         );
         setbuttonLoading(false);
       } else {
@@ -170,7 +180,13 @@ export default function ProductDetails() {
         let newQuanity = objDataOut[index].quanity + quanity;
         if (newQuanity > option[1]) {
           message.warning(
+<<<<<<< HEAD
             "This product only has  " + option[1] + ", Please select check again"
+=======
+            "Product is only available " +
+              option[1] +
+              ", please select check again"
+>>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
           );
           setbuttonLoading(false);
           return;
@@ -192,8 +208,13 @@ export default function ProductDetails() {
       setbuttonLoading(false);
       updateCartCurrent(dispatch);
       notification["success"]({
+<<<<<<< HEAD
         message: "Order successful",
         description: "Would you like to go to cart now?",
+=======
+        message: "Add to cart successfully !",
+        description: "Would you like to go to cart now ?",
+>>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         btn,
         key: "notifysuccess",
       });
@@ -278,6 +299,7 @@ style={{ display:'flex',flexDirection:'column' }}
         <span>Code: {dataProduct.id}</span>
         <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span className="rate">
+<<<<<<< HEAD
           
           { reviewStar > 0 ?
               <>
@@ -295,6 +317,17 @@ style={{ display:'flex',flexDirection:'column' }}
                 There are no reviews yet
               </>
           }
+=======
+          Rate:
+          <Rate
+            allowHalf
+            style={{ size: "10px" }}
+            tooltips="12345"
+            defaultValue={reviewStar}
+            disabled
+          />
+          ({quanityReview} review)
+>>>>>>> 497b5293e0778f1ec29e2ec43baf161e7bd45b49
         </span>
       </div>
     </div>
@@ -385,59 +418,83 @@ style={{ display:'flex',flexDirection:'column' }}
             <span>ADD CART</span>
           </Button>
           <Button className="buy-now" disabled={outOfStock}>
-            <span>BUY NOW</span>
+            <Link to="/cart"><span>BUY NOW</span></Link>
           </Button>
         </div>
 
         <div className="block-promotion">
-          <div className="heading-promo"><GiftOutlined style={{marginRight: 5}}/>Special promotion</div>
+          <div className="heading-promo">
+            <GiftOutlined style={{ marginRight: 5 }} />
+            Special promotion
+          </div>
           <div className="promo-content">
-            <p>Special discount program to celebrate Lunar New Year. Applicable from January 12 - February 29</p>
-            <p> + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from 850,000 VND !</p>
+            <p></p>
+            <p>
+              Special discount program to celebrate Lunar New Year. Applicable
+              from January 12 - February 29
+            </p>
+            <p>
+              + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from
+              850,000 VND !
+            </p>
+            <p>+ Apply code SHIPTET to save 15,000 VND on shipping !</p>
           </div>
         </div>
 
-        <div style={{ paddingTop: 50 }}>
-          {dataProduct.description !== null && (
-            <span style={{ fontSize: 16 }}>
-              <h4>PRODUCT INFORMATION</h4>{" "}
+        <div className="block-promotion">
+          <div className="heading-product-infor">
+            <InfoCircleOutlined style={{ marginRight: 5 }} />
+            Product Information
+          </div>
+          <div className="promo-content">
+            <p></p>
+            <span style={{ fontSize: 14 }}>
+              {ReactHtmlParser(dataProduct.description)}
             </span>
+          </div>
+        </div>
+        {/* 
+<div style={{ paddingTop: 50 }}>
+          {dataProduct.description !== null && (
+            <span className="option-children">PRODUCT INFORMATION</span>
           )}
-          <span style={{ fontSize: 16 }}>
+          <span style={{ fontSize: 14 }}>
             {ReactHtmlParser(dataProduct.description)}
           </span>
         </div>
+*/}
+      </div>
 
-        <div style={{ paddingTop: 50 }}>
-          <span style={{ fontSize: 16 }}>
-            {" "}
-            <h4>Customer reviews</h4>{" "}
-          </span>
-          {arrReview.map((review, ind) => {
-            return (
-              <div className="review">
-                <div className="review-block" key={ind}>
-                  <span className="review-avt">
-                    <FaRegUserCircle />
-                  </span>
-                  <span className="review-name">{review.name} : </span>
-                  <span className="review-star">
-                    <Rate
-                      allowHalf
-                      style={{ color: "orange", fontSize: 16 }}
-                      tooltips="12345"
-                      defaultValue={review.reviewStar}
-                      disabled
-                    />
-                  </span>
-                </div>
-                <div className="review-comment">
-                  <span>{review.comment}</span>
-                </div>
+      <div className="reviews">
+        <p className="review-title">CUSTOMER REVIEWS</p>
+        {arrReview.map((review, ind) => {
+          return (
+            <div className="review">
+              <div className="review-block" key={ind}>
+                <span className="review-avt">
+                  <FaRegUserCircle />
+                </span>
+                <span className="review-name">{review.name}</span>
               </div>
-            );
-          })}
-        </div>
+              <div className="date-start">
+                <span>2024-01-01 20:20</span>
+                <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <span className="review-star">
+                  <Rate
+                    allowHalf
+                    style={{ color: "orange", fontSize: 16 }}
+                    tooltips="12345"
+                    defaultValue={review.reviewStar}
+                    disabled
+                  />
+                </span>
+              </div>
+              <div className="review-comment">
+                <span>{review.comment}</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

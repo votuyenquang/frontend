@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import { Layout, Menu, Input, Row, Col, BackTop, Dropdown, message, Badge} from "antd";
+import {
+  Layout,
+  Menu,
+  Input,
+  Row,
+  Col,
+  BackTop,
+  Dropdown,
+  message,
+  Badge,
+} from "antd";
 import * as FetchAPI from "../util/fetchApi";
 import logo from "../images/logo.png";
 import Home from "./client/Home";
@@ -91,11 +101,11 @@ export default function App() {
       setstatusUser(true);
       const status = await getUser(token, dispatch);
       if (status === false) {
-        message.warning("Phiên đăng nhập hết hạn, vui lòng đăng nhập lại !");
+        message.warning("Login session expired, please log in again !");
         setstatusUser(false);
       } else if (status == "block") {
         message.error(
-          "Tài khoản của bạn đang bị khóa, vui lòng liên hệ với quản lý!"
+          "Your account is locked, please contact the administrator !"
         );
         setstatusUser(false);
       } else {
@@ -212,7 +222,7 @@ export default function App() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                color: "#8a8a8a",
+                color: "#fff",
                 fontSize: 17,
               }}
             >
@@ -224,10 +234,11 @@ export default function App() {
           </Dropdown>
         )}
         <div
-          className="btn-header cart"
+          className="btn-cart cart"
           style={{
             display: "flex",
             flexDirection: "row",
+            color: "#fff",
             alignItems: "center",
           }}
         >
@@ -235,7 +246,7 @@ export default function App() {
             style={{
               display: "flex",
               alignItems: "center",
-              color: "#8a8a8a",
+              color: "#fff",
               fontSize: 17,
             }}
             onClick={() => console.log(datauser)}
@@ -245,17 +256,17 @@ export default function App() {
           </Link>
           <Dropdown overlay={Cartdrop} placement="bottomCenter" arrow>
             <Badge count={quanityCart} offset={[5, -10]}>
-              <span
-                className="title"
-                style={{
-                  paddingLeft: 5,
-                  fontSize: 17,
-                  color: "#8a8a8a",
-                  cursor: "pointer",
-                }}
-              >
-                Cart
-              </span>
+                <span
+                  className="title"
+                  style={{
+                    paddingLeft: 5,
+                    fontSize: 17,
+                    color: "#fff",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cart
+                </span>
             </Badge>
           </Dropdown>
         </div>
@@ -390,8 +401,7 @@ export default function App() {
             <div className="topbar">
               <span style={{ color: "white", alignItems: "center" }}>
                 {" "}
-                <EnvironmentOutlined style={{ marginRight: 5 }} /> 115 Đỗ Thúc
-                Tịnh, Khuê Trung, Cẩm Lệ |{" "}
+                <EnvironmentOutlined style={{ marginRight: 5 }} /> 115 Do Thuc Tinh, Khue Trung, Cam Le |{" "}
                 <MailOutlined style={{ marginLeft: 10, marginRight: 5 }} />{" "}
                 Email: fashion@gmail.com.vn |{" "}
                 <HistoryOutlined style={{ marginLeft: 10, marginRight: 5 }} />{" "}
