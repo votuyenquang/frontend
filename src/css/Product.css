@@ -67,3 +67,17 @@
     margin-left: 50px;
     margin-bottom: 4px;
 }
+.button_add_cart{
+    color: rgb(31, 25, 25);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    border: solid 1px #5a8ce9;
+    background-color: #6e9bf0;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
