@@ -331,9 +331,9 @@ export default function Home() {
               </div>
             )}
 
-            <span className="title-new" style={{ marginTop: 40 }}>
+            <h2 className="title-news" style={{ marginTop: 40 }}>
               CHOOSE FASHION HQ
-            </span>
+            </h2>
             <Row className="reason-choose">
               <Col className="item" xl={6} md={12} sm={24}>
                 <div className="image">

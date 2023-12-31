@@ -249,31 +249,6 @@ export default function ProductDetails() {
   const ProductInformation = () => (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h1 className="name-product">{dataProduct.name}</h1>
-      {/* 
-<div> 
-                <Rate allowHalf style={{ color:"orange"}} tooltips="12345" defaultValue={reviewStar} disabled/>
-                <span style={{ marginLeft:10 }}>{`Evaluate: (${quanityReview} evaluate)`}</span>
-            </div>
-            
-    <span><span style={{ fontWeight:'bold' }}>Product code : </span>{dataProduct.id}</span>
-{line()}
-style={{ display:'flex',flexDirection:'column' }} 
-
-<Button
-          type="primary"
-          danger
-          style={{ width: 150, height: 50, borderRadius: 10 }}
-          onClick={handleValidation}
-          disabled={outOfStock}
-          loading={buttonLoading}
-        >
-          {outOfStock ? (
-            <span style={{ fontWeight: "bold" }}>OUT OF STOCK</span>
-          ) : (
-            <span style={{ fontWeight: "bold" }}>BUY</span>
-          )}
-        </Button>
-*/}
       <div className="inventory-quantity">
         <span>Code: {dataProduct.id}</span>
         <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
