@@ -2,11 +2,13 @@ import React,{useEffect,useState} from 'react';
 import * as FetchAPI from '../../util/fetchApi';
 import Spinner from '../../elements/spinner';
 import {getPriceVND} from '../../contain/getPriceVND';
-import {InputNumber,Table,DatePicker,Button,message,Drawer,Form,Input,Modal} from 'antd';
+import {InputNumber,Table,DatePicker,Button,message,Drawer,Form,Input,Modal,Select} from 'antd';
 import moment from 'moment';
 import {PlusCircleOutlined} from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 const { RangePicker } = DatePicker;
+const {Option} = Select;
+
 export default function SaleManager(){
     const [showContent, setshowContent] = useState();
     const [dataFullPromotion, setdataFullPromotion] = useState();
@@ -72,6 +74,7 @@ export default function SaleManager(){
     const handleAddSale = async()=>{
         setloadingBtn(true);
         const data = {"data":dataAddSale};
+        console.log({data});
         const res = await FetchAPI.postDataAPI("/promotion/addPromotion",data);
         if(res.msg){
             if(res.msg==="Success"){
@@ -175,7 +178,7 @@ export default function SaleManager(){
             width={overflowX ?"100%":520}
             getContainer={false}
             onClose={()=>setshowDrawer(false)} 
-            visible={showDrawer}
+            open={showDrawer}
            
         >
             <Form
@@ -205,6 +208,32 @@ export default function SaleManager(){
                         value={dataAddSale.code_sale}
                         onChange= {(e)=>setdataAddSale({...dataAddSale,code_sale:e.target.value})}
                     />
+                </Form.Item>
+                <Form.Item
+                    label="Type"
+                    name="type"
+                    rules={[{ required: true, message: 'Please enter type code!' }]}
+                >
+                    {/* <InputNumber
+                        placeholder="Type"
+                        formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                        min={0}
+                        value={dataAddSale.quanity}
+                        onChange={(e)=>setdataAddSale({...dataAddSale,quanity:e})}
+                    /> */}
+                    <Select 
+                    value={dataAddSale.type}
+                    placeholder="Type"
+                    onChange= {(e)=>setdataAddSale({...dataAddSale,type:e})}
+                >
+                    <Option value={0}>
+                        Free shipping
+                    </Option>
+                    <Option value={1}>
+                        Discount
+                    </Option>
+                </Select>
                 </Form.Item>
                 <Form.Item
                     label="Cost sale"

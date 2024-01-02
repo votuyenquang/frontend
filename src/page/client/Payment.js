@@ -18,6 +18,9 @@ export default function Payment (props){
     const dataCart = useSelector(state=>state.productReducer.cart);
     const datauser = useSelector(state=>state.userReducer.currentUser);
     const [dataSale, setdataSale] = useState();
+    const [pricePayment, setPricePayment] = useState(0);
+    const [idSale, setIdSale] = useState(null);
+
     const dispatch = useDispatch();
     const [showUser, setshowUser] = useState(false);
     const [methodPayment, setmethodPayment] = useState(1);
@@ -25,12 +28,13 @@ export default function Payment (props){
     const [paymentSucess, setpaymentSucess] = useState(false);
     const textMethodBank = "Make payments right into our bank account. Please use your Order ID in the Checkout text section. The order will be delivered after the money has been transferred."
     const location = useLocation();
+    const receivedDataSale = location.state?.data;
+    console.log({receivedDataSale});
     useEffect(()=>{
         setpaymentSucess(false)
         setshowUser(false)
-        if(location.dataSale!==undefined){
-            setdataSale(location.dataSale)
-            setpromoprice(location.dataSale.cost_sale)
+        if(receivedDataSale  !=undefined){
+            setpromoprice(receivedDataSale.cost_sale)
         }
         if(dataCart.length!==undefined){
             let total = 0;
@@ -46,6 +50,7 @@ export default function Payment (props){
                 return false
             })
         }  
+       
         getUser(); 
     },[datauser])
     const getUser = async()=>{
@@ -77,24 +82,36 @@ export default function Payment (props){
         }
     }
     const handleOrder = async()=>{
-        let idSale = null;
-        let total = totalTmp+30000;
-        if(dataSale!== undefined){
-            idSale = dataSale.id
-            total = total-dataSale.cost_sale
+        let saleID = null;
+        let shipfee = 30000
+        // let total_payment = totalTmp;
+        if(receivedDataSale != undefined){
+            saleID = receivedDataSale.id;
         }
+        let total_payment = getPricePayment()
+        //     if (receivedDataSale.type == 0) {
+        //         shipfee = shipfee - receivedDataSale.cost_sale;
+        //         shipfee > 0 ? shipfee : 0;
+        //     } 
+        //     else {
+        //         total_payment = total_payment- receivedDataSale.cost_sale
+        //     }
+        // }
+        // total_payment = total_payment + shipfee;
+        
         const data = {
             "name": name,
             "address": address,
             "email" : email,
             "phone" : phone,
-            "total_price":total,
+            "total_price":total_payment,
             "message":message,
             "dataProduct":dataCart,
             "methodPayment":methodPayment,
             "user": idUser,
-            "idSale":idSale,
+            "idSale":saleID,
         }
+        console.log({data});
         const res = await FetchAPI.postDataAPI("/order/addBill",data);
         if(res.msg){
             if(res.msg==="success"){
@@ -135,7 +152,7 @@ export default function Payment (props){
     const InformationPayment = ()=>(
        <div style={{ padding:20 }}>
            <div style={{ display:'flex',flexDirection:'column', marginBottom: 10 }}>
-            {dataSale===undefined &&
+            {receivedDataSale  ===undefined &&
                 <span >Do you have a promotional code ?<Link to="/cart"> Come back</Link> shopping cart to receive promotion !</span>
             }
            </div>
@@ -230,6 +247,22 @@ export default function Payment (props){
             </Form.Item>
        </div>
     )
+    const getPricePayment = () =>{
+        let total_payment = totalTmp;
+        let shipfee = 30000;
+        if(receivedDataSale != undefined){
+          
+            if (receivedDataSale.type == 0) {
+                shipfee = shipfee - receivedDataSale.cost_sale;
+                shipfee = shipfee > 0 ? shipfee : 0;
+            } 
+            else {
+                total_payment = total_payment- receivedDataSale.cost_sale
+            }
+        }
+        total_payment = total_payment + shipfee;
+        return total_payment;
+    }
     const Payment = ()=>(
         <div style={{ border:"2px solid black",padding:20 }}>
             <h2 style={{fontWeight: "bold"}}>YOUR ORDER</h2>
@@ -243,7 +276,7 @@ export default function Payment (props){
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
-                        {dataSale !== undefined &&
+                        {receivedDataSale !== undefined &&
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
                             <Table.Summary.Cell index={1}>{"-"+getPriceVND(promoprice)+" $"}</Table.Summary.Cell>
@@ -255,7 +288,7 @@ export default function Payment (props){
                         </Table.Summary.Row>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promoprice+30000)+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{getPriceVND(getPricePayment())+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                     </Table.Summary>
             )}/>

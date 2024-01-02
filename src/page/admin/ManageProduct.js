@@ -174,9 +174,9 @@ export default function ManageProduct(){
             key:'status',
             render: record=>{
                 if(record.status===0){
-                    return <span>Hiển thị</span>
+                    return <span>Show</span>
                 }else{
-                    return <span>Ẩn</span>
+                    return <span>Hide</span>
                 }
             }
         },
@@ -342,7 +342,7 @@ export default function ManageProduct(){
                 </Form.Item>
                 <Form.Item style={{ paddingTop:20 }}  wrapperCol={{ span: 12, offset: 10 }}>
                     <Button type="primary" htmlType="submit" danger loading={loadingBtn}>
-                        Cập nhật
+                        Update
                     </Button>
                 </Form.Item>
             </Form>
