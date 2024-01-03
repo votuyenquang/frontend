@@ -377,7 +377,7 @@ export default function ProductDetails() {
             </p>
             <p>
               + Apply code HAPPYNEWYEAR to get 20 $ off for orders from
-              600 $ !
+              800 $ !
             </p>
             <p>+ Apply code SHIPTET to save 5 $ on shipping !</p>
           </div>
