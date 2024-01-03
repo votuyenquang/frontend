@@ -214,7 +214,7 @@ export default function App() {
         ) : (
           <Dropdown
             className="btn-header"
-            overlay={MenuAccount}
+            open={MenuAccount}
             placement="bottomLeft"
             arrow
           >
@@ -394,7 +394,7 @@ export default function App() {
         <Layout className="layout">
           <div className="header-nav">
             <Account
-              open={showModalAccount}
+              overlay={showModalAccount}
               onCancel={handleCancel}
               refeshAccount={checkUser}
             />
