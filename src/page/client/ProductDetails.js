@@ -409,34 +409,38 @@ export default function ProductDetails() {
 
       <div className="reviews">
         <p className="review-title">CUSTOMER REVIEWS</p>
-        {arrReview.map((review, ind) => {
-          return (
-            <div className="review">
-              <div className="review-block" key={ind}>
-                <span className="review-avt">
-                  <FaRegUserCircle />
-                </span>
-                <span className="review-name">{review.name}</span>
-              </div>
-              <div className="date-start">
-                <span>2024-01-01 20:20</span>
-                <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                <span className="review-star">
-                  <Rate
-                    allowHalf
-                    style={{ color: "orange", fontSize: 16 }}
-                    tooltips="12345"
-                    defaultValue={review.reviewStar}
-                    disabled
-                  />
-                </span>
-              </div>
-              <div className="review-comment">
-                <span>{review.comment}</span>
-              </div>
-            </div>
-          );
-        })}
+        {
+          arrReview.length > 0 ?
+            arrReview.map((review, ind) => {
+              return (
+                <div className="review">
+                  <div className="review-block" key={ind}>
+                    <span className="review-avt">
+                      <FaRegUserCircle />
+                    </span>
+                    <span className="review-name">{review.name}</span>
+                  </div>
+                  <div className="date-start">
+                    <span>2024-01-01 20:20</span>
+                    <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span className="review-star">
+                      <Rate
+                        allowHalf
+                        style={{ color: "orange", fontSize: 16 }}
+                        tooltips="12345"
+                        defaultValue={review.reviewStar}
+                        disabled
+                      />
+                    </span>
+                  </div>
+                  <div className="review-comment">
+                    <span>{review.comment}</span>
+                  </div>
+                </div>
+              );
+            })
+            : "There are no reviews yet"
+        }
       </div>
     </div>
   );

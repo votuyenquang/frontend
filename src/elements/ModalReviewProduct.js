@@ -77,7 +77,7 @@ export default function ModalReviewProduct (props) {
     return(
         <Modal
             title="Reviews product"
-            visible={props.visible}
+            open={props.visible}
             onCancel={props.onCancel}
             footer={false}
         >

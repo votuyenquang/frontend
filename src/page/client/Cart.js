@@ -11,7 +11,7 @@ export default function Cart (){
     const dispatch = useDispatch();
     const [totalTmp, settotalTmp] = useState(0);
     const [promoprice, setpromoprice] = useState(0);
-    const [dataSale, setdataSale] = useState();
+    const [dataSale, setDataSale] = useState();
     const [codeSale, setcodeSale] = useState("");
     const history = useHistory();
     const [overflowX, setoverflowX] = useState(false);
@@ -56,7 +56,7 @@ export default function Cart (){
                     objDataOut[postition].quanity = 1;
                 }
                 else if(e>q){
-                    message.warning(index[0].name+" size "+index.option+" chỉ còn "+q+" sản phẩm");
+                    message.warning(index[0].name+" size "+index.option+" only  "+q+" product left");
                     objDataOut[postition].quanity = q;
                 }else{
                     objDataOut[postition].quanity = e;
@@ -82,10 +82,9 @@ export default function Cart (){
         
     }
     const handlePayment = ()=>{
- 
         history.push({
-            pathname:'/payment',
-            dataSale:dataSale
+            pathname: '/payment',
+            state: { data: dataSale }
         });
     
     }
@@ -115,7 +114,7 @@ export default function Cart (){
             message.warning("This number of codes has expired !")
         }
         else{
-            setdataSale(data);
+            setDataSale(data);
             setpromoprice(data.cost_sale);
             setcodeSale("");
             message.success(
@@ -205,10 +204,10 @@ export default function Cart (){
                <span>Provisional</span>
                <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp) +" $"}</span>
            </div>
-           <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
+           {/* <div style={{ paddingTop:10,fontSize:16,justifyContent:'space-between',display:'flex' }}>
                <span>Total</span>
                <span style={{ paddingRight:20,fontWeight:'bold' }}>{getPriceVND(totalTmp-promoprice) +" $"}</span>
-           </div>
+           </div> */}
            {dataSale!==undefined &&
             <div style={{ paddingTop:10,display:'flex',justifyContent:'space-between' }}>
                 <div>
