@@ -247,16 +247,6 @@ export default function Home() {
           </Button>
         </div>
       </div>
-
-      {/*<div>
-        <img className="imgCarousel" src={slider1} alt="slider1" />
-      </div>
-      <div>
-        <img className="imgCarousel" src={slider2} alt="slider2" />
-      </div>
-      <div>
-        <img className="imgCarousel" src={slider3} alt="slider3" />
-      </div> */}
     </Carousel>
   );
   const ItemProductDeal = itemProductDeal.map((item, i) => {
@@ -319,7 +309,7 @@ export default function Home() {
                   display: "flex",
                 }}
               >
-                <Button
+                {/* <Button
                   className="btn-loadmore"
                   onClick={() => setpageDeal(pageDeal + 1)}
                   type="primary"
@@ -327,7 +317,7 @@ export default function Home() {
                   ghost
                 >
                   View more...
-                </Button>
+                </Button> */}
               </div>
             )}
 

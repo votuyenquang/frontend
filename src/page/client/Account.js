@@ -60,56 +60,10 @@ export default function Account(props) {
 
 
     
-    // Login FaceID
-    var  faceioInstance = null;
-    useEffect(() => {
-        const faceIoScript = document.createElement('script')
-        faceIoScript.src = '//cdn.faceio.net/fio.js'
-        faceIoScript.async = true
-        document.body.appendChild(faceIoScript)
-    
-        return () => {
-          document.body.removeChild(faceIoScript)
-        }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [])
-     
 
      
       
-    
-  const faceSignin = async()=>{
-    try {
-      const model =  document.getElementsByClassName("ant-modal-content")[0].style.display = "none"
-    //   model.style.display = "none"
-      //end
-        faceioInstance = new faceIO('fioabda3');
-        const userData2 = await faceioInstance.authenticate({
-            locale: "auto",
-        })
-        const id = userData2.payload.id;
-        console.log(id);
-        const data = {id: id}
 
-        const res = await FetchAPI.postDataAPI("/user/facelogin",data);
-       
-        if(res.msg==="Invalid account"){
-            message.error("FACE ID không tồn tại")
-        }else if(res.msg==="Success"){
-            localStorage.setItem("token",res.token);
-            finish(res.token);
-            message.success("Đăng nhập thành công !");
-        }
-
-        
-
-
-
-    } catch (errorCode) {
-      console.log(errorCode)
-      
-    }
-  }
 
    
     const Login = ()=>(
@@ -208,7 +162,7 @@ export default function Account(props) {
     return(
         <Modal 
             title="Account" 
-            visible={props.visible} 
+            open={props.visible} 
             onCancel={()=>{props.onCancel();setcontinueRegister(false)}}
             cancelText="Thoát"
             footer={false}
