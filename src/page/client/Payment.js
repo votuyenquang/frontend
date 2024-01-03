@@ -83,7 +83,7 @@ export default function Payment (props){
     }
     const handleOrder = async()=>{
         let saleID = null;
-        let shipfee = 30000
+        let shipfee = 10
         // let total_payment = totalTmp;
         if(receivedDataSale != undefined){
             saleID = receivedDataSale.id;
@@ -249,7 +249,7 @@ export default function Payment (props){
     )
     const getPricePayment = () =>{
         let total_payment = totalTmp;
-        let shipfee = 30000;
+        let shipfee = 10;
         if(receivedDataSale != undefined){
           
             if (receivedDataSale.type == 0) {
@@ -284,7 +284,7 @@ export default function Payment (props){
                         }
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(30000)+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>{getPriceVND(10)+" $"}</Table.Summary.Cell>
                         </Table.Summary.Row>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>

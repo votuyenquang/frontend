@@ -73,6 +73,22 @@ export default function BillDetails(){
             }
         }
     }
+    const getPricePayment = () =>{
+        let total_payment = totalTmp;
+        let shipfee = 10;
+        if(dataSale != undefined){
+          
+            if (dataSale.type == 0) {
+                shipfee = shipfee - dataSale.cost_sale;
+                shipfee = shipfee > 0 ? shipfee : 0;
+            } 
+            else {
+                total_payment = total_payment- dataSale.cost_sale
+            }
+        }
+        total_payment = total_payment + shipfee;
+        return total_payment;
+    }
     const handlePrintInvoices = ()=>{
         let inforbill = document.getElementById('Inforbill');
         let product = document.getElementsByClassName('BillProduct');
@@ -154,11 +170,11 @@ export default function BillDetails(){
                     }
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}  className="Shipping" >{getPriceVND(30000)+" $"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}  className="Shipping" >{getPriceVND(10)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     <Table.Summary.Row >
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                        <Table.Summary.Cell className="TotalBill" index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" $"}</Table.Summary.Cell>
+                        <Table.Summary.Cell className="TotalBill" index={1}>{getPriceVND(getPricePayment())+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                 </Table.Summary>
         )}
@@ -221,7 +237,7 @@ export default function BillDetails(){
                                 <li>Date order: <b>{new Date(dataBill.create_at).toString().split('GMT')[0]}</b></li>
                                 <li>Customer name : <b>{dataBill.name}</b></li>
                                 <li>Email : <b>{dataBill.email}</b></li>
-                                <li>Total : <b>{getPriceVND(totalTmp-promotionprice)+" $"}</b></li>
+                                <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
                                 <li>Updated order time: <b>{new Date(dataBill.update_at).toString().split('GMT')[0]}</b></li>
                                 <li>Payment method: 
                                     <b>{dataBill.methodPayment===1 ? "Bank transfer":"Pay cash"}</b>

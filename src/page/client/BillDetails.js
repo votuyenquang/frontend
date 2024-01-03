@@ -96,6 +96,22 @@ export default function BillDetails(){
             <p>You are sure of your decision ! Your order will be canceled.</p>
         </Modal>
     )
+    const getPricePayment = () =>{
+        let total_payment = totalTmp;
+        let shipfee = 10;
+        if(dataSale != undefined){
+          
+            if (dataSale.type == 0) {
+                shipfee = shipfee - dataSale.cost_sale;
+                shipfee = shipfee > 0 ? shipfee : 0;
+            } 
+            else {
+                total_payment = total_payment- dataSale.cost_sale
+            }
+        }
+        total_payment = total_payment + shipfee;
+        return total_payment;
+    }
     const columns  = [
         {
             title:"Product",
@@ -113,7 +129,7 @@ export default function BillDetails(){
             title:"Total",
             key:'total_price',
             render: record=>{
-                return <span>{getPriceVND(record.price*record.quanity + 30000) +" $"}</span>
+                return <span>{getPriceVND(record.price*record.quanity ) +" $"}</span>
             }
         }
     ]
@@ -137,11 +153,11 @@ export default function BillDetails(){
                     }
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(30000)+" $"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(10)+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                        <Table.Summary.Cell index={1}>{getPriceVND(totalTmp-promotionprice+30000)+" $"}</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}>{getPriceVND(getPricePayment())+" $"}</Table.Summary.Cell>
                     </Table.Summary.Row>
                     {dataBill.status===2 &&
                     <Table.Summary.Row>
@@ -202,7 +218,7 @@ export default function BillDetails(){
                         <li>Code order : <b>{"#"+dataBill.id}</b></li>
                         <li>Order date: <b>{new Date(dataBill.create_at).toString()}</b></li>
                         <li>Email : <b>{dataBill.email}</b></li>
-                        <li>Total : <b>{getPriceVND(totalTmp-promotionprice +30000)+" $"}</b></li>
+                        <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
                         <li>Time to update invoices: <b>{new Date(dataBill.update_at).toString()}</b></li>
                         <li>Payment method: 
                             <b>{dataBill.methodPayment===1 ? " Bank transfer":" Pay cash"}</b>
