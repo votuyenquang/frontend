@@ -131,7 +131,7 @@ export default function App() {
             title={category.name}
             onTitleClick={() => history.push(`/category/${category.id}`)}
           >
-            {res2.map((item,i) => {
+            {res2.map((item) => {
               if (item.idCategory === category.id) {
                 const localmenu = {
                   pathname: `/menuproduct/${item.id}`,
@@ -214,7 +214,7 @@ export default function App() {
         ) : (
           <Dropdown
             className="btn-header"
-            open={MenuAccount}
+            overlay={MenuAccount}
             placement="bottomLeft"
             arrow
           >
@@ -228,7 +228,7 @@ export default function App() {
             >
               <FaUser />
               <span className="title" style={{ paddingLeft: 5 }}>
-             
+                Account
               </span>
             </div>
           </Dropdown>
@@ -394,7 +394,7 @@ export default function App() {
         <Layout className="layout">
           <div className="header-nav">
             <Account
-              overlay={showModalAccount}
+              visible={showModalAccount}
               onCancel={handleCancel}
               refeshAccount={checkUser}
             />
