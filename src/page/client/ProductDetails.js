@@ -376,10 +376,10 @@ export default function ProductDetails() {
               from January 12 - February 29
             </p>
             <p>
-              + Apply code HAPPYNEWYEAR to get 30,000 VND off for orders from
-              850,000 VND !
+              + Apply code HAPPYNEWYEAR to get 20 $ off for orders from
+              800 $ !
             </p>
-            <p>+ Apply code SHIPTET to save 15,000 VND on shipping !</p>
+            <p>+ Apply code SHIPTET to save 5 $ on shipping !</p>
           </div>
         </div>
 
