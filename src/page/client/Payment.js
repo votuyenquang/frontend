@@ -57,12 +57,12 @@ export default function Payment (props){
         if(datauser.name!==undefined){
             const res = await FetchAPI.postDataAPI("/user/getInforUser",{"idUser":datauser.id})
             const user = res[0];
-            form.setFieldsValue({name:user.name,email:user.email,address:user.address,phone:user.phone})
-            setname(user.name);
-            setemail(user.email);
-            setidUser(user.id);
-            setaddress(user.address);
-            setphone(user.phone);
+            form.setFieldsValue({name:user?.name,email:user?.email,address:user?.address,phone:user?.phone})
+            setname(user?.name);
+            setemail(user?.email);
+            setidUser(user?.id);
+            setaddress(user?.address);
+            setphone(user?.phone);
             setshowUser(true)
         }else{  
             form.setFieldsValue({name:"",email:"",address:"",phone:""})

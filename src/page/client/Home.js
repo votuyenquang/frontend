@@ -3,7 +3,7 @@ import { Carousel, Col, Row, Button, Card, message } from "antd";
 import Product from "../../elements/product";
 import * as FetchAPI from "../../util/fetchApi";
 import Spinner from "../../elements/spinner";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import freeship from "../../images/freeship.png";
 import off from "../../images/giam.png";
 import ClipboardJS from "clipboard"
@@ -19,12 +19,14 @@ import Slider from "react-slick";
 
 export default function Home() {
   const [itemProductNew, setitemProductNew] = useState([]);
+  const [promotionList, setPromotionList] = useState([]);
   const [itemProductDeal, setitemProductDeal] = useState([]);
   const [showContent, setshowContent] = useState(false);
   const [pageDeal, setpageDeal] = useState(1);
   const [token, setToken] = useState();
   const [moreDeal, setmoreDeal] = useState(true);
   const location = useLocation();
+  const history = useHistory();
   const [productRecommendation, setProductRecommendation] = useState([]);
  
   var settings_carsoule_new = {
@@ -65,6 +67,11 @@ export default function Home() {
   useEffect(() => {
     setshowContent(false);
     getProductNew();
+  }, []);
+  useEffect(() => {
+    setshowContent(false);
+    getPromotion();
+
   }, []);
   useEffect(  () => {
     setshowContent(false);
@@ -114,6 +121,11 @@ export default function Home() {
     setitemProductNew(res.item);
     setshowContent(true);
   };
+  const getPromotion = async () => {
+    const res = await FetchAPI.getAPI(`/promotion/getPromotionNews`);
+    setPromotionList(res);
+    setshowContent(true);
+  };
   const getProductDeal = async () => {
     let item = itemProductDeal;
     const res = await FetchAPI.getAPI(`/product/getProductDeal/${pageDeal}`);
@@ -125,96 +137,36 @@ export default function Home() {
   };
 
   const sale = () => (
-    <Row className="sale">
-      <Col span={5}>
-        <Card
-          className="sale-item"
-          title={
-            <div className="sale-title">
-              <img src={freeship} style={{ width: 45 }} />
-              <div style={{ display: "grid", marginLeft: 10 }}>
-                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
-                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
+    <>
+      <Row className="sale">
+          <Slider className="slider-item-new" {...settings_carsoule_new} style= {{ marginBottom: "48px" }}>
+            {promotionList.map((item, i) => (
+              <div key={i} style={{ }}>
+                <Card 
+                  className="sale-item"
+                  title={
+                    <div className="sale-title">
+                        <img src={item.type === 0 ? freeship : off} style={{ width: 45 }} />
+                        <div style={{ display: "grid", marginLeft: 10 }}>
+                            <span style={{fontWeight: 600}}>{item.name_event_sale}</span>
+                            <span style={{fontSize: 13}}>{item.type === 0 ?  `Voucher for free shipping ${item.cost_sale} $ for orders` : `Voucher discount ${item.cost_sale} $ for each order`}</span>
+                        </div>
+                      </div>
+                      }
+                      >
+                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <div className="sale-content">
+                      <span>Code: <span style={{fontWeight: 600}}>{item.code_sale}</span></span>
+                      <span>Expiry: {item.expired}</span>
+                    </div>
+                    <Button className="sale-button" data-clipboard-text="SHIPTET">Copy</Button>
+                  </div>
+                </Card>
               </div>
-            </div>
-          }
-        >
-          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <div className="sale-content">
-              <span>Code: <span style={{fontWeight: 600}}>SHIPTET</span></span>
-              <span>Expiry: 29/02/2023</span>
-            </div>
-            <Button className="sale-button" data-clipboard-text="SHIPTET">Copy</Button>
-          </div>
-        </Card>
-      </Col>
-      <Col span={5}>
-        <Card
-          className="sale-item"
-          title={
-            <div className="sale-title">
-              <img src={off} style={{ width: 45 }} />
-              <div style={{ display: "grid", marginLeft: 10 }}>
-                <span style={{fontWeight: 600}}>REDUCED 50,000 VND</span>
-                <span style={{fontSize: 13}}>Applicable to orders from 400k</span>
-              </div>
-            </div>
-          }
-        >
-          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <div className="sale-content">
-              <span>Code: <span style={{fontWeight: 600}}>GIAM50VND</span></span>
-              <span>Expiry: 29/02/2023</span>
-            </div>
-            <Button className="sale-button">Copy</Button>
-          </div>
-        </Card>
-      </Col>
-      <Col span={5}>
-        <Card
-          className="sale-item"
-          title={
-            <div className="sale-title">
-              <img src={freeship} style={{ width: 45 }} />
-              <div style={{ display: "grid", marginLeft: 10 }}>
-                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
-                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
-              </div>
-            </div>
-          }
-        >
-          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <div className="sale-content">
-              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
-              <span>Expiry: 29/02/2023</span>
-            </div>
-            <Button className="sale-button">Copy</Button>
-          </div>
-        </Card>
-      </Col>
-      <Col span={5}>
-        <Card
-          className="sale-item"
-          title={
-            <div className="sale-title">
-              <img src={freeship} style={{ width: 45 }} />
-              <div style={{ display: "grid", marginLeft: 10 }}>
-                <span style={{fontWeight: 600}}>FREE SHIPPING</span>
-                <span style={{fontSize: 13}}>Free shipping for orders from 100k</span>
-              </div>
-            </div>
-          }
-        >
-          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <div className="sale-content">
-              <span>Code: <span style={{fontWeight: 600}}>EGAFREESHIP</span></span>
-              <span>Expiry: 29/02/2023</span>
-            </div>
-            <Button className="sale-button">Copy</Button>
-          </div>
-        </Card>
-      </Col>
-    </Row>
+            ))}
+          </Slider>
+      </Row>
+    </>
   );
 
   const slide = () => (
@@ -230,7 +182,7 @@ export default function Home() {
           <div className="title-1">FLASH SALE</div>
           <div className="title-2">BUY PAIR TO DISCOUNT SET</div>
           <div className="title-3">Apply to many products</div>
-          <Button className="shop-now">
+          <Button className="shop-now" onClick={() => {history.push('/fullproduct/1');}}>
             <ShoppingCartOutlined />
             <span>SHOP NOW</span>
           </Button>
@@ -247,13 +199,14 @@ export default function Home() {
           </Button>
         </div>
       </div>
+
     </Carousel>
   );
   const ItemProductDeal = itemProductDeal.map((item, i) => {
     return (
       <Col
         key={i}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ display: "flex", justifyContent: "center", paddingLeft : 36 }}
         xl={6}
         lg={8}
         md={12}
@@ -309,15 +262,7 @@ export default function Home() {
                   display: "flex",
                 }}
               >
-                {/* <Button
-                  className="btn-loadmore"
-                  onClick={() => setpageDeal(pageDeal + 1)}
-                  type="primary"
-                  danger
-                  ghost
-                >
-                  View more...
-                </Button> */}
+            
               </div>
             )}
 

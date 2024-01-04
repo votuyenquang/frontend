@@ -66,7 +66,7 @@ export default function Profile(){
             >
                 <Input 
                     placeholder="Enter full name and surname"
-                    value={dataUser.name}
+                    value={dataUser?.name}
                     onChange= {(e)=>setdataUser({...dataUser,name:e.target.value})}
                 />
             </Form.Item>
@@ -86,7 +86,7 @@ export default function Profile(){
             >
                 <Input 
                     placeholder="Enter address"
-                    value={dataUser.address}
+                    value={dataUser?.address}
                     onChange= {(e)=>setdataUser({...dataUser,address:e.target.value})}
                 />
             </Form.Item>
@@ -97,7 +97,7 @@ export default function Profile(){
             >
                 <Input
                     placeholder="Phone number"
-                    value={dataUser.phone}
+                    value={dataUser?.phone}
                     onChange= {(e)=>setdataUser({...dataUser,phone:e.target.value})}
                 />
             </Form.Item>

@@ -205,6 +205,7 @@ export default function Product(props){
                     <ShoppingCartOutlined />
                 </Button>
                 <Modal
+                    className='modal_add_to_cart'
                     title="Add to Cart"
                     open={isModalVisible}
                     onOk={handleOrder}
