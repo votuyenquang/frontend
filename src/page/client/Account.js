@@ -57,7 +57,9 @@ export default function Account(props) {
     const handleRegister = async()=>{
         setcontinueRegister(true)
     }
-
+    const handleForgot = async()=>{
+        alert("Please enter your password")
+    }
 
     
 
@@ -121,7 +123,7 @@ export default function Account(props) {
                 */}
 
             <div>
-                <span>Forgot password ?</span>
+                <a onClick={handleForgot}>Forgot password ?</a>
             </div>
         </Form>
     )

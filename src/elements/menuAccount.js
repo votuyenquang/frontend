@@ -37,8 +37,13 @@ export default function MenuAccount (props){
                     {"Information ("+name+")" }
                 </Link>
             </Menu.Item>
+            <Menu.Item key="change-password" >
+                <Link to="/change-password">
+                    Change Password
+                </Link>
+            </Menu.Item>
             <Menu.Item key="logout" onClick={handleLogout}>
-               Log out
+               Logout
             </Menu.Item>
         </Menu>
     )
