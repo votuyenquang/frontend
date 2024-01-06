@@ -44,7 +44,7 @@ export default function ChangePassword(){
             setloadingBtn(false)
         }   
     }
-    const InforUser = ()=>(
+    const InforAccount = ()=>(
         <Form
             form={formInfor}
             labelCol={{ span: 6 }}
@@ -104,7 +104,7 @@ export default function ChangePassword(){
                     :
                     <div style={{ padding:"20px 20px" }}>
                         Update your password
-                        {InforUser()}
+                        {InforAccount()}
                     </div>
                 
                     }

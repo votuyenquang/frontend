@@ -5,6 +5,7 @@ import {getPriceVND} from '../../contain/getPriceVND';
 import {Link,useLocation} from 'react-router-dom';
 import * as FetchAPI from '../../util/fetchApi';
 import {updateCartCurrent} from '../../contain/updateQuanityCart';
+import Paypal from '../../elements/Paypal';
 
 export default function Payment (props){
     const [name, setname] = useState("");
@@ -17,13 +18,14 @@ export default function Payment (props){
     const [promoprice, setpromoprice] = useState(0);
     const dataCart = useSelector(state=>state.productReducer.cart);
     const datauser = useSelector(state=>state.userReducer.currentUser);
+    const [isSuccess,setIsSuccess] = useState(false)
     const [dataSale, setdataSale] = useState();
     const [pricePayment, setPricePayment] = useState(0);
     const [idSale, setIdSale] = useState(null);
 
     const dispatch = useDispatch();
     const [showUser, setshowUser] = useState(false);
-    const [methodPayment, setmethodPayment] = useState(1);
+    const [methodPayment, setmethodPayment] = useState(2);
     const [form] = Form.useForm();
     const [paymentSucess, setpaymentSucess] = useState(false);
     const textMethodBank = "Make payments right into our bank account. Please use your Order ID in the Checkout text section. The order will be delivered after the money has been transferred."
@@ -89,15 +91,6 @@ export default function Payment (props){
             saleID = receivedDataSale.id;
         }
         let total_payment = getPricePayment()
-        //     if (receivedDataSale.type == 0) {
-        //         shipfee = shipfee - receivedDataSale.cost_sale;
-        //         shipfee > 0 ? shipfee : 0;
-        //     } 
-        //     else {
-        //         total_payment = total_payment- receivedDataSale.cost_sale
-        //     }
-        // }
-        // total_payment = total_payment + shipfee;
         
         const data = {
             "name": name,
@@ -300,14 +293,26 @@ export default function Payment (props){
                 horizontal
             >
             <Space direction="vertical">
-                <Radio value={1}><b>Bank transfer</b> <br/>
-                    {methodPayment===1 ? <span>{textMethodBank}</span>:null}
-                </Radio>
                 <Radio value={2}><b>Pay cash upon delivery</b><br/>
                     {methodPayment===2 ? <span>Pay cash upon delivery</span>:null}
                  </Radio>
+                <Radio value={1}
+                ><b>Bank transfer</b> <br/>
+                </Radio>
             </Space> 
             </Radio.Group>
+            {methodPayment===1 && 
+                    <Paypal
+                        style= {{ marginTop : 20 }}  
+                        payload={{
+                            products: null ,
+                            total: getPricePayment(),
+                        }}
+                        setIsSuccess={isSuccess}
+                        amount={getPricePayment()}
+                    />
+
+            }
             
             <Form.Item style={{ paddingTop:20 }}>
                 <Button type="primary" htmlType="submit" danger style={{ height:60,width:120,fontWeight:'bold' }} onClick={()=>console.log(email)}>

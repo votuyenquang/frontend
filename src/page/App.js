@@ -28,6 +28,7 @@ import DropDownCart from "../elements/dropDownCart";
 import ProductSale from "./client/ProductSale";
 import Profile from "./client/Profile";
 import ChangePassword from "./client/ChangePassword";
+import ForgotPassword from "./client/ForgotPassword";
 import SearchView from "./client/SearchView";
 import FullProduct from "./client/FullProduct";
 import FooterWeb from "../elements/FooterWeb";
@@ -365,6 +366,9 @@ export default function App() {
         </Route>
         <Route path="/profile">
           <Profile />
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPassword />
         </Route>
         <Route path="/change-password">
           <ChangePassword />
