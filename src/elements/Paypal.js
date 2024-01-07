@@ -7,9 +7,16 @@ import {
 //   import { apiCreateOrder } from "../../apis";
   import Swal from "sweetalert2";
   import { useHistory  } from "react-router-dom";
+  import { useDispatch } from 'react-redux';
+import {updateCartCurrent} from '../contain/updateQuanityCart';
   
   // This value is from the props in the UI
   const style = { layout: "vertical" };
+
+import * as FetchAPI from '../util/fetchApi';
+import React, { useState } from "react";
+
+
   
   // Custom component to wrap the PayPalButtons and show loading spinner
   const ButtonWrapper = ({
@@ -20,6 +27,8 @@ import {
     setIsSuccess,
   }) => {
     const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
+    const [reloadFlag, setReloadFlag] = useState(false);
+    const dispatchRedux = useDispatch()
     const history = useHistory ();
     useEffect(() => {
       dispatch({
@@ -31,22 +40,42 @@ import {
       });
     }, [currency, showSpinner]);
   
-    const handleSaveOrder = async () => {
-    //   const response = await apiCreateOrder({ ...payload, status: "Succeed" });
-    //   if (response.success) {
-    //     setIsSuccess(true);
-    //     setTimeout(() => {
-    //       Swal.fire(
-    //         "Congratulations",
-    //         "Order created successfully",
-    //         "success"
-    //       ).then(() => {
-    //         history.push("/");
-    //       });
-    //     }, 1500);
-    //   }
-    console.log("=============");
-    };
+    const HandleSaveOrder = async () => {
+      const data = {...payload, payment_status : 1};
+      console.log("==== after paylod ", data);
+      const res = await FetchAPI.postDataAPI("/order/addBill",data);
+      if(res.msg){
+          if(res.msg==="success"){
+              
+              setIsSuccess(true);
+              setTimeout(() => {
+                Swal.fire(
+                  "Congratulations",
+                  "Order created successfully",
+                  "success"
+                ).then(() => {
+                  history.push("/");
+                });
+              }, 1500);
+              localStorage.removeItem("cart");
+              updateCartCurrent(dispatchRedux);
+            }
+          }else{
+            setIsSuccess(false);
+            setTimeout(() => {
+              Swal.fire(
+                "Error",
+                "Order created Failed",
+                "failure"
+              ).then(() => {
+                history.push("/");
+               
+              });
+            }, 1500);
+          }
+      }
+
+
   
     return (
       <>
@@ -68,7 +97,7 @@ import {
           onApprove={(data, actions) =>
             actions.order.capture().then(async (response) => {
               if (response.status === "COMPLETED") {
-                handleSaveOrder();
+                HandleSaveOrder();
               }
             })
           }

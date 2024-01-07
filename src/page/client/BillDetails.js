@@ -53,6 +53,7 @@ export default function BillDetails(){
             }
         }
         setdataBill(bill[0])
+        console.log({dataBill});
         if(bill[0].idSale!==null){
             getSale(bill[0].idSale);
         }
@@ -221,7 +222,7 @@ export default function BillDetails(){
                         <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
                         <li>Time to update invoices: <b>{new Date(dataBill.update_at).toString()}</b></li>
                         <li>Payment method: 
-                            <b>{dataBill.methodPayment===1 ? " Bank transfer":" Pay cash"}</b>
+                            <b>{dataBill.method_payment === 1 ? " Bank transfer":" Pay cash"}</b>
                         </li>
                         <li>
                           Status : {getTextStatus(dataBill.status)}

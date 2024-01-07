@@ -7,6 +7,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import freeship from "../../images/freeship.png";
 import off from "../../images/giam.png";
 import ClipboardJS from "clipboard"
+import moment from 'moment';
 
 import {
   BulbFilled,
@@ -64,6 +65,7 @@ export default function Home() {
       },
     ],
   };
+
   useEffect(() => {
     setshowContent(false);
     getProductNew();
@@ -157,9 +159,9 @@ export default function Home() {
                   <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                     <div className="sale-content">
                       <span>Code: <span style={{fontWeight: 600}}>{item.code_sale}</span></span>
-                      <span>Expiry: {item.expired}</span>
+                      <span>Expiry: {moment(item.expired).format("YYYY-MM-DD")}</span>
                     </div>
-                    <Button className="sale-button" data-clipboard-text="SHIPTET">Copy</Button>
+                    <Button className="sale-button" data-clipboard-text={item.code_sale}>Copy</Button>
                   </div>
                 </Card>
               </div>

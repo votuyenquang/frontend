@@ -8,35 +8,32 @@ import {updateCartCurrent} from '../../contain/updateQuanityCart';
 import Paypal from '../../elements/Paypal';
 
 export default function Payment (props){
-    const [name, setname] = useState("");
-    const [email, setemail] = useState();
-    const [phone, setphone] = useState();
-    const [address, setaddress] = useState();
-    const [message, setmessage] = useState();
-    const [totalTmp, settotalTmp] = useState(0);
-    const [idUser, setidUser] = useState("");
-    const [promoprice, setpromoprice] = useState(0);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState();
+    const [phone, setPhone] = useState();
+    const [address, setAddress] = useState();
+    const [message, setMessage] = useState();
+    const [totalTmp, setTotalTmp] = useState(0);
+    const [idUser, setIdUser] = useState("");
+    const [promoprice, setPromoprice] = useState(0);
     const dataCart = useSelector(state=>state.productReducer.cart);
     const datauser = useSelector(state=>state.userReducer.currentUser);
     const [isSuccess,setIsSuccess] = useState(false)
-    const [dataSale, setdataSale] = useState();
-    const [pricePayment, setPricePayment] = useState(0);
-    const [idSale, setIdSale] = useState(null);
+    const [dataPayment, setDataPayment] = useState();
 
-    const dispatch = useDispatch();
     const [showUser, setshowUser] = useState(false);
-    const [methodPayment, setmethodPayment] = useState(2);
+    const [methodPayment, setMethodPayment] = useState(2);
     const [form] = Form.useForm();
-    const [paymentSucess, setpaymentSucess] = useState(false);
-    const textMethodBank = "Make payments right into our bank account. Please use your Order ID in the Checkout text section. The order will be delivered after the money has been transferred."
+    const [paymentSucess, setPaymentSucess] = useState(false);
+    const dispatch = useDispatch();
     const location = useLocation();
     const receivedDataSale = location.state?.data;
     console.log({receivedDataSale});
     useEffect(()=>{
-        setpaymentSucess(false)
+        setPaymentSucess(false)
         setshowUser(false)
         if(receivedDataSale  !=undefined){
-            setpromoprice(receivedDataSale.cost_sale)
+            setPromoprice(receivedDataSale.cost_sale)
         }
         if(dataCart.length!==undefined){
             let total = 0;
@@ -47,7 +44,7 @@ export default function Payment (props){
                     total+=e[0].promotional*e.quanity
                 }
                 if(index===dataCart.length-1){
-                    settotalTmp(total)
+                    setTotalTmp(total)
                 }
                 return false
             })
@@ -60,32 +57,65 @@ export default function Payment (props){
             const res = await FetchAPI.postDataAPI("/user/getInforUser",{"idUser":datauser.id})
             const user = res[0];
             form.setFieldsValue({name:user?.name,email:user?.email,address:user?.address,phone:user?.phone})
-            setname(user?.name);
-            setemail(user?.email);
-            setidUser(user?.id);
-            setaddress(user?.address);
-            setphone(user?.phone);
+            setName(user?.name);
+            setEmail(user?.email);
+            setIdUser(user?.id);
+            setAddress(user?.address);
+            setPhone(user?.phone);
             setshowUser(true)
         }else{  
             form.setFieldsValue({name:"",email:"",address:"",phone:""})
-            setname("");
-            setemail("");
-            setidUser("");
-            setaddress("");
-            setphone("");
+            setName("");
+            setEmail("");
+            setIdUser("");
+            setAddress("");
+            setPhone("");
             setshowUser(true);
         }
     }
     const handleValidationOrder = ()=>{
         if(methodPayment===2){
             handleOrder();
-        }else{
-            console.log("Pay later")
         }
+        // else{
+        //     console.log("Pay later")
+        // }
     }
-    const handleOrder = async()=>{
+    useEffect(() => {
+        console.log("methodPayment:", methodPayment);
+        console.log("datauser:", datauser);
+    
+        const fetchData = async () => {
+            try {
+                const data = await getOrderInformation();
+                console.log("=======", data);
+                setDataPayment(data);
+                console.log({ dataPayment });
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+    
+        fetchData();
+    }, [methodPayment, datauser]);
+    const getPricePayment = () =>{
+        let total_payment = totalTmp;
+        let shipfee = 10;
+        if(receivedDataSale != undefined){
+          
+            if (receivedDataSale.type == 0) {
+                shipfee = shipfee - receivedDataSale.cost_sale;
+                shipfee = shipfee > 0 ? shipfee : 0;
+            } 
+            else {
+                total_payment = total_payment- receivedDataSale.cost_sale
+            }
+        }
+        total_payment = total_payment + shipfee;
+        return total_payment;
+    }
+    const getOrderInformation =  ()=>{
         let saleID = null;
-        let shipfee = 10
         // let total_payment = totalTmp;
         if(receivedDataSale != undefined){
             saleID = receivedDataSale.id;
@@ -103,14 +133,20 @@ export default function Payment (props){
             "methodPayment":methodPayment,
             "user": idUser,
             "idSale":saleID,
+            "payment_status": 0
         }
+        return data;
+    }
+    const handleOrder = async()=>{
+        console.log({dataPayment});
+        const data = getOrderInformation();
         console.log({data});
         const res = await FetchAPI.postDataAPI("/order/addBill",data);
         if(res.msg){
             if(res.msg==="success"){
                 localStorage.removeItem("cart");
                 updateCartCurrent(dispatch);
-                setpaymentSucess(true)
+                setPaymentSucess(true)
             }else{
                 console.log(res.msg)
             }
@@ -162,7 +198,7 @@ export default function Payment (props){
                     placeholder="Enter your full name"
                     value={name}
                     defaultValue={name}
-                    onChange= {(e)=>setname(e.target.value)}
+                    onChange= {(e)=>setName(e.target.value)}
                     maxLength={24}
                     style={{height:40}}
                 />
@@ -179,7 +215,7 @@ export default function Payment (props){
                     placeholder="Enter address"
                     value={address}
                     defaultValue={address}
-                    onChange= {(e)=>setaddress(e.target.value)}
+                    onChange= {(e)=>setAddress(e.target.value)}
                     maxLength={24}
                     style={{height:40}}
                 />
@@ -196,7 +232,7 @@ export default function Payment (props){
                     placeholder="Enter your phone number"
                     value={phone}
                     defaultValue={phone}
-                    onChange= {(e)=>setphone(e.target.value)}
+                    onChange= {(e)=>setPhone(e.target.value)}
                     maxLength={24}
                     style={{height:40}}
                 />
@@ -216,7 +252,7 @@ export default function Payment (props){
                     placeholder="Enter your email address"
                     value={email}
                     defaultValue={email}
-                    onChange= {(e)=>setemail(e.target.value)}
+                    onChange= {(e)=>setEmail(e.target.value)}
                     maxLength={24}
                     style={{height:40}}
                     disabled={datauser.id!==undefined}
@@ -233,29 +269,14 @@ export default function Payment (props){
                     placeholder="Notes about the order, for example, time or more detailed delivery location instructions."
                     value={message}
                     defaultValue={message}
-                    onChange= {(e)=>setmessage(e.target.value)}
+                    onChange= {(e)=>setMessage(e.target.value)}
                     maxLength={200}
                     style={{height:200}}
                 />
             </Form.Item>
        </div>
     )
-    const getPricePayment = () =>{
-        let total_payment = totalTmp;
-        let shipfee = 10;
-        if(receivedDataSale != undefined){
-          
-            if (receivedDataSale.type == 0) {
-                shipfee = shipfee - receivedDataSale.cost_sale;
-                shipfee = shipfee > 0 ? shipfee : 0;
-            } 
-            else {
-                total_payment = total_payment- receivedDataSale.cost_sale
-            }
-        }
-        total_payment = total_payment + shipfee;
-        return total_payment;
-    }
+ 
     const Payment = ()=>(
         <div style={{ border:"2px solid black",padding:20 }}>
             <h2 style={{fontWeight: "bold"}}>YOUR ORDER</h2>
@@ -289,7 +310,7 @@ export default function Payment (props){
             <Radio.Group  
                 style={{paddingTop:20}}
                 value={methodPayment}
-                onChange= {(e)=>setmethodPayment(e.target.value)}
+                onChange= {(e)=>setMethodPayment(e.target.value)}
                 horizontal
             >
             <Space direction="vertical">
@@ -304,11 +325,8 @@ export default function Payment (props){
             {methodPayment===1 && 
                     <Paypal
                         style= {{ marginTop : 20 }}  
-                        payload={{
-                            products: null ,
-                            total: getPricePayment(),
-                        }}
-                        setIsSuccess={isSuccess}
+                        payload={dataPayment}
+                        setIsSuccess={setIsSuccess}
                         amount={getPricePayment()}
                     />
 
