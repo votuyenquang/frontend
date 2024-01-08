@@ -142,6 +142,11 @@ export default function Invoices(){
             }
         },
         {
+            title:"Payment",
+            key:'payment_status',
+            render: record=><span>{record.payment_status === 1 ? "Paid" : "Unpaid"}</span>
+        },
+        {
             title:"Customize",
             key:'option',
             render:record=>(
@@ -162,6 +167,11 @@ export default function Invoices(){
         }
 
     ]
+    const styles = {
+        overflowX: overflowX ? { overflowX: 'scroll' } : null,
+        textAlign: 'center'
+      };
+      
     return(
     <div>
         <p>You need to delete other canceled orders to put the product back in inventory.</p>
@@ -171,7 +181,7 @@ export default function Invoices(){
             columns={columns} 
             dataSource={fulldataBill} 
             size="small" 
-            style={overflowX?{overflowX:'scroll'}:null} 
+            style={  overflowX?{overflowX:'scroll'}:null } 
             loading={loadingTable} />
          {showModalDeleteBill &&
             <Modal
