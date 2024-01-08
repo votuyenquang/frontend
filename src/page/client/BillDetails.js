@@ -6,6 +6,8 @@ import Spinner from '../../elements/spinner';
 import { useSelector } from 'react-redux';
 import { useParams,useHistory } from 'react-router-dom';
 import ModalReviewProduct from '../../elements/ModalReviewProduct';
+import moment from 'moment';
+
 export default function BillDetails(){
     const history = useHistory();
     const [dataProduct, setdataProduct] = useState();
@@ -53,6 +55,7 @@ export default function BillDetails(){
             }
         }
         setdataBill(bill[0])
+        console.log({dataBill});
         if(bill[0].idSale!==null){
             getSale(bill[0].idSale);
         }
@@ -179,7 +182,7 @@ export default function BillDetails(){
         }else if(a===1){
             return <b>Delivering</b>
         }else if(a===2){
-            return <b>Delivered</b>
+            return <b>Completed</b>
         }else{
             return <b>Cancelled</b>
         }
@@ -216,12 +219,12 @@ export default function BillDetails(){
                 <ul>
                     <Space size={10} direction="vertical">
                         <li>Code order : <b>{"#"+dataBill.id}</b></li>
-                        <li>Order date: <b>{new Date(dataBill.create_at).toString()}</b></li>
+                        <li>Order date: <b>{moment(new Date(dataBill.create_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
                         <li>Email : <b>{dataBill.email}</b></li>
                         <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
-                        <li>Time to update invoices: <b>{new Date(dataBill.update_at).toString()}</b></li>
+                        <li>Time to update invoices: <b> {moment(new Date(dataBill.update_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
                         <li>Payment method: 
-                            <b>{dataBill.methodPayment===1 ? " Bank transfer":" Pay cash"}</b>
+                            <b>{dataBill.method_payment === 1 ? " Bank transfer":" Pay cash"}</b>
                         </li>
                         <li>
                           Status : {getTextStatus(dataBill.status)}

@@ -5,6 +5,8 @@ import {getPriceVND} from '../../contain/getPriceVND';
 import * as FetchAPI from '../../util/fetchApi';
 import Spinner from '../../elements/spinner';
 import {PrinterOutlined} from '@ant-design/icons';
+import moment from 'moment';
+
 
 const {Option} = Select;
 export default function BillDetails(){
@@ -233,14 +235,17 @@ export default function BillDetails(){
                         <Space size={10} direction="vertical">
                             <div id="Inforbill">
                             <Space size={10} direction="vertical">
-                                <li>Order code : <b>{"#"+dataBill.id}</b></li>
-                                <li>Date order: <b>{new Date(dataBill.create_at).toString().split('GMT')[0]}</b></li>
-                                <li>Customer name : <b>{dataBill.name}</b></li>
-                                <li>Email : <b>{dataBill.email}</b></li>
-                                <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
-                                <li>Updated order time: <b>{new Date(dataBill.update_at).toString().split('GMT')[0]}</b></li>
+                                <li>Order code :  <b>{"#"+dataBill.id}</b></li>
+                                <li>Date order:  <b>{moment(new Date(dataBill.create_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
+                                <li>Customer name :  <b>{dataBill.name}</b></li>
+                                <li>Email :  <b>{dataBill.email}</b></li>
+                                <li>Total :  <b>{getPriceVND(getPricePayment())+" $"}</b></li>
+                                <li>Updated order time: <b> {moment(new Date(dataBill.update_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
+                                <li>Payment status: 
+                                    <b>{dataBill.payment_status ===1 ? "Paid":"Unpaid"}</b>
+                                </li>
                                 <li>Payment method: 
-                                    <b>{dataBill.methodPayment===1 ? "Bank transfer":"Pay cash"}</b>
+                                    <b>{dataBill.payment_status ===1 ? "Bank transfer":"Pay cash"}</b>
                                 </li>
                             </Space>
                             </div>

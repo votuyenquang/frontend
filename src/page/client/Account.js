@@ -1,5 +1,6 @@
 import React ,{useEffect, useState} from 'react';
 import {Modal,Row,Col,Input,Button,Spin,Form,message} from 'antd';
+import {useHistory} from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import * as FetchAPI from '../../util/fetchApi';
 import {getUser} from '../../util/getUser'
@@ -14,6 +15,7 @@ export default function Account(props) {
     const [emailRegister, setemailRegister] = useState("");
     const [continueRegister, setcontinueRegister] = useState(false);
     const [formLogin] = Form.useForm();
+    const history = useHistory();
     const dispatch = useDispatch();
     const handleLoginValidation = ()=>{
         setspinning(true);
@@ -57,15 +59,10 @@ export default function Account(props) {
     const handleRegister = async()=>{
         setcontinueRegister(true)
     }
+    const handleForgot = async()=>{
+            history.push("/forgot-password");
+    }
 
-
-    
-
-     
-      
-
-
-   
     const Login = ()=>(
         <Form 
             style={{ paddingBottom:40 }} 
@@ -121,7 +118,7 @@ export default function Account(props) {
                 */}
 
             <div>
-                <span>Forgot password ?</span>
+                <a onClick={handleForgot}>Forgot password ?</a>
             </div>
         </Form>
     )
