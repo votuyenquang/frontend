@@ -28,12 +28,11 @@ export default function Payment (props){
     const dispatch = useDispatch();
     const location = useLocation();
     const receivedDataSale = location.state?.data;
-    console.log({receivedDataSale});
     const typeBuyNow = location.state?.type;
     const dataBuyNow = location.state?.data_buynow;
 
-    console.log({dataCart});
-    console.log({dataBuyNow});
+    
+ 
 
 
     useEffect(()=>{
@@ -58,10 +57,8 @@ export default function Payment (props){
         }  
         
        
-        if (typeBuyNow ==='buy_now'){
-            handleBuyNow(dataBuyNow)
-        }
         getUser(); 
+    
     },[datauser])
     const getUser = async()=>{
         if(datauser.name!==undefined){
@@ -93,15 +90,14 @@ export default function Payment (props){
         // }
     }
     useEffect(() => {
-        console.log("methodPayment:", methodPayment);
-        console.log("datauser:", datauser);
+      
+        
     
         const fetchData = async () => {
             try {
                 const data = await getOrderInformation();
-                console.log("=======", data);
                 setDataPayment(data);
-                console.log({ dataPayment });
+                
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -110,7 +106,13 @@ export default function Payment (props){
         fetchData();
     }, [methodPayment, datauser]);
     const getPricePayment = () =>{
-        let total_payment = totalTmp;
+        let total_payment =0 
+        if (typeBuyNow){
+            total_payment = dataBuyNow[0].price * dataBuyNow[0].quanity
+        } else {
+            total_payment = totalTmp;
+        }
+       
         let shipfee = 10;
         if(receivedDataSale != undefined){
           
@@ -132,7 +134,15 @@ export default function Payment (props){
             saleID = receivedDataSale.id;
         }
         let total_payment = getPricePayment()
-        
+        const customDatabuynow =  typeBuyNow && [
+            {
+              0: { ...dataBuyNow[0] },
+              quanity: dataBuyNow[0].quanity,
+              option: dataBuyNow[0].option,
+              key: 0, status: false
+            }
+          ]
+
         const data = {
             "name": name,
             "address": address,
@@ -140,7 +150,7 @@ export default function Payment (props){
             "phone" : phone,
             "total_price":total_payment,
             "message":message,
-            "dataProduct":dataCart,
+            "dataProduct": typeBuyNow ? customDatabuynow  : dataCart,
             "methodPayment":methodPayment,
             "user": idUser,
             "idSale":saleID,
@@ -149,7 +159,6 @@ export default function Payment (props){
         return data;
     }
     const handleOrder = async()=>{
-        console.log({dataPayment});
         const data = getOrderInformation();
         console.log({data});
         const res = await FetchAPI.postDataAPI("/order/addBill",data);
@@ -157,38 +166,6 @@ export default function Payment (props){
             if(res.msg==="success"){
                 localStorage.removeItem("cart");
                 updateCartCurrent(dispatch);
-                setPaymentSucess(true)
-            }else{
-                console.log(res.msg)
-            }
-        }
-    }
-    const handleBuyNow = async()=>{
-        let saleID = null;
-        // let total_payment = totalTmp;
-        if(receivedDataSale != undefined){
-            saleID = receivedDataSale.id;
-        }
-        const price_buynow = dataBuyNow.quanity * dataBuyNow.price;  
-        setTotalTmp(price_buynow)
-        let total_payment = getPricePayment()
-        
-        const data = {
-            "name": name,
-            "address": address,
-            "email" : email,
-            "phone" : phone,
-            "total_price":total_payment,
-            "message":message,
-            "dataProduct":dataBuyNow,
-            "methodPayment":methodPayment,
-            "user": idUser,
-            "idSale":saleID,
-            "payment_status": 0
-        }
-        const res = await FetchAPI.postDataAPI("/order/addBill",data);
-        if(res.msg){
-            if(res.msg==="success"){
                 setPaymentSucess(true)
             }else{
                 console.log(res.msg)
@@ -223,26 +200,25 @@ export default function Payment (props){
                 )
             }
         },
-        { 
-            title:"Provisional",
-            dataIndex:"",
-            key:'temp',
-            render:(record)=>{
+        {
+            title: "Provisional",
+            dataIndex: "",
+            key: 'temp',
+            render: (record) => (
                 <>
-                {
-                    typeBuyNow ?
-                        <span>{ record.price*record.quanity  +" $"}</span>
-                    :
-                        (record[0].promotional===null) ?
-                            <span>{getPriceVND(record[0].price*record.quanity)+" $"}</span>
-                        :
-                            <span>{getPriceVND(record[0].promotional*record.quanity)+" $"}</span>
-                        
-                }
+                    {
+                        typeBuyNow ?
+                            <span>{getPriceVND(record.price * record.quanity) + " $"}</span>
+                            :
+                            (record[0].promotional === null) ?
+                                <span>{getPriceVND(record[0].price * record.quanity) + " $"}</span>
+                                :
+                                <span>{getPriceVND(record[0].promotional * record.quanity) + " $"}</span>
+                    }
                 </>
-                
-            }
+            )
         }
+        
     ]
     const InformationPayment = ()=>(
        <div style={{ padding:20 }}>
@@ -354,21 +330,33 @@ export default function Payment (props){
                     <Table.Summary>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Provisional</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(totalTmp)+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>
+                                {
+                                    typeBuyNow ? dataBuyNow[0].price * dataBuyNow[0].quanity  : getPriceVND(totalTmp)+" $"
+                                }
+                            </Table.Summary.Cell>
                         </Table.Summary.Row>
                         {receivedDataSale !== undefined &&
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Promotional code</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{"-"+getPriceVND(promoprice)+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>
+                                {"-"+getPriceVND(promoprice)+" $"}
+                            </Table.Summary.Cell>
                         </Table.Summary.Row>
                         }
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Transport fee</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(10)+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>
+                                {getPriceVND(10)+" $"}
+                            </Table.Summary.Cell>
                         </Table.Summary.Row>
                         <Table.Summary.Row>
                             <Table.Summary.Cell index={0}><span style={{fontWeight:'bold'}}>Total</span></Table.Summary.Cell>
-                            <Table.Summary.Cell index={1}>{getPriceVND(getPricePayment())+" $"}</Table.Summary.Cell>
+                            <Table.Summary.Cell index={1}>
+                            {
+                                getPriceVND(getPricePayment())+" $"
+                            }
+                            </Table.Summary.Cell>
                         </Table.Summary.Row>
                     </Table.Summary>
             )}/>
@@ -410,7 +398,7 @@ export default function Payment (props){
     )
     const Content = ()=>(
         <div>
-        {dataCart.length!==undefined ?
+        {dataCart.length!==undefined || typeBuyNow ?
             <div>
             {showUser &&
             <Form 

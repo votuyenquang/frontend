@@ -164,8 +164,17 @@ export default function ProductDetails() {
   const handleBuyNow = () => {
     
       const data = [
-        { id: dataProduct.id, quanity: quanity, option: option[0] , price: dataProduct.price},
-      ];
+        { 
+          id: dataProduct.id, 
+          quanity: quanity, 
+          option: option[0] , 
+          price:  dataProduct.price,
+          promotional : dataProduct.promotional ,
+          name :dataProduct.name,
+          size : option[0]
+
+        }]
+      ;
       
       
         if (quanity > option[1]) {
@@ -177,7 +186,7 @@ export default function ProductDetails() {
         } else {
             history.push({
                 pathname: '/payment',
-                state: { 
+                state: {
                   data_buynow: data ,
                   type : 'buy_now'
                 }
