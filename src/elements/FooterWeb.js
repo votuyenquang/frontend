@@ -37,10 +37,7 @@ export default function FooterWeb() {
           <h2 className="widget-title-footer">Account</h2>
           <ul>
             <li>
-              <Link to={{ pathname: "/" }}>Login</Link>
-            </li>
-            <li>
-              <Link to={{ pathname: "/" }}>Register</Link>
+              <Link to={{ pathname: "/profile" }}>Information</Link>
             </li>
             <li>
               <Link to={{ pathname: "/billfollow" }}>Order</Link>
