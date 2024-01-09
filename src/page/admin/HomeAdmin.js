@@ -173,7 +173,7 @@ export default function HomeAdmin(){
                 <span style={{ fontWeight:'bold' }}>{`${thisMonthNumber} order`}</span>
             </ItemCard>
             <ItemCard title="Revenue this month" colorLeft="blue" >
-                <span style={{ fontWeight:'bold' }}>{`${getPriceVND(totalMonth)} $`}</span>
+                <span style={{ fontWeight:'bold' }}>{ totalMonth ? `${getPriceVND(totalMonth)} $` : '0 $'}</span>
             </ItemCard>
             <ItemCard title="Today's order quantity" colorLeft="green">
                 <span style={{ fontWeight:'bold' }}>{`${thisDayNumber} order`}</span>
