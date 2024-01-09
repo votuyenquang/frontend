@@ -25,6 +25,7 @@ import PreviewImmage from "../../elements/PreviewImmage";
 import ReactHtmlParser from "react-html-parser";
 import { render } from "@testing-library/react";
 import { FaRegUserCircle } from "react-icons/fa";
+import moment  from "moment";
 
 const { Option } = Select;
 export default function ProductDetails() {
@@ -83,6 +84,7 @@ export default function ProductDetails() {
         data
       );
       setarrReview(res);
+      
     };
     getReviewStar();
   }, []);
@@ -116,25 +118,36 @@ export default function ProductDetails() {
     setnameProductType(product_type.name);
     setshowContent(true);
   };
-  const handleValidation = () => {
-    setbuttonLoading(true);
-    setTimeout(() => {
-      if (option == null) {
-        message.warning("Please select size and color to order !");
-        setbuttonLoading(false);
-      } else if (quanity === null) {
-        message.warning("Please select quantity !");
-        setbuttonLoading(false);
-      } else if (option[1] < quanity) {
-        message.warning(
-          "This model only has  " +
-            option[1] +
-            " product, Please sympathize!"
+  const handleOption = () => {
+    if (option == null) {
+      message.warning("Please select size and color to order !");
+      setbuttonLoading(false);
+    } else if (quanity === null) {
+      message.warning("Please select quantity !");
+      setbuttonLoading(false);
+    } else if (option[1] < quanity) {
+      message.warning(
+        "This model only has  " +
+        option[1] +
+        " product, Please sympathize!"
         );
         setbuttonLoading(false);
       } else {
-        handleOrder();
+        return true
       }
+    }
+  const handleValidationAddCart = () => {
+    setbuttonLoading(true);
+    setTimeout(() => {
+      const resultHandleOption  = handleOption()
+      resultHandleOption && handleOrder();
+    }, 1000);
+  };
+  const handleValidationBuyNow = () => {
+    setbuttonLoading(true);
+    setTimeout(() => {
+      const resultHandleOption  = handleOption()
+      resultHandleOption && handleBuyNow();
     }, 1000);
   };
   const btn = (
@@ -148,6 +161,31 @@ export default function ProductDetails() {
       Go now
     </Button>
   );
+  const handleBuyNow = () => {
+    
+      const data = [
+        { id: dataProduct.id, quanity: quanity, option: option[0] , price: dataProduct.price},
+      ];
+      
+      
+        if (quanity > option[1]) {
+          message.warning(
+            "This product only has  " + option[1] + ", Please select check again"
+          );
+          setbuttonLoading(false);
+          return;
+        } else {
+            history.push({
+                pathname: '/payment',
+                state: { 
+                  data_buynow: data ,
+                  type : 'buy_now'
+                }
+            });
+        
+        }
+      } 
+   
   const handleOrder = () => {
     const dataOut = localStorage.getItem("cart");
     let objDataOut = JSON.parse(dataOut);
@@ -353,14 +391,20 @@ export default function ProductDetails() {
         <div className="button-buy">
           <Button
             className="add-cart"
-            onClick={handleValidation}
+            onClick={handleValidationAddCart}
             disabled={outOfStock}
             loading={buttonLoading}
           >
             <span>ADD CART</span>
           </Button>
-          <Button className="buy-now" disabled={outOfStock}>
-            <Link to="/cart"><span>BUY NOW</span></Link>
+          <Button 
+            className="buy-now" 
+            disabled={outOfStock}
+            loading={buttonLoading}
+            onClick={handleValidationBuyNow}
+          >
+            {/* <Link to="/cart"><span>BUY NOW</span></Link> */}
+            <span>BUY NOW</span>
           </Button>
         </div>
 
@@ -395,16 +439,7 @@ export default function ProductDetails() {
             </span>
           </div>
         </div>
-        {/* 
-<div style={{ paddingTop: 50 }}>
-          {dataProduct.description !== null && (
-            <span className="option-children">PRODUCT INFORMATION</span>
-          )}
-          <span style={{ fontSize: 14 }}>
-            {ReactHtmlParser(dataProduct.description)}
-          </span>
-        </div>
-*/}
+       
       </div>
 
       <div className="reviews">
@@ -421,7 +456,7 @@ export default function ProductDetails() {
                     <span className="review-name">{review.name}</span>
                   </div>
                   <div className="date-start">
-                    <span>2024-01-01 20:20</span>
+                    <span>{ moment(review.update_at).format("YYYY-MM-DD : hh-mm")}</span>
                     <span className="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                     <span className="review-star">
                       <Rate

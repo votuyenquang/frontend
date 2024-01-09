@@ -29,6 +29,13 @@ export default function Payment (props){
     const location = useLocation();
     const receivedDataSale = location.state?.data;
     console.log({receivedDataSale});
+    const typeBuyNow = location.state?.type;
+    const dataBuyNow = location.state?.data_buynow;
+
+    console.log({dataCart});
+    console.log({dataBuyNow});
+
+
     useEffect(()=>{
         setPaymentSucess(false)
         setshowUser(false)
@@ -49,7 +56,11 @@ export default function Payment (props){
                 return false
             })
         }  
+        
        
+        if (typeBuyNow ==='buy_now'){
+            handleBuyNow(dataBuyNow)
+        }
         getUser(); 
     },[datauser])
     const getUser = async()=>{
@@ -152,16 +163,63 @@ export default function Payment (props){
             }
         }
     }
+    const handleBuyNow = async()=>{
+        let saleID = null;
+        // let total_payment = totalTmp;
+        if(receivedDataSale != undefined){
+            saleID = receivedDataSale.id;
+        }
+        const price_buynow = dataBuyNow.quanity * dataBuyNow.price;  
+        setTotalTmp(price_buynow)
+        let total_payment = getPricePayment()
+        
+        const data = {
+            "name": name,
+            "address": address,
+            "email" : email,
+            "phone" : phone,
+            "total_price":total_payment,
+            "message":message,
+            "dataProduct":dataBuyNow,
+            "methodPayment":methodPayment,
+            "user": idUser,
+            "idSale":saleID,
+            "payment_status": 0
+        }
+        const res = await FetchAPI.postDataAPI("/order/addBill",data);
+        if(res.msg){
+            if(res.msg==="success"){
+                setPaymentSucess(true)
+            }else{
+                console.log(res.msg)
+            }
+        }
+    }
     const columns  = [
         {
             title:"Product",
             key:'name',
             render: record=>{
                 return (
-                    <Row>
-                        <span>{record[0].name+" - ( "+record.option+" )"}</span>
-                        <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
-                    </Row>
+                    <>
+                    {
+                        typeBuyNow ? 
+                        <Row>
+                            <span>{record.id+" - ( "+record.option+" )"}</span>
+                            <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
+                        </Row>
+                        : 
+                        <Row>
+                            <span>{record[0].name+" - ( "+record.option+" )"}</span>
+                            <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
+                        </Row>
+                    }
+                    </>
+                    
+                    // <Row>
+                    //     <span>{record[0].name+" - ( "+record.option+" )"}</span>
+                    //     <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
+                    // </Row>
                 )
             }
         },
@@ -170,11 +228,19 @@ export default function Payment (props){
             dataIndex:"",
             key:'temp',
             render:(record)=>{
-                if(record[0].promotional===null){
-                    return <span>{getPriceVND(record[0].price*record.quanity)+" $"}</span>
-                }else{
-                    return <span>{getPriceVND(record[0].promotional*record.quanity)+" $"}</span>
+                <>
+                {
+                    typeBuyNow ?
+                        <span>{ record.price*record.quanity  +" $"}</span>
+                    :
+                        (record[0].promotional===null) ?
+                            <span>{getPriceVND(record[0].price*record.quanity)+" $"}</span>
+                        :
+                            <span>{getPriceVND(record[0].promotional*record.quanity)+" $"}</span>
+                        
                 }
+                </>
+                
             }
         }
     ]
@@ -281,7 +347,7 @@ export default function Payment (props){
         <div style={{ border:"2px solid black",padding:20 }}>
             <h2 style={{fontWeight: "bold"}}>YOUR ORDER</h2>
             <Table 
-                dataSource={dataCart} 
+                dataSource={typeBuyNow ?  dataBuyNow : dataCart} 
                 columns={columns} 
                 pagination={false}
                 summary={()=>(
