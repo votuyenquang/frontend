@@ -242,15 +242,15 @@ export default function BillDetails(){
                                 <li>Total :  <b>{getPriceVND(getPricePayment())+" $"}</b></li>
                                 <li>Updated order time: <b> {moment(new Date(dataBill.update_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
                                 <li>Payment status: 
-                                    <b>{dataBill.payment_status ===1 ? "Paid":"Unpaid"}</b>
+                                    <b>{dataBill.payment_status ===1 ? " Paid":" Unpaid"}</b>
                                 </li>
                                 <li>Payment method: 
-                                    <b>{dataBill.payment_status ===1 ? "Bank transfer":"Pay cash"}</b>
+                                    <b>{dataBill.payment_status ===1 ? " Bank transfer":" Pay cash"}</b>
                                 </li>
                             </Space>
                             </div>
                             <li>
-                                Tình trạng : {getStatus(dataBill.status)}
+                                Status : {getStatus(dataBill.status)}
                             </li>
                             <div style={{ marginTop: 20}}>
                                 <Button style={{ borderRadius : 10}} type="primary" danger onClick={()=>setshowModalDeleteBill(true)}>

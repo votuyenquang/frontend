@@ -223,9 +223,13 @@ export default function BillDetails(){
                         <li>Email : <b>{dataBill.email}</b></li>
                         <li>Total : <b>{getPriceVND(getPricePayment())+" $"}</b></li>
                         <li>Time to update invoices: <b> {moment(new Date(dataBill.update_at)).format("YYYY-MM-DD hh:mm:ss")}</b></li>
+                        <li>Payment status: 
+                            <b>{dataBill.payment_status === 1 ? " Paid":" Unpaid"}</b>
+                        </li>
                         <li>Payment method: 
                             <b>{dataBill.method_payment === 1 ? " Bank transfer":" Pay cash"}</b>
                         </li>
+                       
                         <li>
                           Status : {getTextStatus(dataBill.status)}
                         </li>
