@@ -227,19 +227,19 @@ export default function Home() {
           {sale()}
           <div className="contentHome">
 
-          <h2 className="title-news">Recommendation for you</h2>
-            <Slider className="slider-item-new" {...settings_carsoule_new}
-               style= {{ marginBottom: "48px" }}>
-              {productRecommendation.map((item, i) => (
+            <h2 className="title-news">New products</h2>
+            <Slider className="slider-item-new" {...settings_carsoule_new}>
+              {itemProductNew.map((item, i) => (
                 <div key={i} className="hello">
                   <Product item={item} />
                 </div>
               ))}
             </Slider>
 
-            <h2 className="title-news">New products</h2>
-            <Slider className="slider-item-new" {...settings_carsoule_new}>
-              {itemProductNew.map((item, i) => (
+            <h2 className="title-news" style={{ marginTop:48}}>Recommendation for you</h2>
+            <Slider className="slider-item-new" {...settings_carsoule_new}
+               style= {{ marginBottom: "48px" }}>
+              {productRecommendation.map((item, i) => (
                 <div key={i} className="hello">
                   <Product item={item} />
                 </div>
