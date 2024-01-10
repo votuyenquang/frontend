@@ -30,7 +30,7 @@ export default function Register(props){
             setsuccess(true);
             props.loading(false);
         }else{
-            console.log("Có lỗi rồi");
+            alert("There was an error");
             props.loading(false);
         }
     }

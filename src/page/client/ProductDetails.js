@@ -32,6 +32,7 @@ export default function ProductDetails() {
   const [dataProduct, setdataProduct] = useState();
   const [showContent, setshowContent] = useState(false);
   const [buttonLoading, setbuttonLoading] = useState(false);
+  const [buttonBuynowLoading, setButtonBuynowLoading] = useState(false);
   const [nameCategory, setnameCategory] = useState("");
   const [nameProductType, setnameProductType] = useState("");
   const [quanity, setquanity] = useState(1);
@@ -122,9 +123,13 @@ export default function ProductDetails() {
     if (option == null) {
       message.warning("Please select size and color to order !");
       setbuttonLoading(false);
+      setButtonBuynowLoading(false);
+
     } else if (quanity === null) {
       message.warning("Please select quantity !");
       setbuttonLoading(false);
+      setButtonBuynowLoading(false);
+
     } else if (option[1] < quanity) {
       message.warning(
         "This model only has  " +
@@ -132,6 +137,8 @@ export default function ProductDetails() {
         " product, Please sympathize!"
         );
         setbuttonLoading(false);
+        setButtonBuynowLoading(false);
+
       } else {
         return true
       }
@@ -144,7 +151,7 @@ export default function ProductDetails() {
     }, 1000);
   };
   const handleValidationBuyNow = () => {
-    setbuttonLoading(true);
+    setButtonBuynowLoading(true);
     setTimeout(() => {
       const resultHandleOption  = handleOption()
       resultHandleOption && handleBuyNow();
@@ -181,7 +188,7 @@ export default function ProductDetails() {
           message.warning(
             "This product only has  " + option[1] + ", Please select check again"
           );
-          setbuttonLoading(false);
+          setButtonBuynowLoading(false);
           return;
         } else {
             history.push({
@@ -361,7 +368,7 @@ export default function ProductDetails() {
               onChange={(e) => {
                 console.log(e);
                 var arr = [];
-                arr = e.split(",");
+                arr = e?.split(",");
                 setoption(arr);
               }}
               allowClear
@@ -409,7 +416,7 @@ export default function ProductDetails() {
           <Button 
             className="buy-now" 
             disabled={outOfStock}
-            loading={buttonLoading}
+            loading={buttonBuynowLoading}
             onClick={handleValidationBuyNow}
           >
             {/* <Link to="/cart"><span>BUY NOW</span></Link> */}

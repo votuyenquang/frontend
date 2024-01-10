@@ -41,38 +41,56 @@ import React, { useState } from "react";
     }, [currency, showSpinner]);
   
     const HandleSaveOrder = async () => {
-      const data = {...payload, payment_status : 1};
-      console.log("==== after paylod ", data);
-      const res = await FetchAPI.postDataAPI("/order/addBill",data);
-      if(res.msg){
-          if(res.msg==="success"){
-              
-              setIsSuccess(true);
-              setTimeout(() => {
-                Swal.fire(
-                  "Congratulations",
-                  "Order created successfully",
-                  "success"
-                ).then(() => {
-                  history.push("/");
-                });
-              }, 1500);
-              localStorage.removeItem("cart");
-              updateCartCurrent(dispatchRedux);
-            }
-          }else{
-            setIsSuccess(false);
-            setTimeout(() => {
-              Swal.fire(
-                "Error",
-                "Order created Failed",
-                "failure"
-              ).then(() => {
-                history.push("/");
-               
-              });
-            }, 1500);
-          }
+      if (payload.name !== null && payload.name !== undefined && payload.name !== "" &&
+      payload.address !== null && payload.address !== undefined && payload.address !== "" &&
+      payload.phone !== null && payload.phone !== undefined && payload.phone !== "" &&
+      payload.email !== null && payload.email !== undefined && payload.email !== "") {
+
+          const data = {...payload, payment_status : 1};
+          console.log("==== after paylod ", data);
+          const res = await FetchAPI.postDataAPI("/order/addBill",data);
+          if(res.msg){
+              if(res.msg==="success"){
+                  
+                  setIsSuccess(true);
+                  setTimeout(() => {
+                    Swal.fire(
+                      "Congratulations",
+                      "Order created successfully",
+                      "success"
+                    ).then(() => {
+                      history.push("/");
+                    });
+                  }, 1500);
+                  localStorage.removeItem("cart");
+                  updateCartCurrent(dispatchRedux);
+                }
+              }else{
+                setIsSuccess(false);
+                setTimeout(() => {
+                  Swal.fire(
+                    "Error",
+                    "Order created Failed",
+                    "failure"
+                  ).then(() => {
+                    history.push("/");
+                  
+                  });
+                }, 1500);
+              }
+      } else {
+        setIsSuccess(false);
+                setTimeout(() => {
+                  Swal.fire(
+                    "Error",
+                    "Order created Failed, you have to enter your information order",
+                    "failure"
+                  ).then(() => {
+                    history.push("/cart");
+                  
+                  });
+                }, 1500);
+      }
       }
 
 

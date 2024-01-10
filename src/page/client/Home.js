@@ -142,7 +142,7 @@ export default function Home() {
     <>
       <Row className="sale">
           <Slider className="slider-item-new" {...settings_carsoule_new} style= {{ marginBottom: "48px" }}>
-            {promotionList.map((item, i) => (
+            {promotionList?.map((item, i) => (
               <div key={i} style={{ }}>
                 <Card 
                   className="sale-item"
@@ -236,15 +236,21 @@ export default function Home() {
               ))}
             </Slider>
 
-            <h2 className="title-news" style={{ marginTop:48}}>Recommendation for you</h2>
-            <Slider className="slider-item-new" {...settings_carsoule_new}
-               style= {{ marginBottom: "48px" }}>
-              {productRecommendation.map((item, i) => (
-                <div key={i} className="hello">
-                  <Product item={item} />
-                </div>
-              ))}
-            </Slider>
+            {
+             productRecommendation && 
+            <>
+              <h2 className="title-news" style={{ marginTop:48}}>Recommendation for you</h2>
+              <Slider className="slider-item-new" {...settings_carsoule_new}
+                style= {{ marginBottom: "48px" }}>
+                {productRecommendation?.map((item, i) => (
+                  <div key={i} className="hello">
+                    <Product item={item} />
+                  </div>
+                ))}
+              </Slider>
+            </>
+            }
+              
 
             <h2 className="title-news" style={{ marginTop: 40 }}>
               HOT DEAL PRODUCTS

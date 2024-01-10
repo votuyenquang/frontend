@@ -182,7 +182,7 @@ export default function Payment (props){
                     {
                         typeBuyNow ? 
                         <Row>
-                            <span>{record.id+" - ( "+record.option+" )"}</span>
+                            <span>{record.name+" - ( "+record.option+" )"}</span>
                             <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
                         </Row>
                         : 
@@ -193,10 +193,6 @@ export default function Payment (props){
                     }
                     </>
                     
-                    // <Row>
-                    //     <span>{record[0].name+" - ( "+record.option+" )"}</span>
-                    //     <span style={{ fontWeight:'bold',paddingLeft:20 }}>X {record.quanity}</span>
-                    // </Row>
                 )
             }
         },
