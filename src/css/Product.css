@@ -67,6 +67,10 @@
     margin-left: 50px;
     margin-bottom: 4px;
 }
+.content-add-to-cart{
+    display: flex;
+    flex-direction: row;
+}
 .button_add_cart{
     color: rgb(31, 25, 25);
     position: absolute;

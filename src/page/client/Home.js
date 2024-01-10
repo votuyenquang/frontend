@@ -139,7 +139,7 @@ export default function Home() {
   };
 
   const sale = () => (
-    <>
+    <div>
       <Row className="sale">
           <Slider className="slider-item-new" {...settings_carsoule_new} style= {{ marginBottom: "48px" }}>
             {promotionList.map((item, i) => (
@@ -168,7 +168,7 @@ export default function Home() {
             ))}
           </Slider>
       </Row>
-    </>
+    </div>
   );
 
   const slide = () => (
