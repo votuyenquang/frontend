@@ -381,6 +381,22 @@
  font-weight: 600;
 }
 
+.brand{
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  margin-top: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(119, 119, 119, 0.3);
+}
+.brand>img:hover{
+  transition: transform 0.8s;
+  transform: scale(1.1);
+}
+
 
 @keyframes ripple {
   to {
